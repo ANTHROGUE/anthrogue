@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqpmi3pqv8kj2"]
+
+[ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://at/player/player.gd" id="1_sbar3"]
+[ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://at/player/camera/spring_camera.tscn" id="2_sijrc"]
+[ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sbar3"]
+material = SubResource("StandardMaterial3D_sbar3")
+
+[sub_resource type="BoxMesh" id="BoxMesh_sijrc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epcbq"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sijrc"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_sbar3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96113145, 0)
+mesh = SubResource("CapsuleMesh_sbar3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+mesh = SubResource("BoxMesh_sijrc")
+surface_material_override/0 = SubResource("StandardMaterial3D_epcbq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961, 0)
+shape = SubResource("CapsuleShape3D_sijrc")
+debug_color = Color(0.9857194, 0, 0.33561736, 0.41960785)
+
+[node name="SpringCamera" parent="." instance=ExtResource("2_sijrc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1188939, 0)
+
+[node name="FiniteStateMachine3D" type="Node3D" parent="."]
+script = ExtResource("3_epcbq")
+metadata/_custom_type_script = "uid://cs7q470v3yvq3"

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5qbsdj15ugvp"]
+
+[ext_resource type="Script" uid="uid://ctcvmmlho5wb2" path="res://spring_camera.gd" id="1_6gc5o"]
+
+[node name="SpringCamera" type="SpringArm3D"]
+spring_length = 2.5
+script = ExtResource("1_6gc5o")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+fov = 52.0

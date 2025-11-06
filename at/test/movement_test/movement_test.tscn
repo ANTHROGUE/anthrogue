@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsojgwadnby4f"]
+
+[ext_resource type="PackedScene" uid="uid://cqpmi3pqv8kj2" path="res://at/player/player.tscn" id="1_vod4g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vod4g"]
+
+[node name="MovementTest" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.435791)
+use_collision = true
+size = Vector3(57.80664, 1, 21.565918)
+material = SubResource("StandardMaterial3D_vod4g")
+
+[node name="Player" parent="." instance=ExtResource("1_vod4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.539, 0)
