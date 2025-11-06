@@ -43,3 +43,18 @@ func apply_item() -> void:
 # TODO
 func remove_item() -> void:
 	pass
+
+func serialize() -> Dictionary:
+	var dict: Dictionary[StringName, Variant]
+	if is_instance_valid(node): dict = node.get_seralized_data()
+	else: dict = {}
+	
+	# Add our instance values
+	dict['id'] = item_id
+	dict['registry_id'] = get_registry_id()
+	
+	return dict
+
+#TODO
+func get_registry_id() -> int:
+	return -1

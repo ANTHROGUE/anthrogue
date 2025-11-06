@@ -17,3 +17,8 @@ func on_load() -> void:
 ## Action to take on removal
 func on_removed() -> void:
 	pass
+
+func get_seralized_data() -> Dictionary:
+	var dict: Dictionary[String, Variant] = {}
+	
+	return dict
