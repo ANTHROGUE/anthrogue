@@ -14,6 +14,10 @@ config/name="anthrogue"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/graphedit2/plugin.cfg", "res://addons/moon-interval/plugin.cfg", "res://addons/moon-registry/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
