@@ -55,4 +55,3 @@ func handle_jump(delta: float) -> void:
 		else:
 			jump_force_remaining = 0.0
 			jumping = false
-		print(jump_force_remaining)

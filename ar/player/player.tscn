@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://cqpmi3pqv8kj2"]
 
-[ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://at/player/player.gd" id="1_sbar3"]
-[ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://at/player/camera/spring_camera.tscn" id="2_sijrc"]
+[ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://ar/player/player.gd" id="1_sbar3"]
+[ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://ar/player/camera/spring_camera.tscn" id="2_sijrc"]
 [ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
-[ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://at/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
+[ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://ar/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
 albedo_color = Color(0, 1, 1, 1)

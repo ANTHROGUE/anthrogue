@@ -22,7 +22,7 @@ enabled=PackedStringArray("res://addons/graphedit2/plugin.cfg", "res://addons/mo
 
 folder_colors={
 "res://addons/": "red",
-"res://at/": "blue",
+"res://ar/": "blue",
 "res://game/": "teal"
 }
 
