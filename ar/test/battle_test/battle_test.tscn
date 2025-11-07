@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfulvjn770vuy"]
+
+[ext_resource type="Texture2D" uid="uid://dv3ipad4eyg0m" path="res://icon.svg" id="1_anvxm"]
+[ext_resource type="PackedScene" uid="uid://cqpmi3pqv8kj2" path="res://ar/player/player.tscn" id="2_77eix"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfskg"]
+albedo_texture = ExtResource("1_anvxm")
+
+[node name="BattleTest" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.435791)
+use_collision = true
+size = Vector3(57.80664, 1, 21.565918)
+material = SubResource("StandardMaterial3D_vfskg")
+
+[node name="Player" parent="." instance=ExtResource("2_77eix")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.885426, 0.5389999, 0)

@@ -2,7 +2,6 @@ extends CharacterBody3D
 class_name Player
 
 
-
 const BASE_SPEED := 8.0
 const GROUND_FRICTION := 10.0
 const ACCELERATION := 80.0
