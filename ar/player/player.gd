@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Combatant
 class_name Player
 
 
@@ -12,11 +12,16 @@ const AIR_FRICTION := 10.0
 static var instance: Player
 
 @onready var camera: SpringCamera = %SpringCamera
+@onready var state_controller: FiniteStateMachine3D = %PlayerState
+
+var inventory: Inventory
 
 
 func _ready() -> void:
+	super()
 	instance = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	inventory = Inventory.new()
 
 func calculate_friction() -> float:
 	if is_on_floor():
@@ -31,3 +36,6 @@ func calculate_jump_decay() -> float:
 
 func calculate_run_speed() -> float:
 	return BASE_SPEED
+
+func request_state(state: StringName) -> void:
+	state_controller.request(state)

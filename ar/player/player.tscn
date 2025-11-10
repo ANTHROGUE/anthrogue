@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqpmi3pqv8kj2"]
+[gd_scene load_steps=11 format=3 uid="uid://cqpmi3pqv8kj2"]
 
 [ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://ar/player/player.gd" id="1_sbar3"]
 [ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://ar/player/camera/spring_camera.tscn" id="2_sijrc"]
 [ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
 [ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://ar/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
+[ext_resource type="Script" uid="uid://bddcm42wkpvww" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
 albedo_color = Color(0, 1, 1, 1)
@@ -19,7 +20,9 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sijrc"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 3
 script = ExtResource("1_sbar3")
+combatant_tags = Array[int]([0])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
@@ -39,11 +42,16 @@ debug_color = Color(0.9857194, 0, 0.33561736, 0.41960785)
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1188939, 0)
 
-[node name="FiniteStateMachine3D" type="Node3D" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="PlayerState" type="Node3D" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
 script = ExtResource("3_epcbq")
 initial_state = NodePath("Walk")
 metadata/_custom_type_script = "uid://cs7q470v3yvq3"
 
-[node name="Walk" type="Node3D" parent="FiniteStateMachine3D"]
+[node name="Walk" type="Node3D" parent="PlayerState"]
 script = ExtResource("4_n8jis")
 metadata/_custom_type_script = "uid://qgxhu3wis2l8"
+
+[node name="Stopped" type="Node3D" parent="PlayerState"]
+script = ExtResource("5_7ubmn")
+metadata/_custom_type_script = "uid://c0x8ymvu44xkw"

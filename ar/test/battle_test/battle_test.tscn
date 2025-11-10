@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfulvjn770vuy"]
+[gd_scene load_steps=7 format=3 uid="uid://cfulvjn770vuy"]
 
 [ext_resource type="Texture2D" uid="uid://dv3ipad4eyg0m" path="res://icon.svg" id="1_anvxm"]
 [ext_resource type="PackedScene" uid="uid://cqpmi3pqv8kj2" path="res://ar/player/player.tscn" id="2_77eix"]
+[ext_resource type="PackedScene" uid="uid://dissrv86lly3" path="res://game/battle/battle_node/battle_node.tscn" id="3_77eix"]
+[ext_resource type="PackedScene" uid="uid://cfgxtotgi5fgp" path="res://ar/registry/battle/enemies/test/enemy_test.tscn" id="4_vfskg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfskg"]
 albedo_texture = ExtResource("1_anvxm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_77eix"]
+size = Vector3(19.596375, 2.788025, 12.604889)
 
 [node name="BattleTest" type="Node3D"]
 
@@ -16,3 +21,11 @@ material = SubResource("StandardMaterial3D_vfskg")
 
 [node name="Player" parent="." instance=ExtResource("2_77eix")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.885426, 0.5389999, 0)
+
+[node name="BattleNode" parent="." instance=ExtResource("3_77eix")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.588194, 0.62989473, 0)
+spawnable_enemies = Array[PackedScene]([ExtResource("4_vfskg")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BattleNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5571588, 1.7427237, 2.1109467)
+shape = SubResource("BoxShape3D_77eix")
