@@ -16,7 +16,6 @@ var player: Player
 var enemies: Array[Combatant] = []
 var manager: BattleManager
 
-
 func _ready() -> void:
 	set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
 	if not body_entered.is_connected(on_body_entered):
@@ -45,10 +44,12 @@ func on_body_entered(body: Node3D) -> void:
 		on_player_entered(body)
 
 func on_player_entered(plyr: Player) -> void:
-	start_battle(plyr)
+	call_deferred("start_battle", plyr)
 
 ## TODO (WIP)
 func start_battle(plyr: Player) -> void:
+	if manager is BattleManager:
+		return
 	# Stop Player
 	player = plyr
 	player.request_state(&'Stopped')

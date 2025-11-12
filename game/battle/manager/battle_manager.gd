@@ -23,8 +23,10 @@ func _ready() -> void:
 
 func on_turn_confirmed() -> void:
 	append_enemy_moves()
+	if !(action_queue.size() > 0):
+		print("Action Queue size invalid")
+		return
 	begin_round()
-	battle_ui.hide()
 
 func queue_action(action: BattleAction, user: Combatant = null, targets: Array[Combatant] = []) -> void:
 	var queued_action := QueuedAction.new()
@@ -39,8 +41,10 @@ func append_enemy_moves() -> void:
 			queue_action(combatant.get_action())
 
 func begin_round() -> void:
-	while not action_queue.is_empty():
-		await run_action(action_queue.pop_front())
+	battle_ui.hide()
+	for action in action_queue:
+		await run_action(action)
+	action_queue.clear()
 	battle_ui.show()
 
 func run_action(action: QueuedAction) -> void:
@@ -50,5 +54,6 @@ func run_action(action: QueuedAction) -> void:
 		action_node.set_script(battle_action.action_script)
 		add_child(action_node)
 		if action_node is ActionScript:
-			await action_node.action()
+			action_node.action()
+			await action_node.s_action_end
 	action_node.queue_free()
