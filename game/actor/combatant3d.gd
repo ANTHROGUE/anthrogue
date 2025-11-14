@@ -16,6 +16,9 @@ var stats: BattleStats
 func _ready() -> void:
 	stats = initialize_stats()
 
+func lose() -> void:
+	pass
+
 func initialize_stats() -> BattleStats:
 	var new_stats := BattleStats.new()
 	for stat in stats_preset:
