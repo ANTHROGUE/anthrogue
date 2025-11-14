@@ -11,12 +11,19 @@ config_version=5
 [application]
 
 config/name="anthrogue"
+run/main_scene="uid://cfulvjn770vuy"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Globals="*res://game/globals/globals.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

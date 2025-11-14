@@ -2,7 +2,10 @@ extends Control
 
 
 signal s_turn_confirmed()
-signal s_move_queued(move: BattleAction, user: Player, targets: Array[Combatant])
+signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant])
+
+func _ready() -> void:
+	%AnimationPlayer.play("battleui_in")
 
 func on_go_pressed() -> void:
 	# s_move_queued.emit(load('res://ar/registry/battle/actions/test/test_action.tres'), Player.instance, targets)

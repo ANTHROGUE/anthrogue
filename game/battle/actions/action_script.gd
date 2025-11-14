@@ -6,7 +6,8 @@ signal s_action_impact
 
 ## Override to script your battle movie
 func action() -> void:
-	s_action_impact.emit()
+	impact()
+	end_action()
 	pass
 
 func end_action() -> void:
