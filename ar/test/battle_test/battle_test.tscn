@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfulvjn770vuy"]
+[gd_scene load_steps=10 format=3 uid="uid://cfulvjn770vuy"]
 
 [ext_resource type="Texture2D" uid="uid://dv3ipad4eyg0m" path="res://icon.svg" id="1_anvxm"]
 [ext_resource type="PackedScene" uid="uid://cqpmi3pqv8kj2" path="res://ar/player/player.tscn" id="2_77eix"]
@@ -10,6 +10,28 @@ albedo_texture = ExtResource("1_anvxm")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77eix"]
 size = Vector3(19.596375, 2.788025, 12.604889)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vfskg"]
+sky_top_color = Color(0.4234562, 0.48696434, 0.5800961, 1)
+sky_horizon_color = Color(0.116507165, 0.10595008, 0.30699638, 1)
+sky_curve = 0.09896318
+ground_curve = 0.18379185
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_n1hb5"]
+sky_material = SubResource("ProceduralSkyMaterial_vfskg")
+
+[sub_resource type="Environment" id="Environment_vfskg"]
+background_mode = 1
+sky = SubResource("Sky_n1hb5")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.42
+glow_enabled = true
+glow_bloom = 0.22
+fog_enabled = true
+fog_light_energy = 0.51
+fog_sun_scatter = 0.19
 
 [node name="BattleTest" type="Node3D"]
 
@@ -29,3 +51,18 @@ spawnable_enemies = Array[PackedScene]([ExtResource("4_vfskg")])
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BattleNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5571588, 1.7427237, 2.1109467)
 shape = SubResource("BoxShape3D_77eix")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vfskg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.83570194, -0.0264924, 0.548544, -0.54918337, -0.040313948, 0.834729, 1.3847338e-09, -0.9988358, -0.048239622, 0, 12.695616, 0)
+light_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
+light_energy = 3.142
+light_indirect_energy = 1.119
+shadow_enabled = true
+shadow_bias = 1.025
+shadow_opacity = 0.6
+shadow_blur = 1.787
+directional_shadow_mode = 1
+directional_shadow_fade_start = 0.175
