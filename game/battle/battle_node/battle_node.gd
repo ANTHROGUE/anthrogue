@@ -18,12 +18,13 @@ var manager: BattleManager
 
 
 func _ready() -> void:
-	set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
-	if not body_entered.is_connected(on_body_entered):
-		body_entered.connect(on_body_entered)
 	if not spawnable_enemies.is_empty():
 		initialize_enemies()
-	%Pointer.queue_free()
+	if not Engine.is_editor_hint():
+		set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
+		if not body_entered.is_connected(on_body_entered):
+			body_entered.connect(on_body_entered)
+		%Pointer.queue_free()
 
 func initialize_enemies() -> void:
 	# Remove existing enemies
@@ -45,7 +46,8 @@ func on_body_entered(body: Node3D) -> void:
 		on_player_entered(body)
 
 func on_player_entered(plyr: Player) -> void:
-	start_battle(plyr)
+	if not plyr.state_controller.current_state_name == 'Stopped':
+		start_battle(plyr)
 
 ## TODO (WIP)
 func start_battle(plyr: Player) -> void:
