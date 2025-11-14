@@ -8,34 +8,42 @@ class_name BattleStats
 @export var hp := 10.0
 @export var max_hp := 10.0
 
-## Damage:
-## The base power of a combatant's attacks
-@export var damage := 1.0
+@export var ap := 7
+@export var max_ap := 7
+## AP Regen: Amount of AP gained at the start of a round
+## Affected by DEX
+@export var ap_regen := 1
 
-## Defense:
-## Used to diminish the effects of Damage from outward sources
-@export var defense := 1.0
+## Strength: Scales flat damage
+@export var strength := 0
+## Toughness: Scales Max HP
+@export var toughness := 0
+## Dexterity: Scales dodge rate
+@export var dexterity := 1
+## Luck: Scales crit chance and odds of favorable outcomes in other events
+@export var luck := 1
+## Agility: The movement speed of the character, may also influence turn order
+@export var agility := 1
 
-## Accuracy:
-## The base likelihood of a combatant to land an attack on their opponent
+#endregion
+
+#region Variable Stats
+## Moves: The amount of times the combatant is allowed to attack per-round
+## Affected by AGI
+@export var moves := 1
+## Accuracy: The base likelihood of a combatant to land an attack on their opponent
+## Affected by DEX and LCK, should be 100% on non-debuffed player
 @export var accuracy := 1.0
 
-## Dexterity:
-## Used to diminish an opponent's accuracy
-@export var dexterity := 1.0
+## Crit Chance: Percent-based roll per attack of getting a Critical
+## Affected by LCK
+@export var crit_chance := 0.0
+## Crit Mult: Multiplier applied to outgoing damage on a critical attack
+## Affected by items
+@export var crit_mult := 2.0
 
-## Agility:
-## The movement speed of the character, may also influence turn order
-@export var agility := 1.0
-
-## Luck:
-## Crit chance, also has interactions with other game elements
-@export var luck := 1.0
-
-## Moves:
-## The amount of times the combatant is allowed to attack per-round
-@export var moves := 1
 #endregion
+
 
 ## Combatant Tags
 enum CombatantTag {
