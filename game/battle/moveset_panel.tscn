@@ -26,12 +26,12 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="MascotPanel" type="ColorRect"]
-custom_minimum_size = Vector2(528, 304)
+custom_minimum_size = Vector2(768, 304)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -304.0
-offset_right = 528.0
+offset_right = 768.0
 grow_vertical = 0
 color = Color(0.234, 0.39, 0.234, 1)
 
@@ -42,7 +42,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -528.0
+offset_left = -768.0
 offset_top = -520.0
 offset_bottom = -320.0
 grow_horizontal = 0
@@ -58,7 +58,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -72.0
 offset_top = -184.0
-offset_right = 248.0
+offset_right = 368.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -74,7 +74,7 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -256.0
+offset_left = -368.0
 offset_top = 16.0
 offset_right = -72.0
 offset_bottom = 184.0
@@ -87,9 +87,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1072.0
+offset_left = -1096.0
 offset_top = -328.0
-offset_right = -552.0
+offset_right = -776.0
 offset_bottom = -72.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -97,17 +97,15 @@ color = Color(0, 0, 0, 0.3137255)
 
 [node name="StatsLabel" type="Label" parent="StatsPanel"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -244.0
-offset_top = -252.0
-offset_right = 244.0
-offset_bottom = -8.0
+offset_left = 8.0
+offset_top = 4.5
+offset_right = -8.0
+offset_bottom = -4.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 text = "STR: 2 TGN: 2 DEX: 2 LCK: 2 AGI: 2
 
 Effective DMG: 100%
@@ -117,11 +115,14 @@ Critical Multiplier: 2.0x
 Accuracy: 100%
 Dodge: 20%"
 label_settings = SubResource("LabelSettings_h65jm")
+autowrap_mode = 2
 
 [node name="Label_Name" type="Label" parent="."]
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 28.0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 144.0
+offset_bottom = 68.0
 text = "MascotName"
 label_settings = SubResource("LabelSettings_2yhv4")
 
@@ -130,9 +131,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -272.0
-offset_right = 109.0
-offset_bottom = -238.0
+offset_left = 16.0
+offset_top = -232.0
+offset_right = 125.0
+offset_bottom = -198.0
 grow_vertical = 0
 text = "HP: 15/15"
 label_settings = SubResource("LabelSettings_2yhv4")
@@ -142,9 +144,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -240.0
-offset_right = 80.0
-offset_bottom = -206.0
+offset_left = 16.0
+offset_top = -200.0
+offset_right = 96.0
+offset_bottom = -166.0
 grow_vertical = 0
 text = "AP: 7/7"
 label_settings = SubResource("LabelSettings_2yhv4")
@@ -154,9 +157,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
+offset_left = 24.0
 offset_top = -120.0
-offset_right = 104.0
+offset_right = 128.0
 offset_bottom = -16.0
 grow_vertical = 0
 text = "Weapon"
@@ -182,9 +185,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 120.0
+offset_left = 152.0
 offset_top = -264.0
-offset_right = 520.0
+offset_right = 752.0
 offset_bottom = -160.0
 grow_vertical = 0
 theme_override_constants/separation = 12
@@ -231,14 +234,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="TalentButton3" type="Button" parent="TalentUIContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Talent"
+
+[node name="Label" type="Label" parent="TalentUIContainer/TalentButton3"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 2.0
+grow_horizontal = 2
+text = "Brush Rush"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="TalentUIContainer2" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 120.0
+offset_left = 152.0
 offset_top = -120.0
-offset_right = 528.0
+offset_right = 752.0
 offset_bottom = -16.0
 grow_vertical = 0
 theme_override_constants/separation = 12
@@ -270,6 +294,27 @@ layout_mode = 2
 text = "Talent"
 
 [node name="Label" type="Label" parent="TalentUIContainer2/TalentButton2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 2.0
+grow_horizontal = 2
+text = "Brush Rush"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TalentButton3" type="Button" parent="TalentUIContainer2"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Talent"
+
+[node name="Label" type="Label" parent="TalentUIContainer2/TalentButton3"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

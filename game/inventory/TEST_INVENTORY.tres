@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://c1yngcuf5act1"]
+
+[ext_resource type="Script" uid="uid://dcomr1wbp4rlr" path="res://game/inventory/item/item.gd" id="1_oqndg"]
+[ext_resource type="Script" uid="uid://bmicmnkbs4t4k" path="res://game/inventory/inventory.gd" id="2_5hmpj"]
+[ext_resource type="Script" uid="uid://848sb6qh7g2v" path="res://game/battle/actions/player_action.gd" id="3_rn04x"]
+
+[resource]
+script = ExtResource("2_5hmpj")
+actions = Array[ExtResource("3_rn04x")]([null, null, null, null])
+metadata/_custom_type_script = "uid://bmicmnkbs4t4k"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://do8u84lipsd0x"]
+
+[ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="1_r5bx7"]
+
+[resource]
+script = ExtResource("1_r5bx7")
+name = &"Test Strike"
+ap_cost = 1
+summary = "Deal $damage damage"
+values = [6]
+metadata/_custom_type_script = "uid://dv6lo85qpphjt"

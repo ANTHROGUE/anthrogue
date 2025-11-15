@@ -11,6 +11,7 @@ const ENEMY_SPACING := 1.5
 
 @onready var camera: Camera3D = %BattleCamera
 @onready var default_camera_angle: Transform3D = %BattleCamera.transform
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 var player: Player
 var enemies: Array[Combatant] = []

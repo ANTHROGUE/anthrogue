@@ -3,11 +3,12 @@ class_name BattleStats
 
 
 #region Standard Stats
-## HP:
-## Hit Points (Health)
+## HP: Hit Points (Health)
+## Affected by TGN
 @export var hp := 10.0
 @export var max_hp := 10.0
 
+## AP: Action Points (Currency for using Talents)
 @export var ap := 7
 @export var max_ap := 7
 ## AP Regen: Amount of AP gained at the start of a round
@@ -22,12 +23,22 @@ class_name BattleStats
 @export var dexterity := 1
 ## Luck: Scales crit chance and odds of favorable outcomes in other events
 @export var luck := 1
-## Agility: The movement speed of the character, may also influence turn order
+## Agility: Scales real-time movement speed and affects move order
 @export var agility := 1
 
 #endregion
 
 #region Variable Stats
+## Damage Mult: Multiplier to outgoing damage
+@export var damage_mult := 1.0
+## Defense Mult: (Inverse) multiplier to incoming damage
+@export var defense_mult := 1.0
+## Damage Flatt: Added to outoging damage
+## Affected by STR
+@export var damage_flat := 0
+## Defense Flat: Subtracted from incoming damage
+@export var defense_flat := 0
+
 ## Moves: The amount of times the combatant is allowed to attack per-round
 ## Affected by AGI
 @export var moves := 1
@@ -35,12 +46,16 @@ class_name BattleStats
 ## Affected by DEX and LCK, should be 100% on non-debuffed player
 @export var accuracy := 1.0
 
-## Crit Chance: Percent-based roll per attack of getting a Critical
+## Crit Chance: Percent-based roll per attack of getting a critical
 ## Affected by LCK
 @export var crit_chance := 0.0
 ## Crit Mult: Multiplier applied to outgoing damage on a critical attack
 ## Affected by items
 @export var crit_mult := 2.0
+
+## Movespeed: Multiplier to base speed of platformer character
+## Affected by AGI
+@export var movespeed := 1.0
 
 #endregion
 

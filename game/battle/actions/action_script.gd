@@ -4,6 +4,13 @@ class_name ActionScript
 signal s_action_end
 signal s_action_impact
 
+## Relevant combatants
+var source: Combatant
+var target: Combatant
+## Other variables
+var manager: BattleManager
+var battle_node: BattleNode
+
 ## Override to script your battle movie
 func action() -> void:
 	impact()

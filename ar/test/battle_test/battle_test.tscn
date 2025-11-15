@@ -43,6 +43,13 @@ material = SubResource("StandardMaterial3D_vfskg")
 
 [node name="Player" parent="." instance=ExtResource("2_77eix")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.885426, 0.5389999, 0)
+stats_preset = Dictionary[String, Variant]({
+"agility": 4,
+"dexterity": 2,
+"luck": 4,
+"strength": 0,
+"toughness": 2
+})
 
 [node name="BattleNode" parent="." instance=ExtResource("3_77eix")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.588194, 0.62989473, 0)
