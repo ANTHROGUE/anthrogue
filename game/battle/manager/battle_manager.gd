@@ -6,7 +6,8 @@ const BATTLE_UI := preload('res://game/battle/battle_ui/battle_ui.tscn')
 
 class QueuedAction:
 	var user: Combatant
-	var targets: Array[Combatant] = []
+	var target: Combatant
+	var alt_targets: Array[Combatant] = []
 	var action: BattleAction
 
 var combatants: Array[Combatant] = []
@@ -28,17 +29,18 @@ func on_turn_confirmed() -> void:
 		return
 	begin_round()
 
-func queue_action(action: BattleAction, user: Combatant = null, targets: Array[Combatant] = []) -> void:
+func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = []) -> void:
 	var queued_action := QueuedAction.new()
 	queued_action.user = user
-	queued_action.targets = targets
+	queued_action.target = target
+	queued_action.alt_targets = alt_targets
 	queued_action.action = action
 	action_queue.append(queued_action)
 
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
-			queue_action(combatant.get_action())
+			queue_action(combatant.get_action(), combatant, Player.instance)
 
 func begin_round() -> void:
 	battle_ui.hide()
@@ -52,6 +54,10 @@ func run_action(action: QueuedAction) -> void:
 	var action_node := Node.new()
 	if battle_action.action_script:
 		action_node.set_script(battle_action.action_script)
+		for combatant in ['user', 'target', 'alt_targets']:
+			if action[combatant] != null:
+				action_node[combatant] = action[combatant]
+		action_node.manager = self
 		add_child(action_node)
 		if action_node is ActionScript:
 			action_node.action()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drjhh6ujr0yw0" path="res://game/actor/enemy.gd" id="1_ebrf4"]
 [ext_resource type="Texture2D" uid="uid://b1yhlw8ugnqfr" path="res://addons/fsm/icons/diamond_purple.png" id="2_ebrf4"]
 [ext_resource type="Script" uid="uid://dv6lo85qpphjt" path="res://game/battle/actions/battle_action.gd" id="2_th6y6"]
-[ext_resource type="Resource" uid="uid://jveis1ahupsx" path="res://ar/registry/battle/actions/test/test_action.tres" id="3_8fpvq"]
+[ext_resource type="Resource" uid="uid://do8u84lipsd0x" path="res://game/battle/actions/test_actions/test_strike.tres" id="3_th6y6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sp5ja"]
 albedo_texture = ExtResource("2_ebrf4")
@@ -13,7 +13,7 @@ material = SubResource("StandardMaterial3D_sp5ja")
 
 [node name="EnemyTest" type="CharacterBody3D"]
 script = ExtResource("1_ebrf4")
-actions = Array[ExtResource("2_th6y6")]([ExtResource("3_8fpvq")])
+actions = Array[ExtResource("2_th6y6")]([ExtResource("3_th6y6")])
 metadata/_custom_type_script = "uid://e68mb3rk7cmy"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

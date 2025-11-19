@@ -1,11 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://do8u84lipsd0x"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://do8u84lipsd0x"]
 
 [ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="1_r5bx7"]
+[ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://game/battle/actions/test_actions/test_strike.gd" id="1_slbuy"]
 
 [resource]
 script = ExtResource("1_r5bx7")
 name = &"Test Strike"
 ap_cost = 1
 summary = "Deal $damage damage"
+action_script = ExtResource("1_slbuy")
 values = [6]
 metadata/_custom_type_script = "uid://dv6lo85qpphjt"

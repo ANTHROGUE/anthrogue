@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://c80tj678kqkkk"]
+
+[ext_resource type="Script" uid="uid://hdjgpdt57p5a" path="res://addons/moon-interval/nodes/sequence_node.gd" id="1_bmsme"]
+[ext_resource type="Script" uid="uid://be8ua6ji4bugr" path="res://addons/moon-interval/nodes/parallel_node.gd" id="2_kas30"]
+[ext_resource type="Script" uid="uid://w53l1qtcgxyu" path="res://addons/moon-interval/nodes/lerp_property_node.gd" id="3_qi8ju"]
+[ext_resource type="PackedScene" uid="uid://cfgxtotgi5fgp" path="res://ar/registry/battle/enemies/test/enemy_test.tscn" id="4_kas30"]
+[ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="4_qi8ju"]
+[ext_resource type="Script" uid="uid://dyy8dwk13mfwo" path="res://addons/moon-interval/nodes/func_node.gd" id="5_uc4rm"]
+
+[node name="SequenceNode" type="Node"]
+script = ExtResource("1_bmsme")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="Parallel_Mascot" type="Node" parent="."]
+script = ExtResource("2_kas30")
+
+[node name="SequenceNode" type="Node" parent="Parallel_Mascot"]
+script = ExtResource("1_bmsme")
+
+[node name="01_user_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../user")
+property = &":position:y"
+start_value = 0.0
+value = 1.0
+duration = 0.4
+ease = 1
+trans = 3
+flags = 1
+
+[node name="WaitNode" type="Node" parent="Parallel_Mascot/SequenceNode"]
+script = ExtResource("4_qi8ju")
+time = 0.3
+
+[node name="02_user_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../user")
+property = &":position:y"
+start_value = 1.0
+value = 0.0
+duration = 0.2
+ease = 0
+trans = 10
+
+[node name="impact" type="Node" parent="Parallel_Mascot/SequenceNode" groups=["ival_battle_impact"]]
+script = ExtResource("5_uc4rm")
+
+[node name="03_target_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../target")
+property = &":position:y"
+start_value = 0.0
+value = 1.0
+duration = 0.15
+ease = 1
+trans = 5
+flags = 1
+
+[node name="04_target_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../target")
+property = &":position:y"
+start_value = 1.0
+value = 0.0
+duration = 0.15
+trans = 5
+
+[node name="user" parent="." instance_placeholder="res://ar/player/player.tscn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+
+[node name="target" parent="." instance=ExtResource("4_kas30")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2.5)

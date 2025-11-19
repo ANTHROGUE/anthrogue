@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://ar/player/camera/spring_camera.tscn" id="2_sijrc"]
 [ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
 [ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://ar/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
-[ext_resource type="Script" uid="uid://bddcm42wkpvww" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
+[ext_resource type="Script" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
 albedo_color = Color(0, 1, 1, 1)

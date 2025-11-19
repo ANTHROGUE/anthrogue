@@ -23,7 +23,7 @@ func _ready() -> void:
 		body_entered.connect(on_body_entered)
 	if not spawnable_enemies.is_empty():
 		initialize_enemies()
-	%Pointer.queue_free()
+	#%Pointer.queue_free()
 
 func initialize_enemies() -> void:
 	# Remove existing enemies

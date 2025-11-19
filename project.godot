@@ -37,6 +37,13 @@ folder_colors={
 "res://game/": "teal"
 }
 
+[global_group]
+
+ival_battle_alt_targets=""
+ival_battle_target=""
+ival_battle_user=""
+ival_battle_impact=""
+
 [input]
 
 move_up={
