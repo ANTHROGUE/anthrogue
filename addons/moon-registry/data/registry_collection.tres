@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RegistryCollection" load_steps=24 format=3 uid="uid://cx1do2l5hcbg8"]
+[gd_resource type="Resource" script_class="RegistryCollection" load_steps=87 format=3 uid="uid://cx1do2l5hcbg8"]
 
 [ext_resource type="Script" uid="uid://counuj1l33fav" path="res://addons/moon-registry/data/registry.gd" id="1_g76xr"]
 [ext_resource type="Script" uid="uid://cps0w3c1g6x35" path="res://addons/moon-registry/data/registry_collection.gd" id="2_hwpud"]
@@ -20,7 +20,70 @@
 [ext_resource type="Script" uid="uid://cwuh4uhvd1dpo" path="res://addons/graphedit2/resources/graph_element_resource.gd" id="18_evgmf"]
 [ext_resource type="Script" uid="uid://cv7ghpv2yx3u" path="res://addons/graphedit2/resources/graph_frame_resource.gd" id="19_jpfj8"]
 [ext_resource type="Script" uid="uid://d2efhse1dte0t" path="res://addons/graphedit2/resources/graph_node_resource.gd" id="20_njrnh"]
+[ext_resource type="Script" uid="uid://c5xhftev4xapu" path="res://addons/moon-interval/editor/interval/interval_editor.gd" id="22_nsxps"]
+[ext_resource type="Script" uid="uid://bnwntie2g1ddy" path="res://addons/moon-interval/editor/interval/interval_edit_button.gd" id="23_tv564"]
+[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event/multi_event_editor.gd" id="24_v3hvw"]
+[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event/multi_event_graph_edit.gd" id="25_a5pc5"]
+[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event_editor.gd" id="26_ifn0l"]
+[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event_graph_edit.gd" id="27_fm1di"]
+[ext_resource type="Script" uid="uid://dm526geqwj0qd" path="res://addons/moon-interval/events/animate/animation_player_event.gd" id="28_evgmf"]
+[ext_resource type="Script" uid="uid://bhfqv5etqnxlh" path="res://addons/moon-interval/events/animate/wait_event.gd" id="29_jpfj8"]
+[ext_resource type="Script" uid="uid://i73g44ikqpw4" path="res://addons/moon-interval/events/control/block_event.gd" id="30_njrnh"]
+[ext_resource type="Script" uid="uid://d2lnhmorejxf5" path="res://addons/moon-interval/events/control/router_base.gd" id="31_osu37"]
+[ext_resource type="Script" uid="uid://bnjbukbdak0if" path="res://addons/moon-interval/events/control/router_func_bool.gd" id="32_6tfbg"]
+[ext_resource type="Script" uid="uid://dda0b1t8qwubm" path="res://addons/moon-interval/events/control/router_plays.gd" id="33_h0roa"]
+[ext_resource type="Script" uid="uid://dubyrkx5syvig" path="res://addons/moon-interval/events/control/router_random.gd" id="34_tvbjb"]
+[ext_resource type="Script" uid="uid://nat4x7wwj18" path="res://addons/moon-interval/events/control/router_signal.gd" id="35_edkrb"]
+[ext_resource type="Script" uid="uid://bpsy8noevxrch" path="res://addons/moon-interval/events/control/router_signal_multi.gd" id="36_oa07x"]
+[ext_resource type="Script" uid="uid://c12kub5mbihi0" path="res://addons/moon-interval/events/control/router_state.gd" id="37_ida77"]
+[ext_resource type="Script" uid="uid://dvlhudd01sjr1" path="res://addons/moon-interval/events/control/signal_event.gd" id="38_rtfuy"]
+[ext_resource type="Script" uid="uid://dgsf07gu6xjq2" path="res://addons/moon-interval/events/control/state_event.gd" id="39_ahjny"]
+[ext_resource type="Script" uid="uid://cyl2anm0oio0l" path="res://addons/moon-interval/events/event.gd" id="40_41scv"]
+[ext_resource type="Script" uid="uid://cey7plwf8vy3x" path="res://addons/moon-interval/events/meta/comment_event.gd" id="41_b1jjn"]
+[ext_resource type="Script" uid="uid://b4jeg84ympsqj" path="res://addons/moon-interval/events/meta/end_multi_event.gd" id="42_xb3xb"]
+[ext_resource type="Script" uid="uid://20d2ld5bbex0" path="res://addons/moon-interval/events/meta/event_ref.gd" id="43_ndrpa"]
+[ext_resource type="Script" uid="uid://cvvsdoeq53sg6" path="res://addons/moon-interval/events/meta/print_event.gd" id="44_d2ee4"]
+[ext_resource type="Script" uid="uid://ciyodddkqsiev" path="res://addons/moon-interval/events/multi_event.gd" id="45_0dga5"]
+[ext_resource type="Script" uid="uid://cstoq3atg4q1d" path="res://addons/moon-interval/events/script/emit_event.gd" id="46_xhiit"]
+[ext_resource type="Script" uid="uid://cnjr7agc82xsu" path="res://addons/moon-interval/events/script/func_event.gd" id="47_d6t1c"]
+[ext_resource type="Script" uid="uid://cuyiggc4hjc42" path="res://addons/moon-interval/events/script/property_event.gd" id="48_e2xoa"]
+[ext_resource type="Script" uid="uid://0dcnrsmqdybr" path="res://addons/moon-interval/events/script/ref_emit_event.gd" id="49_ciem8"]
+[ext_resource type="Script" uid="uid://ce4q7ujljjslh" path="res://addons/moon-interval/events/script/ref_func_event.gd" id="50_54oyo"]
+[ext_resource type="Script" uid="uid://bos7ub3cb2wdw" path="res://addons/moon-interval/events/script/ref_property_event.gd" id="51_etaqr"]
+[ext_resource type="Script" uid="uid://ctyc6gdgc1d63" path="res://addons/moon-interval/integrations/fmod/play_fmod.gd" id="52_krhuh"]
+[ext_resource type="Script" uid="uid://dnvlkyblkoxtm" path="res://addons/moon-interval/integrations/fmod/play_fmod_node.gd" id="53_ch6we"]
+[ext_resource type="Script" uid="uid://eijxwqi05l6k" path="res://addons/moon-interval/integrations/moonAudio/play_audio.gd" id="54_s580q"]
+[ext_resource type="Script" uid="uid://b750sutwde0yb" path="res://addons/moon-interval/integrations/moonAudio/play_audio_node.gd" id="55_diduc"]
+[ext_resource type="Script" uid="uid://dohh83j2007f1" path="res://addons/moon-interval/interval/active_interval.gd" id="56_416c3"]
+[ext_resource type="Script" uid="uid://d05jrpf7u7s6" path="res://addons/moon-interval/interval/common/connect.gd" id="57_fsdb7"]
+[ext_resource type="Script" uid="uid://c1ywhkgbfdwxj" path="res://addons/moon-interval/interval/common/func.gd" id="58_nn8lo"]
+[ext_resource type="Script" uid="uid://s1ii5ralvh" path="res://addons/moon-interval/interval/common/lerp_func.gd" id="59_fce1j"]
+[ext_resource type="Script" uid="uid://dmed6bgl2e8wr" path="res://addons/moon-interval/interval/common/lerp_property.gd" id="60_nwfh7"]
+[ext_resource type="Script" uid="uid://cqhdit7a8ity0" path="res://addons/moon-interval/interval/common/lerp_shader_global.gd" id="61_84xee"]
+[ext_resource type="Script" uid="uid://cmt80aqp275vo" path="res://addons/moon-interval/interval/common/projectile_move_2d.gd" id="62_30ua1"]
+[ext_resource type="Script" uid="uid://dvd3bv1j4ghmx" path="res://addons/moon-interval/interval/common/projectile_move_3d.gd" id="63_si7db"]
+[ext_resource type="Script" uid="uid://jmqo50w85qjk" path="res://addons/moon-interval/interval/common/set_property.gd" id="64_b1jn1"]
+[ext_resource type="Script" uid="uid://dc3mxutiufww8" path="res://addons/moon-interval/interval/common/wait.gd" id="65_fpbfm"]
+[ext_resource type="Script" uid="uid://c1hfin7e7dwgs" path="res://addons/moon-interval/interval/container/interval_container.gd" id="66_n8ylg"]
+[ext_resource type="Script" uid="uid://b2d4d4n78umny" path="res://addons/moon-interval/interval/container/parallel.gd" id="67_ajiwk"]
+[ext_resource type="Script" uid="uid://bf2mu7m4iycy1" path="res://addons/moon-interval/interval/container/sequence.gd" id="68_heio2"]
+[ext_resource type="Script" uid="uid://dcjdodbw8jfj1" path="res://addons/moon-interval/interval/container/sequence_random.gd" id="69_rubje"]
+[ext_resource type="Script" uid="uid://4j3c3kkplxlk" path="res://addons/moon-interval/interval/container/track_interval.gd" id="70_42hjq"]
+[ext_resource type="Script" uid="uid://b17n1b0oicgpl" path="res://addons/moon-interval/interval/interval.gd" id="71_bn78b"]
+[ext_resource type="Script" uid="uid://blsus0wox3w7p" path="res://addons/moon-interval/nodes/event_player.gd" id="72_2osel"]
+[ext_resource type="Script" uid="uid://dyy8dwk13mfwo" path="res://addons/moon-interval/nodes/func_node.gd" id="73_u7f8u"]
+[ext_resource type="Script" uid="uid://cos2xy4u8wwqb" path="res://addons/moon-interval/nodes/interval_container_node.gd" id="74_y5m6j"]
+[ext_resource type="Script" uid="uid://cuhsbq6mf4paa" path="res://addons/moon-interval/nodes/interval_node.gd" id="75_14ldu"]
+[ext_resource type="Script" uid="uid://w53l1qtcgxyu" path="res://addons/moon-interval/nodes/lerp_property_node.gd" id="76_m7kyr"]
+[ext_resource type="Script" uid="uid://be8ua6ji4bugr" path="res://addons/moon-interval/nodes/parallel_node.gd" id="77_2oltn"]
+[ext_resource type="Script" uid="uid://65cjbkrvxpoj" path="res://addons/moon-interval/nodes/projectile_2d_move_node.gd" id="78_mlluw"]
+[ext_resource type="Script" uid="uid://cb0xohr7aqu8e" path="res://addons/moon-interval/nodes/projectile_3d_move_node.gd" id="79_4f46r"]
 [ext_resource type="Script" uid="uid://jb5lno60xhh2" path="res://addons/script-tabs/plugin.gd" id="79_7aowi"]
+[ext_resource type="Script" uid="uid://hdjgpdt57p5a" path="res://addons/moon-interval/nodes/sequence_node.gd" id="80_w0ki4"]
+[ext_resource type="Script" uid="uid://d2t47oeh14y4h" path="res://addons/moon-interval/nodes/set_property_node.gd" id="81_mbply"]
+[ext_resource type="Script" uid="uid://cotkwanlbw0vs" path="res://addons/moon-interval/nodes/track_node.gd" id="82_h57hs"]
+[ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="83_1te1p"]
+[ext_resource type="Script" uid="uid://bt64gatk5rir1" path="res://addons/moon-interval/plugin.gd" id="84_vhei0"]
 
 [sub_resource type="Resource" id="Resource_hwpud"]
 resource_name = "resource_registry_scripts"
@@ -47,7 +110,70 @@ id_to_resource = Dictionary[int, Resource]({
 17: ExtResource("18_evgmf"),
 18: ExtResource("19_jpfj8"),
 19: ExtResource("20_njrnh"),
-78: ExtResource("79_7aowi")
+20: ExtResource("22_nsxps"),
+21: ExtResource("23_tv564"),
+22: ExtResource("24_v3hvw"),
+23: ExtResource("25_a5pc5"),
+24: ExtResource("26_ifn0l"),
+25: ExtResource("27_fm1di"),
+26: ExtResource("28_evgmf"),
+27: ExtResource("29_jpfj8"),
+28: ExtResource("30_njrnh"),
+29: ExtResource("31_osu37"),
+30: ExtResource("32_6tfbg"),
+31: ExtResource("33_h0roa"),
+32: ExtResource("34_tvbjb"),
+33: ExtResource("35_edkrb"),
+34: ExtResource("36_oa07x"),
+35: ExtResource("37_ida77"),
+36: ExtResource("38_rtfuy"),
+37: ExtResource("39_ahjny"),
+38: ExtResource("40_41scv"),
+39: ExtResource("41_b1jjn"),
+40: ExtResource("42_xb3xb"),
+41: ExtResource("43_ndrpa"),
+42: ExtResource("44_d2ee4"),
+43: ExtResource("45_0dga5"),
+44: ExtResource("46_xhiit"),
+45: ExtResource("47_d6t1c"),
+46: ExtResource("48_e2xoa"),
+47: ExtResource("49_ciem8"),
+48: ExtResource("50_54oyo"),
+49: ExtResource("51_etaqr"),
+50: ExtResource("52_krhuh"),
+51: ExtResource("53_ch6we"),
+52: ExtResource("54_s580q"),
+53: ExtResource("55_diduc"),
+54: ExtResource("56_416c3"),
+55: ExtResource("57_fsdb7"),
+56: ExtResource("58_nn8lo"),
+57: ExtResource("59_fce1j"),
+58: ExtResource("60_nwfh7"),
+59: ExtResource("61_84xee"),
+60: ExtResource("62_30ua1"),
+61: ExtResource("63_si7db"),
+62: ExtResource("64_b1jn1"),
+63: ExtResource("65_fpbfm"),
+64: ExtResource("66_n8ylg"),
+65: ExtResource("67_ajiwk"),
+66: ExtResource("68_heio2"),
+67: ExtResource("69_rubje"),
+68: ExtResource("70_42hjq"),
+69: ExtResource("71_bn78b"),
+70: ExtResource("72_2osel"),
+71: ExtResource("73_u7f8u"),
+72: ExtResource("74_y5m6j"),
+73: ExtResource("75_14ldu"),
+74: ExtResource("76_m7kyr"),
+75: ExtResource("77_2oltn"),
+76: ExtResource("78_mlluw"),
+77: ExtResource("79_4f46r"),
+78: ExtResource("79_7aowi"),
+79: ExtResource("80_w0ki4"),
+80: ExtResource("81_mbply"),
+81: ExtResource("82_h57hs"),
+82: ExtResource("83_1te1p"),
+83: ExtResource("84_vhei0")
 })
 directory = "res://addons"
 scan_subdirectories = true

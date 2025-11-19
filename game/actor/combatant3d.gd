@@ -12,6 +12,8 @@ class_name Combatant
 ## Node that tracks the stats of the Combatant
 var stats: BattleStats
 
+var panel: CombatantPanel
+
 
 func _ready() -> void:
 	stats = initialize_stats()

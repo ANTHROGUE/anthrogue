@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr7ndutcapucw"]
+[gd_scene load_steps=9 format=3 uid="uid://dr7ndutcapucw"]
 
 [ext_resource type="Script" uid="uid://bwpg4840d070v" path="res://game/battle/battle_ui/battle_ui.gd" id="1_xktba"]
-[ext_resource type="PackedScene" uid="uid://8ikc68l0i02y" path="res://game/battle/mascot_panel.tscn" id="2_v3sf7"]
+[ext_resource type="PackedScene" uid="uid://8ikc68l0i02y" path="res://game/battle/moveset_old.tscn" id="2_v3sf7"]
 [ext_resource type="PackedScene" uid="uid://dfw8g4sirpc08" path="res://game/battle/move_panel.tscn" id="3_5vhio"]
-[ext_resource type="PackedScene" uid="uid://djrshqlncgwga" path="res://game/battle/mascot_panel_1.tscn" id="4_hgdvw"]
-[ext_resource type="PackedScene" uid="uid://cvcfuubl4jdr6" path="res://game/battle/enemy_panel.tscn" id="4_tubnw"]
 [ext_resource type="PackedScene" uid="uid://dbq0o58revbhn" path="res://game/battle/moveset_panel.tscn" id="5_kcxjk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kcxjk"]
@@ -45,7 +43,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BattleUI_lower/MovesetPanelContainer:position")
+tracks/2/path = NodePath("BattleUI_lower/OLDMovesetPanelContainer:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -108,7 +106,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BattleUI_lower/MovesetPanelContainer:position")
+tracks/2/path = NodePath("BattleUI_lower/OLDMovesetPanelContainer:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -209,7 +207,7 @@ layout_mode = 2
 [node name="MovePanel5" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
 layout_mode = 2
 
-[node name="MovesetPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
+[node name="OLDMovesetPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -228,19 +226,19 @@ theme_override_constants/v_separation = 8
 alignment = 1
 reverse_fill = true
 
-[node name="MascotPanel2" parent="BattleUI_lower/MovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+[node name="MascotPanel2" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
 visible = false
 layout_mode = 2
 
-[node name="MascotPanel3" parent="BattleUI_lower/MovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+[node name="MascotPanel3" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
 visible = false
 layout_mode = 2
 
-[node name="MascotPanel4" parent="BattleUI_lower/MovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+[node name="MascotPanel4" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
 visible = false
 layout_mode = 2
 
-[node name="AnimationPlayer_MPC" type="AnimationPlayer" parent="BattleUI_lower/MovesetPanelContainer"]
+[node name="AnimationPlayer_MPC" type="AnimationPlayer" parent="BattleUI_lower/OLDMovesetPanelContainer"]
 
 [node name="MascotPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
 unique_name_in_owner = true
@@ -258,32 +256,34 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/h_separation = 48
 
-[node name="MascotPanel1" parent="BattleUI_lower/MascotPanelContainer" instance=ExtResource("4_hgdvw")]
+[node name="MascotPanel1" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
 custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
 
-[node name="MascotPanel2" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel_1.tscn"]
-custom_minimum_size = Vector2(160, 160)
-layout_mode = 2
-
-[node name="MascotPanel3" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel_1.tscn"]
-custom_minimum_size = Vector2(160, 160)
-layout_mode = 2
-
-[node name="MascotPanel4" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel_1.tscn"]
-custom_minimum_size = Vector2(160, 160)
-layout_mode = 2
-
-[node name="MovesetPanel" parent="BattleUI_lower" instance=ExtResource("5_kcxjk")]
+[node name="MovesetPanelContainer" type="Control" parent="BattleUI_lower"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = 168.0
-offset_top = -551.99536
-offset_right = 936.0
-offset_bottom = -247.99536
+anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = -543.99536
+offset_right = 912.0
+offset_bottom = -239.99536
 grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MovesetPanel" parent="BattleUI_lower/MovesetPanelContainer" instance=ExtResource("5_kcxjk")]
+layout_mode = 1
+anchors_preset = 15
+anchor_top = 0.0
+anchor_right = 1.0
+offset_top = 0.0
+offset_right = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MovesLabel" type="Label" parent="BattleUI_lower"]
 layout_mode = 1
@@ -347,10 +347,11 @@ grow_horizontal = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="EnemyPanel" parent="BattleUI_upper/EnemyPanelContainer" instance=ExtResource("4_tubnw")]
+[node name="EnemyPanel" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
 layout_mode = 2
 
 [node name="EnemyPanel2" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
 layout_mode = 2
 
 [node name="EnemyPanel3" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
@@ -378,7 +379,7 @@ visible = false
 layout_mode = 2
 
 [node name="AnimationPlayer_EPC" type="AnimationPlayer" parent="BattleUI_upper/EnemyPanelContainer"]
-root_node = NodePath("../../../BattleUI_lower/MovesetPanelContainer")
+root_node = NodePath("../../../BattleUI_lower/OLDMovesetPanelContainer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

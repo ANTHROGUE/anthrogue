@@ -43,6 +43,8 @@ ival_battle_alt_targets=""
 ival_battle_target=""
 ival_battle_user=""
 ival_battle_impact=""
+Combatant_Enemy=""
+Combatant_Ally=""
 
 [input]
 
