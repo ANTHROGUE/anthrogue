@@ -10,8 +10,8 @@ class_name Combatant
 @export var combatant_tags: Array[BattleStats.CombatantTag] = []
 
 ## Node that tracks the stats of the Combatant
-var stats: BattleStats
-
+@export var stats: BattleStats
+@export var inventory: Inventory
 var panel: CombatantPanel
 
 

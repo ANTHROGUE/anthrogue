@@ -10,11 +10,15 @@ const ENEMY_PANEL = preload("uid://cvcfuubl4jdr6")
 var mascot_panels: Array[CombatantPanel] = []
 var enemy_panels: Array[CombatantPanel] = []
 
+var moveset_panel: MovesetPanel
+
 signal s_turn_confirmed()
 signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant])
+signal s_move_selected(move: BattleAction, user: Combatant)
 
 func _ready() -> void:
-	setup_combatant_panels()
+	setup_panels()
+	update_moveset_panel(Player.instance)
 	%AnimationPlayer.play("battleui_in")
 
 func on_go_pressed() -> void:
@@ -32,7 +36,7 @@ func _on_action_button_pressed() -> void:
 	s_move_queued.emit(new_move, Player.instance, target, targets)
 	pass # Replace with function body.
 
-func setup_combatant_panels() -> void:
+func setup_panels() -> void:
 	for combatant in manager.combatants:
 		if combatant.panel == null:
 			var new_panel: CombatantPanel
@@ -47,7 +51,16 @@ func setup_combatant_panels() -> void:
 			combatant.panel = new_panel
 			new_panel.user = combatant
 
+func update_moveset_panel(combatant: Combatant) -> void:
+	if moveset_panel is MovesetPanel:
+		moveset_panel.queue_free()
+	moveset_panel = MOVESET_PANEL.instantiate()
+	moveset_panel.battle_ui = self
+	moveset_panel.user = combatant
+	%MovesetPanelContainer.add_child(moveset_panel)
+
 func update_panels() -> void:
 	for array in [mascot_panels, enemy_panels]:
 		for panel: CombatantPanel in array:
-			panel = panel.refresh_panel() if CombatantPanel else array.erase(panel)
+			panel.refresh_panel()
+			if panel.combatant == null: array.erase(panel)

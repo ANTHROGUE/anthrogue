@@ -15,8 +15,8 @@ class_name Inventory
 
 ## BANGRS: 1 Weapon (Equip), 4 Talents (Learn)
 @export var weapon: Weapon
-@export var actions: Array[PlayerAction] = [] ## TODO
-@export var action_cap = 4
+@export var actions: Array[BattleAction] = [] ## TODO
+@export var action_cap = 6
 
 ## Point Pools
 ## Points allocated to using specific weapons

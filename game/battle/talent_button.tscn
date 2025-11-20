@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://byo54fus7gfit"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppigx"]
+line_spacing = -8.0
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="TalentButton1" type="Button"]
+custom_minimum_size = Vector2(192, 104)
+text = "Talent"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 2.0
+grow_horizontal = 2
+text = "Brush Rush"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

@@ -19,6 +19,7 @@ func _ready() -> void:
 	battle_ui = BATTLE_UI.instantiate()
 	battle_ui.s_move_queued.connect(queue_action)
 	battle_ui.s_turn_confirmed.connect(on_turn_confirmed)
+	battle_ui.s_move_selected.connect(select_action)
 	add_child(battle_ui)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -63,3 +64,7 @@ func run_action(action: QueuedAction) -> void:
 			action_node.action()
 			await action_node.s_action_end
 	action_node.queue_free()
+
+func select_action(action: BattleAction, user: Combatant) -> void:
+	print("Selected %s from %s" % [action, user])
+	pass

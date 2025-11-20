@@ -14,14 +14,12 @@ static var instance: Player
 @onready var camera: SpringCamera = %SpringCamera
 @onready var state_controller: FiniteStateMachine3D = %PlayerState
 
-var inventory: Inventory
-
 
 func _ready() -> void:
 	super()
 	instance = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	inventory = Inventory.new()
+	#inventory = Inventory.new()
 
 func calculate_friction() -> float:
 	if is_on_floor():

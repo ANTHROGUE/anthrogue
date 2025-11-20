@@ -1,5 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbq0o58revbhn"]
 
+[ext_resource type="Script" uid="uid://caiqtdim4iteu" path="res://game/battle/moveset_panel.gd" id="1_ppigx"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_h65jm"]
 line_spacing = -4.0
 font_size = 22
@@ -19,13 +21,7 @@ line_spacing = -8.0
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ppigx"]
-line_spacing = -8.0
-font_size = 20
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[node name="MascotPanel" type="ColorRect"]
+[node name="MovesetPanel" type="ColorRect"]
 custom_minimum_size = Vector2(768, 304)
 anchors_preset = 2
 anchor_top = 1.0
@@ -34,8 +30,11 @@ offset_top = -304.0
 offset_right = 768.0
 grow_vertical = 0
 color = Color(0.234, 0.39, 0.234, 1)
+script = ExtResource("1_ppigx")
 
 [node name="DetailPanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -81,6 +80,8 @@ offset_bottom = 184.0
 grow_horizontal = 2
 
 [node name="StatsPanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -118,6 +119,7 @@ label_settings = SubResource("LabelSettings_h65jm")
 autowrap_mode = 2
 
 [node name="Label_Name" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 16.0
 offset_top = 40.0
@@ -127,6 +129,7 @@ text = "MascotName"
 label_settings = SubResource("LabelSettings_2yhv4")
 
 [node name="Label_HP" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -140,6 +143,7 @@ text = "HP: 15/15"
 label_settings = SubResource("LabelSettings_2yhv4")
 
 [node name="Label_AP" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -153,6 +157,8 @@ text = "AP: 7/7"
 label_settings = SubResource("LabelSettings_2yhv4")
 
 [node name="WeaponButton" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -180,7 +186,8 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 3
 
-[node name="TalentUIContainer" type="HBoxContainer" parent="."]
+[node name="TalentUIContainer" type="HFlowContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -188,144 +195,31 @@ anchor_bottom = 1.0
 offset_left = 152.0
 offset_top = -264.0
 offset_right = 752.0
-offset_bottom = -160.0
-grow_vertical = 0
-theme_override_constants/separation = 12
-
-[node name="TalentButton1" type="Button" parent="TalentUIContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-text = "Talent"
-
-[node name="Label" type="Label" parent="TalentUIContainer/TalentButton1"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="TalentButton2" type="Button" parent="TalentUIContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-text = "Talent"
-
-[node name="Label" type="Label" parent="TalentUIContainer/TalentButton2"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="TalentButton3" type="Button" parent="TalentUIContainer"]
-custom_minimum_size = Vector2(192, 0)
-layout_mode = 2
-text = "Talent"
-
-[node name="Label" type="Label" parent="TalentUIContainer/TalentButton3"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="TalentUIContainer2" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 152.0
-offset_top = -120.0
-offset_right = 752.0
 offset_bottom = -16.0
 grow_vertical = 0
-theme_override_constants/separation = 12
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 40
+reverse_fill = true
 
-[node name="TalentButton1" type="Button" parent="TalentUIContainer2"]
-custom_minimum_size = Vector2(192, 0)
+[node name="TalentButton1" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
 layout_mode = 2
-text = "Talent"
 
-[node name="Label" type="Label" parent="TalentUIContainer2/TalentButton1"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="TalentButton2" type="Button" parent="TalentUIContainer2"]
-custom_minimum_size = Vector2(192, 0)
+[node name="TalentButton2" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+visible = false
 layout_mode = 2
-text = "Talent"
 
-[node name="Label" type="Label" parent="TalentUIContainer2/TalentButton2"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="TalentButton3" type="Button" parent="TalentUIContainer2"]
-custom_minimum_size = Vector2(192, 0)
+[node name="TalentButton3" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+visible = false
 layout_mode = 2
-text = "Talent"
 
-[node name="Label" type="Label" parent="TalentUIContainer2/TalentButton3"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = 2.0
-grow_horizontal = 2
-text = "Brush Rush"
-label_settings = SubResource("LabelSettings_ppigx")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+[node name="TalentButton4" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="TalentButton5" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="TalentButton6" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+visible = false
+layout_mode = 2
