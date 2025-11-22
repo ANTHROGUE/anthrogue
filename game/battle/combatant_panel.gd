@@ -4,7 +4,10 @@ class_name CombatantPanel
 var user: Combatant:
 	set(x):
 		user = x
-		refresh_panel()
+		setup_panel()
+
+func setup_panel() -> void:
+	refresh_panel()
 		
 func refresh_panel() -> void:
 	if user == null:

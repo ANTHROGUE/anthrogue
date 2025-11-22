@@ -23,7 +23,7 @@ func update_buttons() -> void:
 	for button: ActionButton in talent_buttons.keys():
 		button.disabled = !is_usable_action(talent_buttons[button])
 
-func refresh_panel() -> void:
+func setup_panel() -> void:
 	super()
 	setup_buttons()
 

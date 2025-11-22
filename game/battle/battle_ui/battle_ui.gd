@@ -25,7 +25,7 @@ func _ready() -> void:
 	Player.instance.stats.moves = 3
 	setup_panels()
 	update_moveset_panel(Player.instance)
-	update_moves_label()
+	refresh_stats()
 	s_move_selected.connect(set_targeting_panels)
 	%AnimationPlayer.play("battleui_in")
 
@@ -106,12 +106,14 @@ func set_target(target: Combatant) -> void:
 		s_move_queued.emit(targeting_action, targeting_user, target, x)
 	if moveset_panel is MovesetPanel:
 		moveset_panel.update_buttons()
-	update_moves_label()
+	refresh_stats()
 	targeting_panels.clear()
 	update_target_buttons()
 
-func update_moves_label() -> void:
+func refresh_stats() -> void:
 	%MovesLabel.text = "Moves Filled: %d / %d" % [manager.player_moves_queued, Player.instance.stats.moves]
+	for panel: CombatantPanel in mascot_panels + enemy_panels + [moveset_panel]:
+		panel.refresh_panel()
 
 func update_panels() -> void:
 	for array in [mascot_panels, enemy_panels]:

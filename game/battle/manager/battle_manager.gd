@@ -40,6 +40,8 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 	if user is Player:
 		player_moves_queued += 1
 	
+	user.stats.ap -= action.ap_cost
+	
 	var queued_action := QueuedAction.new()
 	queued_action.user = user
 	queued_action.target = target
@@ -57,6 +59,7 @@ func begin_round() -> void:
 	for action in action_queue:
 		await run_action(action)
 	action_queue.clear()
+	player_moves_queued = 0
 	battle_ui.show()
 
 func run_action(action: QueuedAction) -> void:
