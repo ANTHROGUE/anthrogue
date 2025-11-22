@@ -4,6 +4,8 @@ class_name BattleManager
 
 const BATTLE_UI := preload('res://game/battle/battle_ui/battle_ui.tscn')
 
+var current_round := 0
+
 class QueuedAction:
 	var user: Combatant
 	var target: Combatant
@@ -43,7 +45,7 @@ func on_turn_confirmed() -> void:
 	if !(action_queue.size() > 0):
 		print("Action Queue size invalid")
 		return
-	begin_round()
+	execute_round()
 
 func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = [], timing: int = -1, loose: bool = false) -> void:
 	var space: int
@@ -123,12 +125,18 @@ func prepare_queue() -> void:
 	append_enemy_moves()
 	s_new_round.emit()
 
-func begin_round() -> void:
+func execute_round() -> void:
 	for action in action_queue:
 		if action is QueuedAction:
 			await run_action(action) 
 		else:
 			print("Next action is null, skipping")
+	for combatant: Combatant in combatants:
+		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
+	prepare_queue()
+
+func begin_round() -> void:
+	current_round += 1
 	for combatant: Combatant in combatants:
 		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
 	prepare_queue()

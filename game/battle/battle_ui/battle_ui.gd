@@ -33,8 +33,10 @@ func _ready() -> void:
 	manager.s_new_round.connect(on_new_round)
 	
 func on_new_round() -> void:
-	%AnimationPlayer.play("battleui_in")
-	%AnimationPlayer.play_backwards("battleui_to-movie")
+	if manager.current_round < 2:
+		%AnimationPlayer.play("battleui_in")
+	else:
+		%AnimationPlayer.play_backwards("battleui_to-movie")
 	refresh_stats()
 
 func on_go_pressed() -> void:
