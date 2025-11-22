@@ -17,11 +17,14 @@ var action_queue: Array[QueuedAction] = []
 ## BANGRS - Moves calculated using AGI, may be varied
 ## v2i - (queued, max)
 var move_counts: Dictionary[Combatant, Vector2i] = {}
+var move_total := 0
 
 var player_moves_queued := 0
 
 signal s_turn_confirmed()
 signal s_new_round()
+#signal s_timeline_ready()
+signal s_queue_changed()
 
 func _ready() -> void:
 	battle_ui = BATTLE_UI.instantiate()
@@ -33,7 +36,7 @@ func _ready() -> void:
 	#s_new_round.connect(on_new_round)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	s_new_round.emit()
+	prepare_queue()
 
 func on_turn_confirmed() -> void:
 	#append_enemy_moves()
@@ -46,7 +49,9 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 	var space: int
 	# Strict pre-calculated action queue size
 	if timing > -1 && timing < action_queue.size():
-		if action_queue[timing] is QueuedAction:
+		if !action_queue[timing] is QueuedAction:
+			space = timing
+		else:
 			if !loose:
 				print("Overwriting %s in move timeline" % action_queue[timing].name)
 				space = timing
@@ -64,7 +69,7 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 						check = timing + ceili(_f)
 					if action_queue[check] is QueuedAction:
 						continue
-					space = timing + i
+					space = check
 					break
 	else:
 		# Occupy the next open space
@@ -93,19 +98,22 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 	var __p := "Action Queued: %s from %s" % [action.name, user.name]
 	if target is Combatant:
 		__p += " targeting %s" % target.name
+	if timing > -1:
+		__p += " with timing: %d" % timing
 	print(__p)
 	
 	user.stats.ap -= action.ap_cost
+	s_queue_changed.emit()
 
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
 			queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, action_queue.size()), true)
 
-func begin_action_queue() -> void:
+func prepare_queue() -> void:
 	action_queue.clear()
 	move_counts.clear()
-	var move_total := 0
+	move_total = 0
 	for combatant in combatants:
 		var move_count = combatant.stats.calculate_moves()
 		move_counts.set(combatant, Vector2i(0, move_count))
@@ -113,6 +121,7 @@ func begin_action_queue() -> void:
 	action_queue.resize(move_total)
 	## BANGRS: enemy moves in timeline!
 	append_enemy_moves()
+	s_new_round.emit()
 
 func begin_round() -> void:
 	for action in action_queue:
@@ -122,11 +131,7 @@ func begin_round() -> void:
 			print("Next action is null, skipping")
 	for combatant: Combatant in combatants:
 		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
-	begin_action_queue()
-	s_new_round.emit()
-	
-#func on_new_round() -> void:
-	
+	prepare_queue()
 
 func run_action(action: QueuedAction) -> void:
 	var battle_action: BattleAction = action.action

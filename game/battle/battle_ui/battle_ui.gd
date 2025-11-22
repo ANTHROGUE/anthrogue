@@ -1,4 +1,5 @@
 extends Control
+class_name BattleUI
 
 const MASCOT_PANEL = preload("uid://djrshqlncgwga")
 const MOVESET_PANEL = preload("uid://dbq0o58revbhn")
@@ -26,17 +27,20 @@ func _ready() -> void:
 	Player.instance.stats.moves = 3
 	setup_panels()
 	update_moveset_panel(Player.instance)
+	move_timeline.battle_ui = self
 	s_move_selected.connect(set_targeting_panels)
+	
 	manager.s_new_round.connect(on_new_round)
 	
 func on_new_round() -> void:
 	%AnimationPlayer.play("battleui_in")
+	%AnimationPlayer.play_backwards("battleui_to-movie")
 	refresh_stats()
 
 func on_go_pressed() -> void:
 	# s_move_queued.emit(load('res://ar/registry/battle/actions/test/test_action.tres'), Player.instance, targets)
 	# _on_action_button_pressed()
-	%AnimationPlayer.play_backwards("battleui_in")
+	%AnimationPlayer.play("battleui_to-movie")
 	# risking softlocks for the aura
 	await %AnimationPlayer.animation_finished
 	manager.s_turn_confirmed.emit()
@@ -119,7 +123,7 @@ func set_target(target: Combatant) -> void:
 	update_target_buttons()
 
 func refresh_stats() -> void:
-	%MovesLabel.text = "Moves Filled: %d / %d" % [manager.player_moves_queued, Player.instance.stats.moves]
+	%MovesLabel.text = "Moves Filled: %d / %d" % [manager.move_counts[Player.instance].x, manager.move_counts[Player.instance].y]
 	for panel: CombatantPanel in mascot_panels + enemy_panels + [moveset_panel]:
 		panel.refresh_panel()
 

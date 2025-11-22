@@ -4,7 +4,10 @@ class_name MovesetPanel
 const TALENT_BUTTON = preload("uid://byo54fus7gfit")
 var talent_buttons: Dictionary[Button, BattleAction]
 var battle_ui
-var manager: BattleManager
+var manager: BattleManager:
+	set(x):
+		x.s_queue_changed.connect(refresh_panel)
+		manager = x
 
 func setup_buttons() -> void:
 	talent_buttons.clear()
@@ -17,7 +20,6 @@ func setup_buttons() -> void:
 		talent_buttons.set(button, talent)
 		if battle_ui != null:
 			button.pressed.connect(battle_ui.s_move_selected.emit.bind(talent, user))
-	refresh_panel()
 	
 func refresh_panel() -> void:
 	super()
@@ -29,4 +31,4 @@ func setup_panel() -> void:
 	setup_buttons()
 
 func is_usable_action(action: BattleAction) -> bool:
-	return (user.stats.ap >= action.ap_cost) && (manager.player_moves_queued < user.stats.moves)
+	return (user.stats.ap >= action.ap_cost) && (manager.move_counts[user].x < manager.move_counts[user].y)

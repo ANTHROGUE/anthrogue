@@ -16,6 +16,9 @@ enum TARGETING {
 ## AP cost for player action use
 @export var ap_cost := 0
 
+## Displayed icon
+@export var icon: Texture2D
+
 ## Summary displayed during round, or on UI
 @export_multiline var summary: String
 
