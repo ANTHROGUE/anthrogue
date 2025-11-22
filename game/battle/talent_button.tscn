@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://byo54fus7gfit"]
+[gd_scene load_steps=3 format=3 uid="uid://byo54fus7gfit"]
+
+[ext_resource type="Script" uid="uid://beoypgtq6vpc1" path="res://game/battle/action_button.gd" id="1_g0cfw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ppigx"]
 line_spacing = -8.0
@@ -8,7 +10,10 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="TalentButton1" type="Button"]
 custom_minimum_size = Vector2(192, 104)
+offset_right = 192.0
+offset_bottom = 104.0
 text = "Talent"
+script = ExtResource("1_g0cfw")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

@@ -22,8 +22,10 @@ signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combata
 signal s_move_selected(move: BattleAction, user: Combatant)
 
 func _ready() -> void:
+	Player.instance.stats.moves = 3
 	setup_panels()
 	update_moveset_panel(Player.instance)
+	update_moves_label()
 	s_move_selected.connect(set_targeting_panels)
 	%AnimationPlayer.play("battleui_in")
 
@@ -42,7 +44,9 @@ func _on_action_button_pressed() -> void:
 	pass # Replace with function body.
 
 func setup_panels() -> void:
-	for combatant in manager.combatants:
+	var rev: Array[Combatant] = manager.combatants
+	rev.reverse()
+	for combatant in rev:
 		if combatant.panel == null:
 			var new_panel: CombatantPanel
 			if combatant.is_in_group("Combatant_Ally"):
@@ -61,6 +65,7 @@ func update_moveset_panel(combatant: Combatant) -> void:
 		moveset_panel.queue_free()
 	moveset_panel = MOVESET_PANEL.instantiate()
 	moveset_panel.battle_ui = self
+	moveset_panel.manager = manager
 	moveset_panel.user = combatant
 	%MovesetPanelContainer.add_child(moveset_panel)
 	
@@ -99,8 +104,14 @@ func set_target(target: Combatant) -> void:
 	var x: Array[Combatant] = []
 	if target is Combatant:
 		s_move_queued.emit(targeting_action, targeting_user, target, x)
+	if moveset_panel is MovesetPanel:
+		moveset_panel.update_buttons()
+	update_moves_label()
 	targeting_panels.clear()
 	update_target_buttons()
+
+func update_moves_label() -> void:
+	%MovesLabel.text = "Moves Filled: %d / %d" % [manager.player_moves_queued, Player.instance.stats.moves]
 
 func update_panels() -> void:
 	for array in [mascot_panels, enemy_panels]:

@@ -13,6 +13,7 @@ class QueuedAction:
 var combatants: Array[Combatant] = []
 var battle_ui: Control
 var action_queue: Array[QueuedAction] = []
+var player_moves_queued := 0
 
 
 func _ready() -> void:
@@ -35,6 +36,10 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 	if target is Combatant:
 		__p += " targeting %s" % target.name
 	print(__p)
+	
+	if user is Player:
+		player_moves_queued += 1
+	
 	var queued_action := QueuedAction.new()
 	queued_action.user = user
 	queued_action.target = target
