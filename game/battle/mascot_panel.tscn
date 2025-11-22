@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://djrshqlncgwga"]
+[gd_scene load_steps=4 format=3 uid="uid://djrshqlncgwga"]
 
 [ext_resource type="Script" uid="uid://bgdoun5d3eudi" path="res://game/battle/combatant_panel.gd" id="1_mr8hk"]
+[ext_resource type="PackedScene" uid="uid://dv3m85tmjgyxa" path="res://game/battle/target_button.tscn" id="2_jmpl3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2yhv4"]
 outline_size = 4
@@ -57,19 +58,6 @@ text = "MascotName"
 label_settings = SubResource("LabelSettings_2yhv4")
 horizontal_alignment = 1
 
-[node name="TargetButton" type="Button" parent="."]
-unique_name_in_owner = true
+[node name="TargetButton" parent="." instance=ExtResource("2_jmpl3")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -56.0
-offset_right = 60.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Target"

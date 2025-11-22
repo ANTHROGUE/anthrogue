@@ -9,4 +9,5 @@ script = ExtResource("1_bj6a6")
 icon = ExtResource("1_yn7ex")
 name = &"Test Action"
 action_script = ExtResource("1_72i81")
+targeting = 2
 metadata/_custom_type_script = "uid://848sb6qh7g2v"

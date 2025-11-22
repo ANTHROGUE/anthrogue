@@ -31,6 +31,10 @@ func on_turn_confirmed() -> void:
 	begin_round()
 
 func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = []) -> void:
+	var __p := "Action Queued: %s from %s" % [action.name, user.name]
+	if target is Combatant:
+		__p += " targeting %s" % target.name
+	print(__p)
 	var queued_action := QueuedAction.new()
 	queued_action.user = user
 	queued_action.target = target

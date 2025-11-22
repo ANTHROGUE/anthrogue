@@ -10,6 +10,11 @@ const ENEMY_PANEL = preload("uid://cvcfuubl4jdr6")
 var mascot_panels: Array[CombatantPanel] = []
 var enemy_panels: Array[CombatantPanel] = []
 
+## Targeting
+var targeting_action: BattleAction
+var targeting_user: Combatant
+var targeting_panels: Array[CombatantPanel] = []
+
 var moveset_panel: MovesetPanel
 
 signal s_turn_confirmed()
@@ -19,13 +24,13 @@ signal s_move_selected(move: BattleAction, user: Combatant)
 func _ready() -> void:
 	setup_panels()
 	update_moveset_panel(Player.instance)
+	s_move_selected.connect(set_targeting_panels)
 	%AnimationPlayer.play("battleui_in")
 
 func on_go_pressed() -> void:
 	# s_move_queued.emit(load('res://ar/registry/battle/actions/test/test_action.tres'), Player.instance, targets)
-	_on_action_button_pressed()
+	# _on_action_button_pressed()
 	s_turn_confirmed.emit()
-
 
 func _on_action_button_pressed() -> void:
 	var target: Combatant = get_parent().get_parent().enemies[0]
@@ -58,6 +63,44 @@ func update_moveset_panel(combatant: Combatant) -> void:
 	moveset_panel.battle_ui = self
 	moveset_panel.user = combatant
 	%MovesetPanelContainer.add_child(moveset_panel)
+	
+func set_targeting_panels(move: BattleAction, user: Combatant) -> void:
+	targeting_panels.clear()
+	targeting_action = move
+	targeting_user = user
+	match move.targeting:
+		BattleAction.TARGETING.EnemySingle:
+			targeting_panels.append_array(enemy_panels)
+		BattleAction.TARGETING.AllyAny:
+			targeting_panels.append_array(mascot_panels)
+		BattleAction.TARGETING.AllyOther:
+			for panel: CombatantPanel in mascot_panels:
+				if panel.user != user:
+					targeting_panels.append(panel)
+	if targeting_panels.size() > 0:
+		update_target_buttons()
+	
+func update_target_buttons() -> void:
+	var button: Button
+	var callable: Callable
+	for panel in mascot_panels + enemy_panels:
+		button = panel.get_node("TargetButton")
+		callable = set_target.bind(panel.user)
+		if panel in targeting_panels:
+			button.visible = true
+			button.pressed.connect(callable)
+		else:
+			button.visible = false
+			button.pressed.disconnect(callable)
+
+func set_target(target: Combatant) -> void:
+	if target == null:
+		print("Received no target, cancelling")
+	var x: Array[Combatant] = []
+	if target is Combatant:
+		s_move_queued.emit(targeting_action, targeting_user, target, x)
+	targeting_panels.clear()
+	update_target_buttons()
 
 func update_panels() -> void:
 	for array in [mascot_panels, enemy_panels]:

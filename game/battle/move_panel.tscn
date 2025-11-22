@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfw8g4sirpc08"]
 
-[ext_resource type="Texture2D" uid="uid://bjqgj7re7wty8" path="res://ui_assets/gag_panel.png" id="1_b0qgg"]
+[ext_resource type="Texture2D" uid="uid://bjqgj7re7wty8" path="res://ui_assets/PLACEHOLDER/gag_panel.png" id="1_b0qgg"]
 
 [node name="MovePanel" type="TextureRect"]
 self_modulate = Color(0, 0, 0, 1)
