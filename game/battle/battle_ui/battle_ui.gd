@@ -17,7 +17,6 @@ var targeting_panels: Array[CombatantPanel] = []
 
 var moveset_panel: MovesetPanel
 
-signal s_turn_confirmed()
 signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant])
 signal s_move_selected(move: BattleAction, user: Combatant)
 
@@ -25,14 +24,20 @@ func _ready() -> void:
 	Player.instance.stats.moves = 3
 	setup_panels()
 	update_moveset_panel(Player.instance)
-	refresh_stats()
 	s_move_selected.connect(set_targeting_panels)
+	manager.s_new_round.connect(on_new_round)
+	
+func on_new_round() -> void:
 	%AnimationPlayer.play("battleui_in")
+	refresh_stats()
 
 func on_go_pressed() -> void:
 	# s_move_queued.emit(load('res://ar/registry/battle/actions/test/test_action.tres'), Player.instance, targets)
 	# _on_action_button_pressed()
-	s_turn_confirmed.emit()
+	%AnimationPlayer.play_backwards("battleui_in")
+	# risking softlocks for the aura
+	await %AnimationPlayer.animation_finished
+	manager.s_turn_confirmed.emit()
 
 func _on_action_button_pressed() -> void:
 	var target: Combatant = get_parent().get_parent().enemies[0]
@@ -96,7 +101,8 @@ func update_target_buttons() -> void:
 			button.pressed.connect(callable)
 		else:
 			button.visible = false
-			button.pressed.disconnect(callable)
+			for connection in button.pressed.get_connections():
+				button.pressed.disconnect(connection['callable'])
 
 func set_target(target: Combatant) -> void:
 	if target == null:
@@ -105,7 +111,7 @@ func set_target(target: Combatant) -> void:
 	if target is Combatant:
 		s_move_queued.emit(targeting_action, targeting_user, target, x)
 	if moveset_panel is MovesetPanel:
-		moveset_panel.update_buttons()
+		moveset_panel.refresh_panel()
 	refresh_stats()
 	targeting_panels.clear()
 	update_target_buttons()

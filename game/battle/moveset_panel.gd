@@ -17,9 +17,10 @@ func setup_buttons() -> void:
 		talent_buttons.set(button, talent)
 		if battle_ui != null:
 			button.pressed.connect(battle_ui.s_move_selected.emit.bind(talent, user))
-	update_buttons()
+	refresh_panel()
 	
-func update_buttons() -> void:
+func refresh_panel() -> void:
+	super()
 	for button: ActionButton in talent_buttons.keys():
 		button.disabled = !is_usable_action(talent_buttons[button])
 

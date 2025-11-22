@@ -15,14 +15,20 @@ var battle_ui: Control
 var action_queue: Array[QueuedAction] = []
 var player_moves_queued := 0
 
+signal s_turn_confirmed()
+signal s_new_round()
 
 func _ready() -> void:
 	battle_ui = BATTLE_UI.instantiate()
 	battle_ui.s_move_queued.connect(queue_action)
-	battle_ui.s_turn_confirmed.connect(on_turn_confirmed)
 	battle_ui.s_move_selected.connect(select_action)
 	add_child(battle_ui)
+	
+	s_turn_confirmed.connect(on_turn_confirmed)
+	#s_new_round.connect(on_new_round)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	s_new_round.emit()
 
 func on_turn_confirmed() -> void:
 	append_enemy_moves()
@@ -55,12 +61,16 @@ func append_enemy_moves() -> void:
 			queue_action(combatant.get_action(), combatant, Player.instance)
 
 func begin_round() -> void:
-	battle_ui.hide()
 	for action in action_queue:
 		await run_action(action)
+	for combatant: Combatant in combatants:
+		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
 	action_queue.clear()
 	player_moves_queued = 0
-	battle_ui.show()
+	s_new_round.emit()
+	
+#func on_new_round() -> void:
+	
 
 func run_action(action: QueuedAction) -> void:
 	var battle_action: BattleAction = action.action
