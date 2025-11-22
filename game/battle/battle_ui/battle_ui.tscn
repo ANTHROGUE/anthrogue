@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dr7ndutcapucw"]
 
 [ext_resource type="Script" uid="uid://bwpg4840d070v" path="res://game/battle/battle_ui/battle_ui.gd" id="1_xktba"]
+[ext_resource type="Script" uid="uid://1n8pxetgx6s2" path="res://game/battle/battle_ui/move_timeline.gd" id="2_tubnw"]
 [ext_resource type="PackedScene" uid="uid://8ikc68l0i02y" path="res://game/battle/moveset_old.tscn" id="2_v3sf7"]
-[ext_resource type="PackedScene" uid="uid://dfw8g4sirpc08" path="res://game/battle/move_panel.tscn" id="3_5vhio"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kcxjk"]
 line_spacing = -4.0
@@ -201,7 +201,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.11764706, 0.11764706, 0.11764706, 0.8117647)
 
-[node name="MoveTimeline" type="HBoxContainer" parent="BattleUI_lower"]
+[node name="MoveTimeline" type="Control" parent="BattleUI_lower"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -214,22 +214,36 @@ offset_right = -64.0
 offset_bottom = -27.99707
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 12
+script = ExtResource("2_tubnw")
 
-[node name="MovePanel" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
+[node name="MovePanelContainer" type="HBoxContainer" parent="BattleUI_lower/MoveTimeline"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MovePanel" parent="BattleUI_lower/MoveTimeline/MovePanelContainer" instance_placeholder="res://game/battle/move_panel.tscn"]
 layout_mode = 2
 
-[node name="MovePanel2" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
+[node name="MovePanel2" parent="BattleUI_lower/MoveTimeline/MovePanelContainer" instance_placeholder="res://game/battle/move_panel.tscn"]
 layout_mode = 2
 
-[node name="MovePanel3" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
+[node name="MovePanel3" parent="BattleUI_lower/MoveTimeline/MovePanelContainer" instance_placeholder="res://game/battle/move_panel.tscn"]
 layout_mode = 2
 
-[node name="MovePanel4" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
+[node name="MovePanel4" parent="BattleUI_lower/MoveTimeline/MovePanelContainer" instance_placeholder="res://game/battle/move_panel.tscn"]
 layout_mode = 2
 
-[node name="MovePanel5" parent="BattleUI_lower/MoveTimeline" instance=ExtResource("3_5vhio")]
+[node name="MovePanel5" parent="BattleUI_lower/MoveTimeline/MovePanelContainer" instance_placeholder="res://game/battle/move_panel.tscn"]
 layout_mode = 2
+
+[node name="DEBUG_LABEL" type="Label" parent="BattleUI_lower/MoveTimeline"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="OLDMovesetPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
 visible = false

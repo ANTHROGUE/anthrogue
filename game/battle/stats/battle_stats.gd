@@ -40,8 +40,14 @@ class_name BattleStats
 @export var defense_flat := 0
 
 ## Moves: The amount of times the combatant is allowed to attack per-round
-## Affected by AGI
+## Base before AGI bonus
 @export var moves := 1
+var current_moves := 1
+
+## Bonus Move Agility Threshold: The amount of AGI needed to guarantee a bonus move
+## Remainder gives a chance of getting another bonus move
+@export var bonus_move_agility_thres := 4.0
+
 ## Accuracy: The base likelihood of a combatant to land an attack on their opponent
 ## Affected by DEX and LCK, should be 100% on non-debuffed player
 @export var accuracy := 1.0
@@ -64,5 +70,17 @@ class_name BattleStats
 enum CombatantTag {
 	IS_PLAYER, # Self-explanatory
 	PERFECT_ACCURACY, # This combatant cannot miss an attack
+	USE_BMAT # BANGRS: Gain more moves from Agility
 }
 @export var tags: Array[CombatantTag] = []
+
+
+func calculate_moves() -> int:
+	current_moves = moves
+	if CombatantTag.USE_BMAT in tags:
+		var agi_moves := floori(agility / bonus_move_agility_thres)
+		var agi_move_roll := int(randf() < ((agility / bonus_move_agility_thres) - agi_moves))
+		if agi_move_roll > 0:
+			print("%s gains %d move(s) from roll" % [get_parent().name, agi_move_roll])
+		current_moves += agi_moves + agi_move_roll
+	return current_moves

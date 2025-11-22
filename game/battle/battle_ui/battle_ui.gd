@@ -13,11 +13,13 @@ var enemy_panels: Array[CombatantPanel] = []
 ## Targeting
 var targeting_action: BattleAction
 var targeting_user: Combatant
+var targeting_timing: int = -1
 var targeting_panels: Array[CombatantPanel] = []
 
 var moveset_panel: MovesetPanel
+@onready var move_timeline: MoveTimeline = %MoveTimeline
 
-signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant])
+signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant], timing: int, loose: bool)
 signal s_move_selected(move: BattleAction, user: Combatant)
 
 func _ready() -> void:
@@ -45,7 +47,7 @@ func _on_action_button_pressed() -> void:
 	#var new_move = load('res://ar/registry/battle/actions/test/test_action.tres')
 	var new_move = load("res://game/battle/actions/test_actions/test_strike.tres")
 	# new_move.action_script.TEST_STRING = str(i)
-	s_move_queued.emit(new_move, Player.instance, target, targets)
+	s_move_queued.emit(new_move, Player.instance, target, targets, -1, false)
 	pass # Replace with function body.
 
 func setup_panels() -> void:
@@ -109,7 +111,7 @@ func set_target(target: Combatant) -> void:
 		print("Received no target, cancelling")
 	var x: Array[Combatant] = []
 	if target is Combatant:
-		s_move_queued.emit(targeting_action, targeting_user, target, x)
+		s_move_queued.emit(targeting_action, targeting_user, target, x, targeting_timing, false)
 	if moveset_panel is MovesetPanel:
 		moveset_panel.refresh_panel()
 	refresh_stats()
