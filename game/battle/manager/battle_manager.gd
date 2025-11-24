@@ -48,31 +48,34 @@ func on_turn_confirmed() -> void:
 	execute_round()
 
 func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = [], timing: int = -1, loose: bool = false) -> void:
-	var space: int
+	var space: int = -1
 	# Strict pre-calculated action queue size
 	if timing > -1 && timing < action_queue.size():
 		if !action_queue[timing] is QueuedAction:
 			space = timing
 		else:
 			if !loose:
+				## TODO: Cancel move function
 				print("Overwriting %s in move timeline" % action_queue[timing].name)
 				space = timing
 			## Loose: If timing is taken, find the closest next open space (forward first) 
 			else:
-				var _f := 0.0
-				for i in action_queue.size() - 1:
-					var check: int
-					var next_space_valid := func lambda(x: int) -> bool:
-						if x is not int:
-							return false
-						return x > -1 && x < action_queue.size()
-					while !next_space_valid.call(check):
-						_f = -(_f - 0.5)
-						check = timing + ceili(_f)
-					if action_queue[check] is QueuedAction:
-						continue
-					space = check
-					break
+				var verify = func lambda(x: int) -> bool: return x in range(action_queue.size())
+				var distance := 0
+				while !space > -1:
+					var check = -1
+					distance += 1
+					for direction in [1, -1]:
+						var pre_check = timing + (distance * direction)
+						if verify.call(pre_check):
+							check = pre_check
+						if check == -1 or action_queue[check] is QueuedAction:
+							continue
+						else:
+							space = check
+							break
+					if check == -1:
+						break
 	else:
 		# Occupy the next open space
 		for i in action_queue.size():
@@ -81,7 +84,7 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 			space = i
 			break
 			
-	if space is int:
+	if space > -1 and space < action_queue.size():
 		var queued_action := QueuedAction.new()
 		queued_action.user = user
 		queued_action.target = target
@@ -102,6 +105,8 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 		__p += " targeting %s" % target.name
 	if timing > -1:
 		__p += " with timing: %d" % timing
+		if space != timing:
+			__p += " (Moved to space: %d)" % space
 	print(__p)
 	
 	user.stats.ap -= action.ap_cost
@@ -110,7 +115,8 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
-			queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, action_queue.size()), true)
+			queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
+			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, action_queue.size() - 1), true)
 
 func prepare_queue() -> void:
 	action_queue.clear()
