@@ -2,7 +2,7 @@ extends CombatantPanel
 class_name MovesetPanel
 
 const TALENT_BUTTON = preload("uid://byo54fus7gfit")
-var talent_buttons: Dictionary[Button, BattleAction]
+var talent_buttons: Array[ActionButton]
 var battle_ui
 var manager: BattleManager:
 	set(x):
@@ -17,14 +17,15 @@ func setup_buttons() -> void:
 		var button: Button = TALENT_BUTTON.instantiate()
 		%TalentUIContainer.add_child(button)
 		button.get_node("Label").text = talent.name
-		talent_buttons.set(button, talent)
+		button.action = talent
+		talent_buttons.append(button)
 		if battle_ui != null:
 			button.pressed.connect(battle_ui.s_move_selected.emit.bind(talent, user))
 	
 func refresh_panel() -> void:
 	super()
-	for button: ActionButton in talent_buttons.keys():
-		button.disabled = !is_usable_action(talent_buttons[button])
+	for button: ActionButton in talent_buttons:
+		button.disabled = !is_usable_action(button.action)
 
 func setup_panel() -> void:
 	super()

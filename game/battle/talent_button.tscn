@@ -12,7 +12,7 @@ outline_color = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(192, 104)
 offset_right = 192.0
 offset_bottom = 104.0
-text = "Talent"
+icon_alignment = 1
 script = ExtResource("1_g0cfw")
 
 [node name="Label" type="Label" parent="."]
@@ -30,3 +30,21 @@ label_settings = SubResource("LabelSettings_ppigx")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "cost"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 2
+vertical_alignment = 2
