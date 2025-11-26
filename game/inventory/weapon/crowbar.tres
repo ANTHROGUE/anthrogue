@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bkyl817d4w6wx"]
+
+[ext_resource type="Script" uid="uid://bugxg1uehu7lo" path="res://game/inventory/weapon/weapon.gd" id="1_4mu4i"]
+[ext_resource type="Resource" uid="uid://b8w21j2tj60kd" path="res://game/battle/actions/test_actions/crowbar_bash.tres" id="1_ue58d"]
+
+[resource]
+script = ExtResource("1_4mu4i")
+action = ExtResource("1_ue58d")
+offensive_cut = ExtResource("1_ue58d")
+offensive_cd = 2
+defensive_cd = 2
+name = &"Crowbar"
+metadata/_custom_type_script = "uid://bugxg1uehu7lo"

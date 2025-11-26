@@ -11,7 +11,7 @@ outline_color = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(204, 0)
 offset_right = 204.0
 offset_bottom = 192.0
-color = Color(0.55, 0.33, 0.34833336, 1)
+color = Color(0.55, 0.33, 0.348333, 1)
 script = ExtResource("1_k5afe")
 
 [node name="Label_HP" type="Label" parent="."]

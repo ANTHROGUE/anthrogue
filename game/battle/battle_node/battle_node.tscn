@@ -20,10 +20,15 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_s15mc"]
 script = ExtResource("3_swfr6")
+resources = []
+connections = []
+positions = {}
 
 [sub_resource type="Resource" id="Resource_05g16"]
 script = ExtResource("4_2kmjc")
 editor_data = SubResource("Resource_s15mc")
+cycles = false
+debug = false
 metadata/_custom_type_script = "uid://ciyodddkqsiev"
 
 [node name="BattleNode" type="Area3D"]
@@ -32,7 +37,7 @@ script = ExtResource("1_1h0ks")
 
 [node name="BattleCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(-0.6369612, 0.048960116, -0.7693398, -0.012699127, 0.99717957, 0.07397359, 0.7707917, 0.056888364, -0.6345426, -4.468142, 1.0604511, -2.6073465)
+transform = Transform3D(-0.636961, 0.0489601, -0.76934, -0.0126991, 0.99718, 0.0739736, 0.770792, 0.0568884, -0.634543, -4.46814, 1.06045, -2.60735)
 fov = 84.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

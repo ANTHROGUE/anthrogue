@@ -115,8 +115,8 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
-			queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
-			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, action_queue.size() - 1), true)
+			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
+			queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, action_queue.size() - 1), true)
 
 func prepare_queue() -> void:
 	action_queue.clear()

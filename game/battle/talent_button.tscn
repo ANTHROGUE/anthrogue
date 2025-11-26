@@ -9,8 +9,8 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="TalentButton1" type="Button"]
-custom_minimum_size = Vector2(192, 104)
-offset_right = 192.0
+custom_minimum_size = Vector2(184, 104)
+offset_right = 184.0
 offset_bottom = 104.0
 icon_alignment = 1
 script = ExtResource("1_g0cfw")

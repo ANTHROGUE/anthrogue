@@ -9,13 +9,13 @@
 albedo_texture = ExtResource("1_anvxm")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77eix"]
-size = Vector3(19.596375, 2.788025, 12.604889)
+size = Vector3(19.5964, 2.78802, 12.6049)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vfskg"]
-sky_top_color = Color(0.4234562, 0.48696434, 0.5800961, 1)
-sky_horizon_color = Color(0.116507165, 0.10595008, 0.30699638, 1)
-sky_curve = 0.09896318
-ground_curve = 0.18379185
+sky_top_color = Color(0.423456, 0.486964, 0.580096, 1)
+sky_horizon_color = Color(0.116507, 0.10595, 0.306996, 1)
+sky_curve = 0.0989632
+ground_curve = 0.183792
 use_debanding = false
 
 [sub_resource type="Sky" id="Sky_n1hb5"]
@@ -36,13 +36,13 @@ fog_sun_scatter = 0.19
 [node name="BattleTest" type="Node3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.435791)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.43579)
 use_collision = true
-size = Vector3(57.80664, 1, 21.565918)
+size = Vector3(40, 1, 21.566)
 material = SubResource("StandardMaterial3D_vfskg")
 
 [node name="Player" parent="." instance=ExtResource("2_77eix")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -16.885426, 0.5389999, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.885401, 0.539, 0)
 stats_preset = Dictionary[String, Variant]({
 "agility": 4,
 "dexterity": 2,
@@ -52,19 +52,20 @@ stats_preset = Dictionary[String, Variant]({
 })
 
 [node name="BattleNode" parent="." instance=ExtResource("3_77eix")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 11.588194, 0.62989473, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.5881996, 0.629895, 0)
+enemy_count_range = Vector2i(2, 5)
 spawnable_enemies = Array[PackedScene]([ExtResource("4_vfskg")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BattleNode"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5571588, 1.7427237, 2.1109467)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.557159, 1.74272, 2.11095)
 shape = SubResource("BoxShape3D_77eix")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vfskg")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.83570194, -0.0264924, 0.548544, -0.54918337, -0.040313948, 0.834729, 1.3847338e-09, -0.9988358, -0.048239622, 0, 12.695616, 0)
-light_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
+transform = Transform3D(0.835702, -0.0264924, 0.548544, -0.549183, -0.0403139, 0.834729, 1.38473e-09, -0.998836, -0.0482396, 0, 12.6956, 0)
+light_color = Color(0.262932, 0.262932, 0.262932, 1)
 light_energy = 3.142
 light_indirect_energy = 1.119
 shadow_enabled = true

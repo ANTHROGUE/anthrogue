@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cqpmi3pqv8kj2"]
+[gd_scene load_steps=22 format=3 uid="uid://cqpmi3pqv8kj2"]
 
 [ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://ar/player/player.gd" id="1_sbar3"]
 [ext_resource type="Script" uid="uid://dv6lo85qpphjt" path="res://game/battle/actions/battle_action.gd" id="2_ai27o"]
@@ -6,14 +6,29 @@
 [ext_resource type="Resource" uid="uid://do8u84lipsd0x" path="res://game/battle/actions/test_actions/test_strike.tres" id="3_5xefd"]
 [ext_resource type="Resource" uid="uid://jveis1ahupsx" path="res://ar/registry/battle/actions/test/test_action.tres" id="3_33wsf"]
 [ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
-[ext_resource type="Script" uid="uid://dcomr1wbp4rlr" path="res://game/inventory/item/item.gd" id="4_am3w3"]
 [ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://ar/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
+[ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://game/battle/actions/test_actions/test_strike.gd" id="5_2ats8"]
 [ext_resource type="Script" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
+[ext_resource type="Script" uid="uid://dcomr1wbp4rlr" path="res://game/inventory/item/item.gd" id="5_33wsf"]
 [ext_resource type="Script" uid="uid://bmicmnkbs4t4k" path="res://game/inventory/inventory.gd" id="5_vgn1x"]
+[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://ui_assets/PLACEHOLDER/crosshair031.png" id="6_3airi"]
+[ext_resource type="Resource" uid="uid://bkyl817d4w6wx" path="res://game/inventory/weapon/crowbar.tres" id="7_am3w3"]
+[ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="7_lgvi6"]
+
+[sub_resource type="Resource" id="Resource_pe4b4"]
+script = ExtResource("7_lgvi6")
+name = &"Super Test Strike"
+ap_cost = 3
+icon = ExtResource("6_3airi")
+summary = "Deal $0 damage"
+action_script = ExtResource("5_2ats8")
+values = [24]
+metadata/_custom_type_script = "uid://dv6lo85qpphjt"
 
 [sub_resource type="Resource" id="Resource_3hbgk"]
 script = ExtResource("5_vgn1x")
-actions = Array[ExtResource("2_ai27o")]([ExtResource("3_5xefd"), ExtResource("3_33wsf")])
+weapon = ExtResource("7_am3w3")
+actions = Array[ExtResource("2_ai27o")]([ExtResource("3_5xefd"), ExtResource("3_33wsf"), ExtResource("3_5xefd"), ExtResource("3_5xefd"), ExtResource("3_5xefd"), SubResource("Resource_pe4b4")])
 metadata/_custom_type_script = "uid://bmicmnkbs4t4k"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
@@ -37,7 +52,7 @@ inventory = SubResource("Resource_3hbgk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96113145, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961131, 0)
 mesh = SubResource("CapsuleMesh_sbar3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -47,11 +62,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_epcbq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961, 0)
 shape = SubResource("CapsuleShape3D_sijrc")
-debug_color = Color(0.9857194, 0, 0.33561736, 0.41960785)
+debug_color = Color(0.985719, 0, 0.335617, 0.419608)
 
 [node name="SpringCamera" parent="." instance=ExtResource("2_sijrc")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1188939, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11889, 0)
 
 [node name="PlayerState" type="Node3D" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true

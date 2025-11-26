@@ -75,6 +75,17 @@ enum CombatantTag {
 @export var tags: Array[CombatantTag] = []
 
 
+## Damage Tags
+enum DamageTag {
+	ATTACK,
+	CRITICAL,
+	TRUE_DAMAGE,
+	TRAP,
+	CUT,
+	BONUS
+}
+
+
 func calculate_moves() -> int:
 	current_moves = moves
 	if CombatantTag.USE_BMAT in tags:
