@@ -8,6 +8,8 @@ var battle_ui
 var manager: BattleManager:
 	set(x):
 		x.s_queue_changed.connect(refresh_panel)
+		x.s_turn_confirmed.connect(hide)
+		x.s_new_round.connect(show)
 		manager = x
 
 func setup_buttons() -> void:
@@ -26,7 +28,10 @@ func setup_buttons() -> void:
 	if %WeaponButton.weapon is Weapon:
 		action_buttons.append(%WeaponButton)
 	if battle_ui != null:
+		%DetailPanel.battle_ui = battle_ui
 		for button in action_buttons:
+			button.mouse_entered.connect(battle_ui.s_move_hovered.emit.bind(button.action))
+			button.mouse_exited.connect(battle_ui.s_move_hovered.emit.bind(null))
 			button.pressed.connect(battle_ui.s_move_selected.emit.bind(button.action, user))
 	
 func refresh_panel() -> void:

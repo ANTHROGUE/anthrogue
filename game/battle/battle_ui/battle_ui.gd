@@ -22,6 +22,7 @@ var moveset_panel: MovesetPanel
 
 signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant], timing: int, loose: bool)
 signal s_move_selected(move: BattleAction, user: Combatant)
+signal s_move_hovered(move: BattleAction)
 
 func _ready() -> void:
 	Player.instance.stats.moves = 3

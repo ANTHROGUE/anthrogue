@@ -1,8 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr7ndutcapucw"]
+[gd_scene load_steps=11 format=3 uid="uid://dr7ndutcapucw"]
 
 [ext_resource type="Script" uid="uid://bwpg4840d070v" path="res://game/battle/battle_ui/battle_ui.gd" id="1_xktba"]
 [ext_resource type="PackedScene" uid="uid://cn4evg0uslc3c" path="res://game/battle/move_timeline.tscn" id="2_5vhio"]
+[ext_resource type="Shader" uid="uid://bc3dmi0nh5kxd" path="res://shaders/canvas_blur_shader.gdshader" id="2_tubnw"]
 [ext_resource type="PackedScene" uid="uid://8ikc68l0i02y" path="res://game/battle/moveset_old.tscn" id="2_v3sf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgdvw"]
+shader = ExtResource("2_tubnw")
+shader_parameter/strength = 3.5430001682925
+shader_parameter/sample_power = 4
 
 [sub_resource type="LabelSettings" id="LabelSettings_kcxjk"]
 line_spacing = -4.0
@@ -54,14 +60,14 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BattleUI_lower/MoveTimeline:position")
+tracks/3/path = NodePath("MoveTimeline:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(64, 223.997)]
+"values": [Vector2(64, 944)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -74,18 +80,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(64, 24)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BattleUI_lower/MovesetPanelContainer:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(576, -272.001)]
 }
 
 [sub_resource type="Animation" id="Animation_tubnw"]
@@ -128,15 +122,15 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BattleUI_lower/MoveTimeline:position")
+tracks/3/enabled = false
+tracks/3/path = NodePath("MoveTimeline:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.1, 0.7),
-"transitions": PackedFloat32Array(0.25, 1),
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
 "update": 0,
-"values": [Vector2(64, 360), Vector2(64, 223.997)]
+"values": [Vector2(-1856, 920), Vector2(64, 952)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -149,18 +143,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
 "values": [Vector2(64, -192), Vector2(64, 22.2504)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BattleUI_lower/MovesetPanelContainer:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(0.25, 1),
-"update": 0,
-"values": [Vector2(576, 216), Vector2(576, -272.001)]
 }
 
 [sub_resource type="Animation" id="Animation_5vhio"]
@@ -203,15 +185,15 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BattleUI_lower/MoveTimeline:position")
+tracks/3/enabled = false
+tracks/3/path = NodePath("MoveTimeline:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(64, 223.997), Vector2(64, -199.981)]
+"values": [Vector2(64, 944), Vector2(64, 856)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -224,18 +206,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(0.25, 0.25),
 "update": 0,
 "values": [Vector2(64, 22.2504), Vector2(64, -192)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BattleUI_lower/MovesetPanelContainer:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(0.25, 0.25),
-"update": 0,
-"values": [Vector2(576, -272.001), Vector2(576, 216)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kcxjk"]
@@ -261,11 +231,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -352.0
-offset_bottom = -0.0059814453
+offset_bottom = -0.0078125
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Back" type="ColorRect" parent="BattleUI_lower"]
+material = SubResource("ShaderMaterial_hgdvw")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,12 +246,7 @@ offset_right = -0.00012207
 offset_bottom = 0.00463867
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.117647, 0.117647, 0.117647, 0.811765)
-
-[node name="MoveTimeline" parent="BattleUI_lower" instance=ExtResource("2_5vhio")]
-unique_name_in_owner = true
-layout_mode = 1
-offset_bottom = -27.995483
+color = Color(0.6745098, 0.6745098, 0.6745098, 1)
 
 [node name="OLDMovesetPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
 visible = false
@@ -291,9 +257,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -896.0
-offset_top = -335.9963
+offset_top = -335.99448
 offset_right = 888.0
-offset_bottom = 216.00366
+offset_bottom = 216.0055
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/h_separation = 8
@@ -323,43 +289,33 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -896.0
+offset_left = -832.0
 offset_top = -303.995
-offset_right = 896.0
+offset_right = 128.0
 offset_bottom = -135.995
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/h_separation = 48
-alignment = 1
+theme_override_constants/h_separation = 32
 
 [node name="MascotPanel1" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
 custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
 
-[node name="MovesetPanelContainer" type="Control" parent="BattleUI_lower"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -384.0
-offset_top = -623.995
-offset_right = 384.0
-offset_bottom = -319.99515
-grow_horizontal = 2
-grow_vertical = 0
+[node name="MascotPanel2" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
 
-[node name="MovesetPanel" parent="BattleUI_lower/MovesetPanelContainer" instance_placeholder="res://game/battle/moveset_panel.tscn"]
-layout_mode = 1
-anchors_preset = 15
-anchor_top = 0.0
-anchor_right = 1.0
-offset_top = 0.0
-offset_right = 0.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MascotPanel3" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="MascotPanel4" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="MascotPanel5" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
 
 [node name="MovesLabel" type="Label" parent="BattleUI_lower"]
 unique_name_in_owner = true
@@ -381,6 +337,7 @@ horizontal_alignment = 2
 
 [node name="GoButton" type="Button" parent="BattleUI_lower"]
 unique_name_in_owner = true
+z_index = 10
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -404,6 +361,7 @@ offset_bottom = 240.0
 grow_horizontal = 2
 
 [node name="Back" type="ColorRect" parent="BattleUI_upper"]
+material = SubResource("ShaderMaterial_hgdvw")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -411,7 +369,7 @@ anchor_bottom = 1.0
 offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.117647, 0.117647, 0.117647, 0.811765)
+color = Color(0.6745098, 0.6745098, 0.6745098, 1)
 
 [node name="EnemyPanelContainer" type="HBoxContainer" parent="BattleUI_upper"]
 unique_name_in_owner = true
@@ -466,9 +424,44 @@ libraries = {
 &"": SubResource("AnimationLibrary_kcxjk")
 }
 
+[node name="MovesetPanelContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -576.0
+offset_right = -32.000244
+offset_bottom = -232.00623
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MovesetPanel" parent="MovesetPanelContainer" instance_placeholder="res://game/battle/moveset_panel.tscn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -171.99689
+offset_right = 384.0
+offset_bottom = 172.00311
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TargetSelect" parent="." instance_placeholder="res://game/battle/target_select.tscn"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+
+[node name="MoveTimeline" parent="." instance=ExtResource("2_5vhio")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = -136.0
+offset_bottom = -35.99524
 
 [connection signal="pressed" from="BattleUI_lower/GoButton" to="." method="on_go_pressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbq0o58revbhn"]
+[gd_scene load_steps=7 format=3 uid="uid://dbq0o58revbhn"]
 
 [ext_resource type="Script" uid="uid://caiqtdim4iteu" path="res://game/battle/moveset_panel.gd" id="1_ppigx"]
+[ext_resource type="Script" uid="uid://u4cfosmiwbtq" path="res://game/battle/detail_panel.gd" id="2_edbv6"]
 [ext_resource type="Script" uid="uid://ckipvh0ohu1g8" path="res://game/battle/weapon_button.gd" id="2_o27an"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h65jm"]
@@ -24,11 +25,11 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="MovesetPanel" type="ColorRect"]
-custom_minimum_size = Vector2(768, 304)
+custom_minimum_size = Vector2(768, 344)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -304.0
+offset_top = -344.0
 offset_right = 768.0
 grow_vertical = 0
 color = Color(0.234, 0.39, 0.234, 1)
@@ -43,11 +44,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -768.0
-offset_top = -520.0
-offset_bottom = -320.0
+offset_top = -552.0
+offset_bottom = -352.0
 grow_horizontal = 0
 grow_vertical = 0
 color = Color(0, 0, 0, 0.313726)
+script = ExtResource("2_edbv6")
 
 [node name="DetailLabel" type="Label" parent="DetailPanel"]
 layout_mode = 1
@@ -69,7 +71,7 @@ Use it to do a thing!"
 label_settings = SubResource("LabelSettings_h65jm")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DetailPanel"]
+[node name="ActionIcon" type="TextureRect" parent="DetailPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -88,10 +90,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1096.0
+offset_left = -1256.0
 offset_top = -328.0
 offset_right = -776.0
-offset_bottom = -72.0
+offset_bottom = -96.0
 grow_horizontal = 0
 grow_vertical = 0
 color = Color(0, 0, 0, 0.313726)
@@ -163,12 +165,13 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 24.0
 offset_top = -120.0
-offset_right = 136.0
+offset_right = 144.0
 offset_bottom = -16.0
 grow_vertical = 0
 icon_alignment = 1
+expand_icon = true
 script = ExtResource("2_o27an")
 
 [node name="Label" type="Label" parent="WeaponButton"]
@@ -225,12 +228,12 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 168.0
-offset_top = -264.0
-offset_right = 736.0
+offset_left = 160.0
+offset_top = -328.0
+offset_right = 760.0
 offset_bottom = -16.0
 grow_vertical = 0
-theme_override_constants/h_separation = 8
+theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 40
 reverse_fill = true
 
@@ -238,21 +241,16 @@ reverse_fill = true
 layout_mode = 2
 
 [node name="TalentButton2" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
-visible = false
 layout_mode = 2
 
 [node name="TalentButton3" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
-visible = false
 layout_mode = 2
 
 [node name="TalentButton4" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
-visible = false
 layout_mode = 2
 
 [node name="TalentButton5" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
-visible = false
 layout_mode = 2
 
 [node name="TalentButton6" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
-visible = false
 layout_mode = 2

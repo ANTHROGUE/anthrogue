@@ -7,7 +7,7 @@ var manager: BattleManager
 var battle_ui: BattleUI:
 	set(x):
 		manager = x.manager
-		x.s_move_queued.connect(on_move_queued)
+		#x.s_move_queued.connect(on_move_queued)
 		manager.s_queue_changed.connect(refresh_panels)
 		#manager.s_timeline_ready.connect(setup_panels)
 		battle_ui = x
@@ -43,6 +43,6 @@ func refresh_panels() -> void:
 			return
 		panel.queued_action = manager.action_queue[i]
 
-func on_move_queued() -> void:
-	refresh_panels()
+#func on_move_queued() -> void:
+#	refresh_panels()
 	

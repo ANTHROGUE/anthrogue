@@ -8,7 +8,7 @@
 script = ExtResource("3_upqk1")
 name = &"Pry Cover"
 icon = ExtResource("2_epkb7")
-summary = "Gain $0 Block"
+summary = "Gain [0] Block"
 action_script = ExtResource("1_t4vvj")
 values = [8]
 metadata/_custom_type_script = "uid://dv6lo85qpphjt"
