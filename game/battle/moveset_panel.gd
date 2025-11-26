@@ -7,7 +7,7 @@ var action_buttons: Array[ActionButton]
 var battle_ui
 var manager: BattleManager:
 	set(x):
-		x.s_queue_changed.connect(refresh_panel)
+		x.timeline.s_queue_changed.connect(refresh_panel)
 		x.s_turn_confirmed.connect(hide)
 		x.s_new_round.connect(show)
 		manager = x

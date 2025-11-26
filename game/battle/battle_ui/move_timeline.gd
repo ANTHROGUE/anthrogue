@@ -4,14 +4,17 @@ class_name MoveTimeline
 const MOVE_PANEL = preload("uid://dfw8g4sirpc08")
 
 var manager: BattleManager
+var timeline: BattleTimeline
 var battle_ui: BattleUI:
 	set(x):
 		manager = x.manager
-		#x.s_move_queued.connect(on_move_queued)
-		manager.s_queue_changed.connect(refresh_panels)
-		#manager.s_timeline_ready.connect(setup_panels)
 		battle_ui = x
 		setup_panels()
+	
+		if manager.timeline is not BattleTimeline:
+			await manager.s_timeline_ready
+		timeline = manager.timeline
+		manager.timeline.s_queue_changed.connect(refresh_panels)
 
 var move_panels: Array[MovePanel] = []
 
