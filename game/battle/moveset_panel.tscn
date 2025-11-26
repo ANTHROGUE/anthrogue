@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dbq0o58revbhn"]
 
 [ext_resource type="Script" uid="uid://caiqtdim4iteu" path="res://game/battle/moveset_panel.gd" id="1_ppigx"]
-[ext_resource type="Script" uid="uid://u4cfosmiwbtq" path="res://game/battle/detail_panel.gd" id="2_edbv6"]
+[ext_resource type="Script" uid="uid://u4cfosmiwbtq" path="res://game/battle/action_detail_panel.gd" id="2_edbv6"]
 [ext_resource type="Script" uid="uid://ckipvh0ohu1g8" path="res://game/battle/weapon_button.gd" id="2_o27an"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h65jm"]
@@ -90,7 +90,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1256.0
+offset_left = -992.0
 offset_top = -328.0
 offset_right = -776.0
 offset_bottom = -96.0
@@ -111,13 +111,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "STR: 2 TGN: 2 DEX: 2 LCK: 2 AGI: 2
 
-Effective DMG: 100%
-Critical Chance: 10%
-Critical Multiplier: 2.0x
+DMG: 100%
+Crit: 10% @ 2.0x
 
 Accuracy: 100%
 Dodge: 20%"
 label_settings = SubResource("LabelSettings_h65jm")
+horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="Label_Name" type="Label" parent="."]

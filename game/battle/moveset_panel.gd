@@ -14,6 +14,7 @@ var manager: BattleManager:
 
 func setup_buttons() -> void:
 	action_buttons.clear()
+	
 	## Talents
 	for button in %TalentUIContainer.get_children():
 		button.queue_free()
@@ -23,10 +24,13 @@ func setup_buttons() -> void:
 		button.get_node("Label").text = talent.name
 		button.action = talent
 		action_buttons.append(button)
+	
 	## Weapon
 	%WeaponButton.weapon = user.inventory.weapon
 	if %WeaponButton.weapon is Weapon:
 		action_buttons.append(%WeaponButton)
+	
+	## UI
 	if battle_ui != null:
 		%DetailPanel.battle_ui = battle_ui
 		for button in action_buttons:
@@ -41,7 +45,17 @@ func refresh_panel() -> void:
 
 func setup_panel() -> void:
 	super()
+	$StatsPanel/StatsLabel.text = parse_stats()
 	setup_buttons()
 
 func is_usable_action(action: BattleAction) -> bool:
 	return (user.stats.ap >= action.ap_cost) && (manager.move_counts[user].x < manager.move_counts[user].y)
+
+func parse_stats() -> String:
+	if user is not Combatant:
+		$StatsPanel/StatsLabel.hide()
+		return ""
+	
+	$StatsPanel/StatsLabel.show()
+	return "STR: %d\nTGH: %d\nDEX: %d\nLCK: %d\nAGI: %d\n\nMoves: %d" % \
+	[user.stats.strength, user.stats.toughness, user.stats.dexterity, user.stats.luck, user.stats.agility, user.stats.moves]
