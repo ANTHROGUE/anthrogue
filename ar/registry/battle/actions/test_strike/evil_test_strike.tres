@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://c48jk3q7kq2ak"]
 
-[ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://game/battle/actions/test_actions/test_strike.gd" id="1_jp6y1"]
+[ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://ar/registry/battle/actions/test_strike/test_strike.gd" id="1_jp6y1"]
 [ext_resource type="Texture2D" uid="uid://bfgtqe21ll0ir" path="res://ui_assets/PLACEHOLDER/evil_crosshair031.png" id="2_jp6y1"]
 [ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="3_6lnrb"]
 
