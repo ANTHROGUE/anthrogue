@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RegistryCollection" load_steps=87 format=3 uid="uid://cx1do2l5hcbg8"]
+[gd_resource type="Resource" script_class="RegistryCollection" load_steps=100 format=3 uid="uid://cx1do2l5hcbg8"]
 
 [ext_resource type="Script" uid="uid://counuj1l33fav" path="res://addons/moon-registry/data/registry.gd" id="1_g76xr"]
 [ext_resource type="Script" uid="uid://cps0w3c1g6x35" path="res://addons/moon-registry/data/registry_collection.gd" id="2_hwpud"]
@@ -79,11 +79,20 @@
 [ext_resource type="Script" uid="uid://d2t47oeh14y4h" path="res://addons/moon-interval/nodes/set_property_node.gd" id="81_mbply"]
 [ext_resource type="Script" uid="uid://cotkwanlbw0vs" path="res://addons/moon-interval/nodes/track_node.gd" id="82_h57hs"]
 [ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="83_1te1p"]
-[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event/multi_event_editor.gd" id="83_nsxps"]
+[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event/multi_event_editor.gd" id="83_osu37"]
 [ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event_editor.gd" id="83_tv564"]
-[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event/multi_event_graph_edit.gd" id="84_tv564"]
+[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event/multi_event_graph_edit.gd" id="84_6tfbg"]
 [ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event_graph_edit.gd" id="84_v3hvw"]
 [ext_resource type="Script" uid="uid://bt64gatk5rir1" path="res://addons/moon-interval/plugin.gd" id="84_vhei0"]
+[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://ui_assets/PLACEHOLDER/crosshair033.png" id="85_a5pc5"]
+[ext_resource type="Resource" uid="uid://jveis1ahupsx" path="res://ar/registry/battle/actions/test/test_action.tres" id="86_ifn0l"]
+[ext_resource type="PackedScene" uid="uid://c80tj678kqkkk" path="res://ar/registry/battle/actions/test_strike/seq_test_strike.tscn" id="86_v3hvw"]
+[ext_resource type="Resource" uid="uid://do8u84lipsd0x" path="res://ar/registry/battle/actions/test_strike/test_strike.tres" id="87_fm1di"]
+[ext_resource type="Resource" uid="uid://c48jk3q7kq2ak" path="res://ar/registry/battle/actions/test_strike/evil_test_strike.tres" id="88_h0roa"]
+[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://ui_assets/PLACEHOLDER/crosshair031.png" id="89_evgmf"]
+[ext_resource type="Resource" uid="uid://bkyl817d4w6wx" path="res://ar/registry/battle/weapons/crowbar/crowbar.tres" id="90_jpfj8"]
+[ext_resource type="Resource" uid="uid://b8w21j2tj60kd" path="res://ar/registry/battle/weapons/crowbar/crowbar_bash.tres" id="91_njrnh"]
+[ext_resource type="Resource" uid="uid://dk2nv7a1iwukr" path="res://ar/registry/battle/weapons/crowbar/crowbar_block.tres" id="92_osu37"]
 
 [sub_resource type="Resource" id="Resource_hwpud"]
 resource_name = "resource_registry_scripts"
@@ -178,8 +187,26 @@ id_to_resource = Dictionary[int, Resource]({
 85: ExtResource("84_v3hvw"),
 86: ExtResource("83_tv564"),
 87: ExtResource("84_v3hvw"),
-88: ExtResource("83_nsxps"),
-89: ExtResource("84_tv564")
+88: ExtResource("83_tv564"),
+89: ExtResource("84_v3hvw"),
+90: ExtResource("83_tv564"),
+91: ExtResource("84_v3hvw"),
+92: ExtResource("83_tv564"),
+93: ExtResource("84_v3hvw"),
+94: ExtResource("83_tv564"),
+95: ExtResource("84_v3hvw"),
+96: ExtResource("83_tv564"),
+97: ExtResource("84_v3hvw"),
+98: ExtResource("83_tv564"),
+99: ExtResource("84_v3hvw"),
+100: ExtResource("83_tv564"),
+101: ExtResource("84_v3hvw"),
+102: ExtResource("83_tv564"),
+103: ExtResource("84_v3hvw"),
+104: ExtResource("83_tv564"),
+105: ExtResource("84_v3hvw"),
+106: ExtResource("83_osu37"),
+107: ExtResource("84_6tfbg")
 })
 directory = "res://addons"
 scan_subdirectories = true
@@ -198,7 +225,62 @@ id_to_resource = Dictionary[int, Resource]({
 directory = "res://addons/moon-registry/editor"
 type = &"GDScript"
 
+[sub_resource type="Resource" id="Resource_nsxps"]
+resource_name = "Battle Actions"
+script = ExtResource("1_g76xr")
+name = &"Battle Actions"
+icon = ExtResource("85_a5pc5")
+id_to_resource = Dictionary[int, Resource]({
+0: ExtResource("86_ifn0l"),
+1: ExtResource("87_fm1di"),
+2: ExtResource("88_h0roa")
+})
+directory = "res://ar/registry/battle/actions"
+scan_subdirectories = true
+type = &"BattleAction"
+use_exact_type = false
+
+[sub_resource type="Resource" id="Resource_a5pc5"]
+resource_name = "Battle Action Intervals"
+script = ExtResource("1_g76xr")
+name = &"Battle Action Intervals"
+icon = ExtResource("85_a5pc5")
+id_to_resource = Dictionary[int, Resource]({
+0: ExtResource("86_v3hvw")
+})
+directory = "res://ar/registry/battle/actions"
+scan_subdirectories = true
+type = &"PackedScene"
+use_exact_type = false
+
+[sub_resource type="Resource" id="Resource_ifn0l"]
+resource_name = "Weapons"
+script = ExtResource("1_g76xr")
+name = &"Weapons"
+icon = ExtResource("89_evgmf")
+id_to_resource = Dictionary[int, Resource]({
+0: ExtResource("90_jpfj8")
+})
+directory = "res://ar/registry/battle/weapons"
+scan_subdirectories = true
+type = &"Weapon"
+use_exact_type = false
+
+[sub_resource type="Resource" id="Resource_evgmf"]
+resource_name = "Weapon Actions"
+script = ExtResource("1_g76xr")
+name = &"Weapon Actions"
+icon = ExtResource("89_evgmf")
+id_to_resource = Dictionary[int, Resource]({
+0: ExtResource("91_njrnh"),
+1: ExtResource("92_osu37")
+})
+directory = "res://ar/registry/battle/weapons"
+scan_subdirectories = true
+type = &"BattleAction"
+use_exact_type = false
+
 [resource]
 script = ExtResource("2_hwpud")
-registries = Array[ExtResource("1_g76xr")]([SubResource("Resource_hwpud"), SubResource("Resource_pkd2b")])
+registries = Array[ExtResource("1_g76xr")]([SubResource("Resource_hwpud"), SubResource("Resource_pkd2b"), SubResource("Resource_nsxps"), SubResource("Resource_a5pc5"), SubResource("Resource_ifn0l"), SubResource("Resource_evgmf")])
 metadata/_custom_type_script = "uid://cps0w3c1g6x35"
