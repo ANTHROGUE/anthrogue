@@ -1,6 +1,7 @@
 extends Node
 class_name ActionScript
 
+signal s_action_interval_started(interval: Interval)
 signal s_action_end
 signal s_action_impact
 signal s_cut_state_entered(state: CutManager.CUT_STATE)
@@ -22,6 +23,7 @@ func action() -> void:
 	ival_node = load(ival_path).instantiate()
 	if ival_node is IntervalNode:
 		assign_ival()
+		s_action_interval_started.emit(ival)
 		await ival.start(self, true).finished
 		end_action()
 	else:

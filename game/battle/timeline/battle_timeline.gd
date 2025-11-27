@@ -12,6 +12,7 @@ var current_action: QueuedAction = null
 
 signal s_queue_changed()
 signal s_queue_finished()
+signal s_action_script_started(script: ActionScript)
 
 var manager: BattleManager:
 	set(x):
@@ -120,6 +121,7 @@ func run_action(action: QueuedAction) -> void:
 		if action_node is ActionScript:
 			action_node.s_cut_state_entered.connect(func(x): cut_manager.cut_state = x)
 			action_node.action()
+			s_action_script_started.emit(action_node)
 			await action_node.s_action_end
 	cut_manager.cut_state = CutManager.CUT_STATE.None
 	current_action = null

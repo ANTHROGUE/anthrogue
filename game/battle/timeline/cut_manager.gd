@@ -4,7 +4,7 @@ class_name CutManager
 var timeline: BattleTimeline:
 	set(x):
 		if x is BattleTimeline:
-			pass
+			x.s_action_script_started.connect(func(s: ActionScript): current_action_script = s)
 		timeline = x
 var manager: BattleManager
 
@@ -17,11 +17,23 @@ enum CUT_STATE {
 
 var cut_state := CUT_STATE.None:
 	set(x):
-		print("Entering Cut State %s" % x)
+		print("Entering Cut State %s" % CUT_STATE.find_key(x))
 		cut_state = x
 signal s_cut_input_received(user: Combatant)
 
 var cut_input_mappings: Dictionary[String, Combatant]
+
+var impact_count := 0
+var current_action_script: ActionScript:
+	set(x):
+		impact_count = 0
+		if x is ActionScript:
+			x.s_action_impact.connect(func(): impact_count += 1)
+			x.s_action_interval_started.connect(func(ival: Interval): current_interval = ival)
+		else:
+			current_interval = null
+		current_action_script = x
+var current_interval: Interval
 
 func _ready() -> void:
 	# ?????
