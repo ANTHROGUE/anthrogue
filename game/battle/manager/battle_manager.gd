@@ -2,7 +2,23 @@ extends Node
 class_name BattleManager
 
 
-const BATTLE_UI := preload('res://game/battle/battle_ui/battle_ui.tscn')
+const BATTLE_UI := preload("uid://dr7ndutcapucw")
+const BATTLE_TIMELINE := preload("uid://hdlhael228mk")
+
+var battle_ui: BattleUI:
+	set(x):
+		x.s_move_selected.connect(select_action)
+		if x not in get_children():
+			add_child(x)
+		battle_ui = x
+		
+var timeline: BattleTimeline:
+	set(x):
+		s_turn_confirmed.connect(x.on_turn_confirmed)
+		if x not in get_children():
+			add_child(x)
+		timeline = x
+
 
 var current_round := 0
 
@@ -13,9 +29,6 @@ class QueuedAction:
 	var action: BattleAction
 
 var combatants: Array[Combatant] = []
-var battle_ui: BattleUI
-var timeline: BattleTimeline
-var action_queue: Array[QueuedAction] = []
 
 ## BANGRS - Moves calculated using AGI, may be varied
 ## v2i - (queued, max)
@@ -29,25 +42,18 @@ signal s_new_round()
 signal s_timeline_ready()
 
 func _ready() -> void:
-	timeline = BattleTimeline.new()
-	add_child(timeline)
-	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	timeline = BATTLE_TIMELINE.instantiate()
 	battle_ui = BATTLE_UI.instantiate()
 	battle_ui.s_move_queued.connect(timeline.queue_action)
-	battle_ui.s_move_selected.connect(select_action)
-	add_child(battle_ui)
-	
-	s_turn_confirmed.connect(timeline.on_turn_confirmed)
-	#s_new_round.connect(on_new_round)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	prepare_queue()
+	begin_round()
 
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
 			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
-			timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, move_total), true)
+			timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, move_total - 1), true)
+			#timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 5, true)
 
 func prepare_queue() -> void:
 	move_counts.clear()

@@ -8,17 +8,22 @@ class QueuedAction:
 	var action: BattleAction
 
 var queue: Array[QueuedAction] = []
+var current_action: QueuedAction = null
 
 signal s_queue_changed()
+signal s_queue_finished()
 
-@onready var manager: BattleManager = get_parent():
+var manager: BattleManager:
 	set(x):
 		if x is BattleManager:
+			s_queue_finished.connect(x.begin_round)
 			x.s_timeline_ready.emit()
 		manager = x
+		
+@onready var cut_manager: CutManager = $CutManager
 
 func _ready() -> void:
-	pass
+	manager = get_parent()
 	
 func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = [], timing: int = -1, loose: bool = false) -> void:
 	var space: int = -1
@@ -98,21 +103,26 @@ func execute_round() -> void:
 			await run_action(action) 
 		else:
 			print("Next action is null, skipping")
-	#begin_round()
+	s_queue_finished.emit()
 	
 func run_action(action: QueuedAction) -> void:
+	current_action = action
+	
 	var battle_action: BattleAction = action.action
 	var action_node := Node.new()
 	if battle_action.action_script:
 		action_node.set_script(battle_action.action_script)
 		for combatant in ['user', 'target', 'alt_targets']:
-			if action[combatant] != null:
+			if action[combatant] is Combatant:
 				action_node[combatant] = action[combatant]
 		action_node.manager = manager
 		add_child(action_node)
 		if action_node is ActionScript:
+			action_node.s_cut_state_entered.connect(func(x): cut_manager.cut_state = x)
 			action_node.action()
 			await action_node.s_action_end
+	cut_manager.cut_state = CutManager.CUT_STATE.None
+	current_action = null
 	action_node.queue_free()
 
 func reset_queue() -> void:

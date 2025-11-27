@@ -39,12 +39,12 @@ func clear_panels() -> void:
 func refresh_panels() -> void:
 	if move_panels.size() != manager.move_total:
 		setup_panels()
-	for i in manager.action_queue.size():
+	for i in timeline.queue.size():
 		var panel = move_panels[i]
 		if panel is not MovePanel:
 			printerr("No move panel found")
 			return
-		panel.queued_action = manager.action_queue[i]
+		panel.queued_action = timeline.queue[i]
 
 #func on_move_queued() -> void:
 #	refresh_panels()

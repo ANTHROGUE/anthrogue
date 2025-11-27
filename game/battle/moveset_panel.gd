@@ -7,10 +7,12 @@ var action_buttons: Array[ActionButton]
 var battle_ui
 var manager: BattleManager:
 	set(x):
-		x.timeline.s_queue_changed.connect(refresh_panel)
 		x.s_turn_confirmed.connect(hide)
 		x.s_new_round.connect(show)
 		manager = x
+		if x.timeline is not BattleTimeline:
+			await x.s_timeline_ready
+		else: x.timeline.s_queue_changed.connect(refresh_panel)
 
 func setup_buttons() -> void:
 	action_buttons.clear()
@@ -49,6 +51,8 @@ func setup_panel() -> void:
 	setup_buttons()
 
 func is_usable_action(action: BattleAction) -> bool:
+	if manager is not BattleManager:
+		return false
 	return (user.stats.ap >= action.ap_cost) && (manager.move_counts[user].x < manager.move_counts[user].y)
 
 func parse_stats() -> String:

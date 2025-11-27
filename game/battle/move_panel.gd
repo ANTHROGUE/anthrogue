@@ -1,9 +1,9 @@
 extends Control
 class_name MovePanel
 
-var queued_action: BattleManager.QueuedAction:
+var queued_action: BattleTimeline.QueuedAction:
 	set(x):
-		if x is BattleManager.QueuedAction:
+		if x is BattleTimeline.QueuedAction:
 			%ActionIcon.texture = x.action.icon
 		else:
 			%ActionIcon.texture = null

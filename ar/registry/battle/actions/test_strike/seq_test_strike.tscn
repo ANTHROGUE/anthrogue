@@ -17,6 +17,10 @@ script = ExtResource("2_kas30")
 [node name="SequenceNode" type="Node" parent="Parallel_Mascot"]
 script = ExtResource("1_bmsme")
 
+[node name="state_offense" type="Node" parent="Parallel_Mascot/SequenceNode" groups=["ival_battle_cutstate"]]
+script = ExtResource("5_uc4rm")
+arguments = ["Offense"]
+
 [node name="01_user_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../user")

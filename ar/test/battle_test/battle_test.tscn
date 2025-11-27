@@ -53,7 +53,7 @@ stats_preset = Dictionary[String, Variant]({
 
 [node name="BattleNode" parent="." instance=ExtResource("3_77eix")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.5881996, 0.629895, 0)
-enemy_count_range = Vector2i(2, 5)
+enemy_count_range = Vector2i(3, 3)
 spawnable_enemies = Array[PackedScene]([ExtResource("4_vfskg")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BattleNode"]
