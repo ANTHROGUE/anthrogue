@@ -101,14 +101,14 @@ func on_turn_confirmed() -> void:
 func execute_round() -> void:
 	for action in queue:
 		if action is QueuedAction:
-			await run_action(action) 
+			current_action = action
+			await run_action(action)
+			current_action = null
 		else:
 			print("Next action is null, skipping")
 	s_queue_finished.emit()
 	
 func run_action(action: QueuedAction) -> void:
-	current_action = action
-	
 	var battle_action: BattleAction = action.action
 	var action_node := Node.new()
 	if battle_action.action_script:
@@ -119,12 +119,10 @@ func run_action(action: QueuedAction) -> void:
 		action_node.manager = manager
 		add_child(action_node)
 		if action_node is ActionScript:
-			action_node.s_cut_state_entered.connect(func(x): cut_manager.cut_state = x)
-			action_node.action()
+			action_node.s_cut_state_entered.connect(func(x): if cut_manager.cut_state != CutManager.CUT_STATE.Locked: cut_manager.cut_state = x)
 			s_action_script_started.emit(action_node)
+			action_node.action()
 			await action_node.s_action_end
-	cut_manager.cut_state = CutManager.CUT_STATE.None
-	current_action = null
 	action_node.queue_free()
 
 func reset_queue() -> void:

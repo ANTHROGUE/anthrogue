@@ -4,15 +4,28 @@ class_name CutManager
 var timeline: BattleTimeline:
 	set(x):
 		if x is BattleTimeline:
-			x.s_action_script_started.connect(func(s: ActionScript): current_action_script = s)
+			x.s_action_script_started.connect(func(s: ActionScript): if cut_state != CUT_STATE.Locked: current_action_script = s)
+			x.s_queue_finished.connect(clear_cut_inputs)
 		timeline = x
 var manager: BattleManager
+
+class CutAction:
+	var user: Combatant
+	var target: Combatant
+	var action: BattleAction
+	var cut_type: CUT_STATE
+	func as_queued_action() -> BattleTimeline.QueuedAction:
+		var _out = BattleTimeline.QueuedAction.new()
+		for key in ['user', 'target', 'action']:
+			_out[key] = self[key]
+		return _out
 
 enum CUT_STATE {
 	None,
 	Offense,
 	Defense,
 	Command,
+	Locked
 }
 
 var cut_state := CUT_STATE.None:
@@ -29,11 +42,11 @@ var current_action_script: ActionScript:
 		impact_count = 0
 		if x is ActionScript:
 			x.s_action_impact.connect(func(): impact_count += 1)
-			x.s_action_interval_started.connect(func(ival: Interval): current_interval = ival)
+			x.s_action_interval_started.connect(func(ival: ActiveInterval): active_interval = ival)
 		else:
-			current_interval = null
+			active_interval = null
 		current_action_script = x
-var current_interval: Interval
+var active_interval: ActiveInterval
 
 func _ready() -> void:
 	# ?????
@@ -59,22 +72,51 @@ func clear_cut_inputs() -> void:
 	s_cut_input_received.disconnect(attempt_cut_input)
 
 func attempt_cut_input(user: Combatant) -> void:
+	match cut_state:
+		CUT_STATE.None, CUT_STATE.Command, CUT_STATE.Locked:
+			print("CUT-IN: Attempted during state %s, cancelling" % CUT_STATE.find_key(cut_state))
+			return
+	
 	var weapon = user.inventory.weapon
 	if weapon is not Weapon:
 		return
 	
-	var action: BattleAction
-	var cd := 0
+	var cut_action := CutAction.new()
+	cut_action.user = user
+	cut_action.cut_type = cut_state
+	
 	match cut_state:
 		CUT_STATE.Offense:
-			cd = weapon.offense_cd_timer
-			action = weapon.offense_cut
+			if weapon.offense_cd_timer > 0:
+				print("CUT-IN: Attempted %s Cut-In on CD" % CUT_STATE.find_key(cut_state))
+				return
+			weapon.offense_cd_timer = weapon.offense_cd
+			cut_action.action = weapon.offense_cut
 		CUT_STATE.Defense:
-			cd = weapon.defense_cd_timer
-			action = weapon.defense_cut
-	if action is not BattleAction:
+			# ActionScript: Defense state should only be entered if the user's team is targeted
+			if weapon.defense_cd_timer > 0:
+				print("CUT-IN: Attempted %s Cut-In on CD" % CUT_STATE.find_key(cut_state))
+				return
+			weapon.defense_cd_timer = weapon.defense_cd
+			cut_action.action = weapon.defense_cut
+	
+	if cut_action.action is not BattleAction:
 		printerr("CUT-IN: Cut-In Action not found")
-	if cd > 0:
-		print("CUT-IN: Attempted %s Cut-In on CD: %d" % [cut_state, cd])
 		return
-	print("CUT-IN: Performing %s now" % action.name)
+	# TODO: Refactor this into teams
+	if current_action_script.target == cut_action.user && !cut_action.cut_type == CUT_STATE.Defense:
+		cut_action.target = current_action_script.user
+	else: cut_action.target = current_action_script.target
+	execute_cut_action(cut_action)
+
+func execute_cut_action(cut_action: CutAction) -> void:
+	var previous_cs := cut_state
+	print("CUT-IN: Performing %s now | %s -> %s" % [cut_action.action.name, cut_action.user, cut_action.target])
+	if active_interval is not ActiveInterval:
+		printerr("CutManager: Active Interval not set")
+		return
+	active_interval.pause()
+	cut_state = CUT_STATE.Locked
+	await timeline.run_action(cut_action.as_queued_action())
+	active_interval.play()
+	cut_state = previous_cs

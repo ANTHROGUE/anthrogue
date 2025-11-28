@@ -8,6 +8,8 @@
 script = ExtResource("1_4mu4i")
 action = ExtResource("1_ue58d")
 offense_cut = ExtResource("1_ue58d")
+offense_cd = 3
 defense_cut = ExtResource("2_mhonc")
+defense_cd = 3
 name = &"Crowbar"
 metadata/_custom_type_script = "uid://bugxg1uehu7lo"
