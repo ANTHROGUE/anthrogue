@@ -35,3 +35,7 @@ func affect_stat(amount: int, stat: String = 'hp') -> void:
 		print("Stat %s not found in %s!" % [stat, name])
 		return
 	stats[stat] += amount
+
+func get_weapon() -> Weapon:
+	if inventory is Inventory: return inventory.weapon
+	return null

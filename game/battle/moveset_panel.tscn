@@ -137,9 +137,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -232.0
+offset_top = -272.0
 offset_right = 125.0
-offset_bottom = -198.0
+offset_bottom = -238.0
 grow_vertical = 0
 text = "HP: 15/15"
 label_settings = SubResource("LabelSettings_2yhv4")
@@ -151,9 +151,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -200.0
+offset_top = -240.0
 offset_right = 96.0
-offset_bottom = -166.0
+offset_bottom = -206.0
 grow_vertical = 0
 text = "AP: 7/7"
 label_settings = SubResource("LabelSettings_2yhv4")
@@ -208,6 +208,28 @@ text = "cost"
 label_settings = SubResource("LabelSettings_ppigx")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="CutLabelOffense" type="Label" parent="WeaponButton"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -72.0
+offset_right = 48.0
+offset_bottom = -23.0
+text = "OFF
+0/3"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+
+[node name="CutLabelDefense" type="Label" parent="WeaponButton"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -72.0
+offset_right = 112.0
+offset_bottom = -23.0
+text = "DEF
+0/3"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
 
 [node name="WeaponUIContainer" type="Control" parent="."]
 unique_name_in_owner = true

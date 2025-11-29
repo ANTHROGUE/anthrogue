@@ -31,8 +31,11 @@ enum CUT_STATE {
 var cut_state := CUT_STATE.None:
 	set(x):
 		print("Entering Cut State %s" % CUT_STATE.find_key(x))
+		s_cut_state_changed.emit(x)
 		cut_state = x
+		
 signal s_cut_input_received(user: Combatant)
+signal s_cut_state_changed(state: CUT_STATE)
 
 var cut_input_mappings: Dictionary[String, Combatant]
 
@@ -81,28 +84,19 @@ func attempt_cut_input(user: Combatant) -> void:
 	if weapon is not Weapon:
 		return
 	
+	var key: String = CUT_STATE.find_key(cut_state)
+	
+	if !weapon.spend_charge(key):
+		return
+	
 	var cut_action := CutAction.new()
 	cut_action.user = user
 	cut_action.cut_type = cut_state
-	
-	match cut_state:
-		CUT_STATE.Offense:
-			if weapon.offense_cd_timer > 0:
-				print("CUT-IN: Attempted %s Cut-In on CD" % CUT_STATE.find_key(cut_state))
-				return
-			weapon.offense_cd_timer = weapon.offense_cd
-			cut_action.action = weapon.offense_cut
-		CUT_STATE.Defense:
-			# ActionScript: Defense state should only be entered if the user's team is targeted
-			if weapon.defense_cd_timer > 0:
-				print("CUT-IN: Attempted %s Cut-In on CD" % CUT_STATE.find_key(cut_state))
-				return
-			weapon.defense_cd_timer = weapon.defense_cd
-			cut_action.action = weapon.defense_cut
-	
+	cut_action.action = weapon.jumps[key]
 	if cut_action.action is not BattleAction:
 		printerr("CUT-IN: Cut-In Action not found")
 		return
+	
 	# TODO: Refactor this into teams
 	if current_action_script.target == cut_action.user && !cut_action.cut_type == CUT_STATE.Defense:
 		cut_action.target = current_action_script.user

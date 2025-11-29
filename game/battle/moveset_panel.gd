@@ -28,7 +28,7 @@ func setup_buttons() -> void:
 		action_buttons.append(button)
 	
 	## Weapon
-	%WeaponButton.weapon = user.inventory.weapon
+	%WeaponButton.user = user
 	if %WeaponButton.weapon is Weapon:
 		action_buttons.append(%WeaponButton)
 	

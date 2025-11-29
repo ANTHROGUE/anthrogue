@@ -10,4 +10,10 @@ var action: BattleAction:
 			icon = null
 			$CostLabel.text = ""
 		action = x
-var user: Combatant
+var user: Combatant:
+	set(x):
+		user_set(x)
+		user = x
+
+func user_set(_user: Combatant) -> void:
+	pass

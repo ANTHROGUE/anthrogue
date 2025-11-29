@@ -7,21 +7,22 @@
 [ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="4_qi8ju"]
 [ext_resource type="Script" uid="uid://dyy8dwk13mfwo" path="res://addons/moon-interval/nodes/func_node.gd" id="5_uc4rm"]
 
-[node name="SequenceNode" type="Node"]
-script = ExtResource("1_bmsme")
-metadata/_custom_type_script = "uid://hdjgpdt57p5a"
-
-[node name="Parallel_Mascot" type="Node" parent="."]
+[node name="seq_test_strike" type="Node"]
 script = ExtResource("2_kas30")
+metadata/_custom_type_script = "uid://be8ua6ji4bugr"
 
-[node name="SequenceNode" type="Node" parent="Parallel_Mascot"]
+[node name="ActionSequence" type="Node" parent="."]
 script = ExtResource("1_bmsme")
 
-[node name="state_offense" type="Node" parent="Parallel_Mascot/SequenceNode" groups=["ival_battle_cutstate"]]
+[node name="state_offense" type="Node" parent="ActionSequence" groups=["ival_battle_cutstate"]]
 script = ExtResource("5_uc4rm")
 arguments = ["Offense"]
 
-[node name="01_user_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+[node name="intro" type="Node" parent="ActionSequence"]
+script = ExtResource("1_bmsme")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="01_user_LerpPos" type="Node" parent="ActionSequence/intro" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../user")
 property = &":position:y"
@@ -32,11 +33,15 @@ ease = 1
 trans = 3
 flags = 1
 
-[node name="WaitNode" type="Node" parent="Parallel_Mascot/SequenceNode"]
+[node name="WaitNode" type="Node" parent="ActionSequence/intro"]
 script = ExtResource("4_qi8ju")
 time = 0.3
 
-[node name="02_user_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+[node name="swing" type="Node" parent="ActionSequence"]
+script = ExtResource("1_bmsme")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="02_user_LerpPos" type="Node" parent="ActionSequence/swing" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../user")
 property = &":position:y"
@@ -46,10 +51,14 @@ duration = 0.2
 ease = 0
 trans = 10
 
-[node name="impact" type="Node" parent="Parallel_Mascot/SequenceNode" groups=["ival_battle_impact"]]
+[node name="impact" type="Node" parent="ActionSequence" groups=["ival_battle_impact"]]
 script = ExtResource("5_uc4rm")
 
-[node name="03_target_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+[node name="outro" type="Node" parent="ActionSequence"]
+script = ExtResource("1_bmsme")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="03_target_LerpPos" type="Node" parent="ActionSequence/outro" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../target")
 property = &":position:y"
@@ -60,7 +69,7 @@ ease = 1
 trans = 5
 flags = 1
 
-[node name="04_target_LerpPos" type="Node" parent="Parallel_Mascot/SequenceNode" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+[node name="04_target_LerpPos" type="Node" parent="ActionSequence/outro" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../target")
 property = &":position:y"
@@ -69,7 +78,7 @@ value = 0.0
 duration = 0.15
 trans = 5
 
-[node name="state_none" type="Node" parent="Parallel_Mascot/SequenceNode" groups=["ival_battle_cutstate"]]
+[node name="state_none" type="Node" parent="ActionSequence" groups=["ival_battle_cutstate"]]
 script = ExtResource("5_uc4rm")
 arguments = ["None"]
 

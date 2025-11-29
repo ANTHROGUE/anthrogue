@@ -71,6 +71,9 @@ func begin_round() -> void:
 	current_round += 1
 	for combatant: Combatant in combatants:
 		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
+		var weapon = combatant.get_weapon()
+		if weapon is Weapon:
+			weapon.regen_charges()
 	prepare_queue()
 
 func select_action(action: BattleAction, user: Combatant) -> void:
