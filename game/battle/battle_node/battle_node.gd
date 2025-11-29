@@ -64,6 +64,8 @@ func start_battle(plyr: Player) -> void:
 	manager.combatants = [player]
 	manager.combatants.append_array(enemies)
 	add_child(manager)
+	
+	BattleService.s_battle_started.emit(self)
 
 func recenter_battle() -> void:
 	recenter_player()

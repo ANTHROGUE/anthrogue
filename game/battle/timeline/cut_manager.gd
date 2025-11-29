@@ -56,6 +56,8 @@ func _ready() -> void:
 	timeline = get_parent()
 	manager = timeline.get_parent()
 	manager.s_turn_confirmed.connect(accept_cut_inputs)
+	
+	BattleService.cut_manager = self
 
 func _process(delta: float) -> void:
 	for input in cut_input_mappings.keys():

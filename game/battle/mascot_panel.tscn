@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://djrshqlncgwga"]
 
-[ext_resource type="Script" uid="uid://bgdoun5d3eudi" path="res://game/battle/combatant_panel.gd" id="1_mr8hk"]
+[ext_resource type="Script" uid="uid://c7hc8fgwo3caq" path="res://game/battle/mascot_panel.gd" id="1_4wao1"]
 [ext_resource type="PackedScene" uid="uid://dv3m85tmjgyxa" path="res://game/battle/target_button.tscn" id="2_jmpl3"]
 [ext_resource type="Script" uid="uid://c278bmtvg5ijj" path="res://game/battle/weapon_jump_button.gd" id="3_4wao1"]
 
@@ -17,7 +17,7 @@ outline_color = Color(0, 0, 0, 1)
 [node name="MascotPanel" type="ColorRect"]
 custom_minimum_size = Vector2(160, 144)
 color = Color(0.234, 0.39, 0.234, 1)
-script = ExtResource("1_mr8hk")
+script = ExtResource("1_4wao1")
 
 [node name="Label_HP" type="Label" parent="."]
 unique_name_in_owner = true

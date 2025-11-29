@@ -14,10 +14,6 @@ metadata/_custom_type_script = "uid://be8ua6ji4bugr"
 [node name="ActionSequence" type="Node" parent="."]
 script = ExtResource("1_bmsme")
 
-[node name="state_offense" type="Node" parent="ActionSequence" groups=["ival_battle_cutstate"]]
-script = ExtResource("5_uc4rm")
-arguments = ["Offense"]
-
 [node name="intro" type="Node" parent="ActionSequence"]
 script = ExtResource("1_bmsme")
 metadata/_custom_type_script = "uid://hdjgpdt57p5a"
@@ -32,6 +28,10 @@ duration = 0.4
 ease = 1
 trans = 3
 flags = 1
+
+[node name="state_offense" type="Node" parent="ActionSequence/intro" groups=["ival_battle_cutstate"]]
+script = ExtResource("5_uc4rm")
+arguments = ["Offense"]
 
 [node name="WaitNode" type="Node" parent="ActionSequence/intro"]
 script = ExtResource("4_qi8ju")
