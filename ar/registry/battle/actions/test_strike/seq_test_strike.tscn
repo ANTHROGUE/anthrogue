@@ -41,18 +41,26 @@ time = 0.3
 script = ExtResource("1_bmsme")
 metadata/_custom_type_script = "uid://hdjgpdt57p5a"
 
+[node name="state_defense" type="Node" parent="ActionSequence/swing" groups=["ival_battle_cutstate"]]
+script = ExtResource("5_uc4rm")
+arguments = ["Defense"]
+
 [node name="02_user_LerpPos" type="Node" parent="ActionSequence/swing" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../user")
 property = &":position:y"
 start_value = 1.0
 value = 0.0
-duration = 0.2
+duration = 0.4
 ease = 0
 trans = 10
 
 [node name="impact" type="Node" parent="ActionSequence" groups=["ival_battle_impact"]]
 script = ExtResource("5_uc4rm")
+
+[node name="state_offense" type="Node" parent="ActionSequence" groups=["ival_battle_cutstate"]]
+script = ExtResource("5_uc4rm")
+arguments = ["Offense"]
 
 [node name="outro" type="Node" parent="ActionSequence"]
 script = ExtResource("1_bmsme")

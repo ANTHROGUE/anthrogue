@@ -119,7 +119,7 @@ func run_action(action: QueuedAction) -> void:
 		action_node.manager = manager
 		add_child(action_node)
 		if action_node is ActionScript:
-			action_node.s_cut_state_entered.connect(func(x): if cut_manager.cut_state != CutManager.CUT_STATE.Locked: cut_manager.cut_state = x)
+			action_node.s_cut_state_entered.connect(cut_manager.set_cut_state_client)
 			s_action_script_started.emit(action_node)
 			action_node.action()
 			await action_node.s_action_end

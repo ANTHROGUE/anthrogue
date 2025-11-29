@@ -116,3 +116,12 @@ func execute_cut_action(cut_action: CutAction) -> void:
 	await timeline.run_action(cut_action.as_queued_action())
 	active_interval.play()
 	cut_state = previous_cs
+
+func set_cut_state_client(_state: CUT_STATE, user: Combatant) -> void:
+	if cut_state == CUT_STATE.Locked:
+		return
+	
+	# TODO: Refactor this into teams
+	if _state == CUT_STATE.Defense && user == Player.instance:
+		cut_state = CUT_STATE.Offense
+	else: cut_state = _state

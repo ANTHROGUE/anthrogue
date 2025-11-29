@@ -4,7 +4,7 @@ class_name ActionScript
 signal s_action_interval_started(active_interval: ActiveInterval)
 signal s_action_end
 signal s_action_impact
-signal s_cut_state_entered(state: CutManager.CUT_STATE)
+signal s_cut_state_entered(state: CutManager.CUT_STATE, user: Combatant)
 
 ## Relevant combatants
 var user: Combatant
@@ -43,7 +43,7 @@ func cutstate(state: String) -> void:
 	if state not in CutManager.CUT_STATE.keys():
 		printerr("Cutstate %s not in CutManager" % state)
 		return
-	s_cut_state_entered.emit(CutManager.CUT_STATE[state])
+	s_cut_state_entered.emit(CutManager.CUT_STATE[state], user)
 
 func assign_ival() -> void:
 	add_child(ival_node)
