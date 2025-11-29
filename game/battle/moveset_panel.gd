@@ -43,7 +43,8 @@ func setup_buttons() -> void:
 func refresh_panel() -> void:
 	super()
 	for button: ActionButton in action_buttons:
-		button.disabled = !is_usable_action(button.action)
+		if button.action is BattleAction:
+			button.disabled = !is_usable_action(button.action)
 
 func setup_panel() -> void:
 	super()
