@@ -68,6 +68,7 @@ func prepare_queue() -> void:
 	s_new_round.emit()
 
 func begin_round() -> void:
+	validate_combatants()
 	current_round += 1
 	for combatant: Combatant in combatants:
 		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
@@ -79,3 +80,10 @@ func begin_round() -> void:
 func select_action(action: BattleAction, user: Combatant) -> void:
 	print("Selected %s from %s" % [action, user])
 	pass
+
+func validate_combatants() -> void:
+	var _combatants: Array[Combatant] = []
+	for combatant: Combatant in combatants:
+		if is_instance_valid(combatant):
+			_combatants.append(combatant)
+	combatants = _combatants

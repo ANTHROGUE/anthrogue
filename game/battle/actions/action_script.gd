@@ -8,22 +8,31 @@ signal s_cut_state_entered(state: CutManager.CUT_STATE, user: Combatant)
 
 ## Relevant combatants
 var user: Combatant
-var target: Combatant
+var target: Combatant:
+	set(x):
+		if x.stats is BattleStats: x.stats.s_hp_changed.connect(validate_target)
+		target = x
 var alt_targets: Array[Combatant]
 ## Other variables
 var manager: BattleManager
 
+var values: Array = []
+var impact_count := 0
+
 var ival_path: String
 var ival_node: IntervalNode
 var ival: Interval
+var active_ival: ActiveInterval
 
 ## Override to script your battle movie
 func action() -> void:
+	if !is_instance_valid(target): return
+	
 	print("Action: %s" % name)
 	ival_node = load(ival_path).instantiate()
 	if ival_node is IntervalNode:
 		assign_ival()
-		var active_ival = ival.start(self, true)
+		active_ival = ival.start(self, true)
 		s_action_interval_started.emit(active_ival)
 		await active_ival.finished
 		end_action()
@@ -33,10 +42,12 @@ func action() -> void:
 
 func end_action() -> void:
 	print("End of Action %s" % name)
+	cutstate("None")
 	s_action_end.emit()
 
 func impact() -> void:
 	print("Impact of Action %s" % name)
+	impact_count += 1
 	s_action_impact.emit()
 	
 func cutstate(state: String) -> void:
@@ -59,3 +70,9 @@ func assign_ival() -> void:
 			sub_ival.function = f
 	ival = ival_node.as_interval()
 	ival_node.queue_free()
+
+func validate_target() -> void:
+	if target.stats.hp <= 0:
+		end_action()
+		if active_ival is ActiveInterval and impact_count <= 0:
+			active_ival.stop()

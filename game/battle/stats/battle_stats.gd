@@ -5,15 +5,41 @@ class_name BattleStats
 #region Standard Stats
 ## HP: Hit Points (Health)
 ## Affected by TGN
-@export var hp := 10.0
-@export var max_hp := 10.0
-
+@export var hp := 10.0:
+	set(x):
+		var _hp = hp
+		hp = x
+		if x != _hp:
+			s_hp_changed.emit()
+@export var max_hp := 10.0:
+	set(x):
+		var _max_hp = max_hp
+		max_hp = x
+		if x != _max_hp:
+			s_max_hp_changed.emit()
+	
 ## AP: Action Points (Currency for using Talents)
-@export var ap := 7
-@export var max_ap := 7
+@export var ap := 7:
+	set(x):
+		var _ap = ap
+		ap = x
+		if x != _ap:
+			s_ap_changed.emit()
+@export var max_ap := 7:
+	set(x):
+		var _max_ap = max_ap
+		max_ap = x
+		if x != _max_ap:
+			s_max_ap_changed.emit()
+		
 ## AP Regen: Amount of AP gained at the start of a round
 ## Affected by DEX
 @export var ap_regen := 1
+
+signal s_hp_changed
+signal s_max_hp_changed
+signal s_ap_changed
+signal s_max_ap_changed
 
 ## Strength: Scales flat damage
 @export var strength := 0

@@ -26,7 +26,7 @@ enum TARGETING {
 @export var action_script: Script
 
 ## Stats
-@export var values = []
+@export var values: Array = []
 @export var targeting: TARGETING
 
 

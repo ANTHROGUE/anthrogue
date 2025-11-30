@@ -17,6 +17,10 @@ var panel: CombatantPanel
 
 func _ready() -> void:
 	stats = initialize_stats()
+	stats.s_hp_changed.connect(func():
+		if stats.hp <= 0:
+			queue_free()
+	)
 
 func initialize_stats() -> BattleStats:
 	var new_stats := BattleStats.new()

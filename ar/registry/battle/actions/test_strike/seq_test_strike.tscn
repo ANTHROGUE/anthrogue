@@ -86,10 +86,6 @@ value = 0.0
 duration = 0.15
 trans = 5
 
-[node name="state_none" type="Node" parent="ActionSequence" groups=["ival_battle_cutstate"]]
-script = ExtResource("5_uc4rm")
-arguments = ["None"]
-
 [node name="user" parent="." instance_placeholder="res://ar/player/player.tscn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
 

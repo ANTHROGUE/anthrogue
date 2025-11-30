@@ -109,14 +109,18 @@ func execute_round() -> void:
 	s_queue_finished.emit()
 	
 func run_action(action: QueuedAction) -> void:
+	for combatant in ['user', 'target']:
+		if !is_instance_valid(action[combatant]): return
+	
 	var battle_action: BattleAction = action.action
-	var action_node := Node.new()
+	var action_node := ActionScript.new()
 	if battle_action.action_script:
 		action_node.set_script(battle_action.action_script)
 		for combatant in ['user', 'target', 'alt_targets']:
 			if action[combatant] is Combatant:
 				action_node[combatant] = action[combatant]
 		action_node.manager = manager
+		action_node.values = battle_action.values
 		add_child(action_node)
 		if action_node is ActionScript:
 			action_node.s_cut_state_entered.connect(cut_manager.set_cut_state_client)
