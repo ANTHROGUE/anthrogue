@@ -21,6 +21,8 @@ class_name LerpPropertyNode
 		
 		notify_property_list_changed()
 
+@export var other: Node
+
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Set Property", "MemberProperty") var _editor_set := _editor_property
 
@@ -31,7 +33,7 @@ class_name LerpPropertyNode
 @export var ease := Tween.EASE_IN_OUT
 @export var trans := Tween.TRANS_LINEAR
 
-@export_flags("Has Start:1", "Relative:2") var flags := 0:
+@export_flags("Has Start:1", "Relative:2", "Other:4") var flags := 0:
 	set(x):
 		flags = x
 		notify_property_list_changed()
@@ -48,12 +50,14 @@ func as_interval() -> Interval:
 			e = p.ease_override
 		if p.has_trans_override():
 			t = p.trans_override
-	return LerpProperty.new(node, NodePath(property), d, value, start_value if flags & 1 else null, flags & 2, e, t)
+	return LerpProperty.new(node, NodePath(property), d, value, start_value if flags & 1 else null, flags & 2, e, t, other if flags & 4 else null)
 
 func reset():
-	if node and flags & 1:
-		node.set_indexed(NodePath(property), start_value)
+	if node:
+		if flags & 1:
+			node.set_indexed(NodePath(property), start_value)
 
+		
 #region Editor API
 
 func _editor_property():
@@ -80,12 +84,15 @@ func _validate_property(p: Dictionary) -> void:
 	super(p)
 	
 	if node and property:
-		if p.name == &"start_value" or p.name == &"value":
+		if p.name in [
+			&"start_value", &"value"
+		]:
 			p.type = typeof(node.get_indexed(NodePath(property)))
 	else:
-		if p.name == &"value" or p.name == &"start_value" or p.name == &"duration" or p.name == &"ease" or p.name == &"trans" or p.name == &"flags" or p.name == &"Animation":
+		if p.name in [
+			&"value", &"start_value", &"duration", &"ease", &"trans", &"flags", &"other", &"Animation"
+		]:
 			p.usage = 0
-		return
 	
 	if Engine.is_editor_hint():
 		if p.name == &"property":

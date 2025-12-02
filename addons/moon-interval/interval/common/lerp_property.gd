@@ -14,6 +14,7 @@ var from: Variant
 var relative: bool
 var ease: Tween.EaseType
 var trans: Tween.TransitionType
+var other: Object
 var custom_interpolator: Callable
 
 func _init(p_object: Object = null,
@@ -24,6 +25,7 @@ func _init(p_object: Object = null,
 		p_relative: bool = false,
 		p_ease := Tween.EASE_IN_OUT,
 		p_trans := Tween.TRANS_LINEAR,
+		p_other: Object = null,
 		p_custom_interpolator: Callable = _do_nothing) -> void:
 	object = p_object
 	property = p_property
@@ -33,7 +35,11 @@ func _init(p_object: Object = null,
 	relative = p_relative
 	ease = p_ease
 	trans = p_trans
+	other = p_other
 	custom_interpolator = p_custom_interpolator
+	
+	if other is Object:
+		final_val = other.get_indexed(property) + final_val
 
 static func setup(object: Object = null, property: NodePath = ^"", duration := 0.0, final_val: Variant = null) -> LerpProperty:
 	return LerpProperty.new(object, property, duration, final_val)

@@ -18,24 +18,24 @@ script = ExtResource("1_bmsme")
 script = ExtResource("1_bmsme")
 metadata/_custom_type_script = "uid://hdjgpdt57p5a"
 
-[node name="01_user_LerpPos" type="Node" parent="ActionSequence/intro" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
-script = ExtResource("3_qi8ju")
-node = NodePath("../../../user")
-property = &":position:y"
-start_value = 0.0
-value = 1.0
-duration = 0.4
-ease = 1
-trans = 3
-flags = 1
-
 [node name="state_offense" type="Node" parent="ActionSequence/intro" groups=["ival_battle_cutstate"]]
 script = ExtResource("5_uc4rm")
 arguments = ["Offense"]
 
+[node name="01_user_LerpPos" type="Node" parent="ActionSequence/intro" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../user")
+property = &":position"
+start_value = Vector3(0, 0, 0)
+value = Vector3(0, 1, 0)
+duration = 0.4
+ease = 1
+trans = 3
+flags = 2
+
 [node name="WaitNode" type="Node" parent="ActionSequence/intro"]
 script = ExtResource("4_qi8ju")
-time = 0.3
+time = 0.2
 
 [node name="swing" type="Node" parent="ActionSequence"]
 script = ExtResource("1_bmsme")
@@ -45,15 +45,21 @@ metadata/_custom_type_script = "uid://hdjgpdt57p5a"
 script = ExtResource("5_uc4rm")
 arguments = ["Defense"]
 
-[node name="02_user_LerpPos" type="Node" parent="ActionSequence/swing" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+[node name="WaitNode2" type="Node" parent="ActionSequence/swing"]
+script = ExtResource("4_qi8ju")
+time = 0.2
+
+[node name="02_user_LerpPos" type="Node" parent="ActionSequence/swing" node_paths=PackedStringArray("node", "other") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
 node = NodePath("../../../user")
-property = &":position:y"
-start_value = 1.0
-value = 0.0
-duration = 0.4
+property = &":position"
+other = NodePath("../../../target")
+start_value = Vector3(0, 0, -2.5)
+value = Vector3(0, 0.5, 0)
+duration = 0.3
 ease = 0
-trans = 10
+trans = 5
+flags = 4
 
 [node name="impact" type="Node" parent="ActionSequence" groups=["ival_battle_impact"]]
 script = ExtResource("5_uc4rm")
@@ -63,12 +69,36 @@ script = ExtResource("5_uc4rm")
 arguments = ["Offense"]
 
 [node name="outro" type="Node" parent="ActionSequence"]
+script = ExtResource("2_kas30")
+metadata/_custom_type_script = "uid://be8ua6ji4bugr"
+
+[node name="user" type="Node" parent="ActionSequence/outro"]
 script = ExtResource("1_bmsme")
 metadata/_custom_type_script = "uid://hdjgpdt57p5a"
 
-[node name="03_target_LerpPos" type="Node" parent="ActionSequence/outro" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+[node name="WaitNode" type="Node" parent="ActionSequence/outro/user"]
+script = ExtResource("4_qi8ju")
+time = 0.2
+
+[node name="user_LerpPos" type="Node" parent="ActionSequence/outro/user" node_paths=PackedStringArray("node", "other") groups=["ival_battle_user"]]
 script = ExtResource("3_qi8ju")
-node = NodePath("../../../target")
+node = NodePath("../../../../user")
+property = &":position"
+other = NodePath("../../../../ref_user")
+start_value = Vector3(0, 0.00046245332, 2.5)
+value = Vector3(0, 0, 0)
+duration = 0.5
+ease = 1
+trans = 5
+flags = 4
+
+[node name="target" type="Node" parent="ActionSequence/outro"]
+script = ExtResource("1_bmsme")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="03_target_LerpPos" type="Node" parent="ActionSequence/outro/target" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+script = ExtResource("3_qi8ju")
+node = NodePath("../../../../target")
 property = &":position:y"
 start_value = 0.0
 value = 1.0
@@ -77,17 +107,35 @@ ease = 1
 trans = 5
 flags = 1
 
-[node name="04_target_LerpPos" type="Node" parent="ActionSequence/outro" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+[node name="04_target_LerpPos" type="Node" parent="ActionSequence/outro/target" node_paths=PackedStringArray("node", "other") groups=["ival_battle_target"]]
 script = ExtResource("3_qi8ju")
-node = NodePath("../../../target")
-property = &":position:y"
-start_value = 1.0
-value = 0.0
+node = NodePath("../../../../target")
+property = &":position"
+other = NodePath("../../../../ref_target")
+start_value = Vector3(0, 0.00046245332, 2.5)
+value = Vector3(0, 0, 0)
 duration = 0.15
 trans = 5
+flags = 4
+
+[node name="FuncNode" type="Node" parent="ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("5_uc4rm")
+node = NodePath("../../ref_user")
+function = &"queue_free"
+
+[node name="FuncNode2" type="Node" parent="ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("5_uc4rm")
+node = NodePath("../../ref_target")
+function = &"queue_free"
+
+[node name="ref_user" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+
+[node name="ref_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
 
 [node name="user" parent="." instance_placeholder="res://ar/player/player.tscn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0001, 1)
 
 [node name="target" parent="." instance=ExtResource("4_kas30")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.5)

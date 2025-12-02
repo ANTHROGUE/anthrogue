@@ -58,21 +58,32 @@ func cutstate(state: String) -> void:
 
 func assign_ival() -> void:
 	add_child(ival_node)
-	for combatant in ['user', 'target', 'alt_targets']:
-		for sub_ival in get_tree().get_nodes_in_group("ival_battle_" + combatant):
-			if self[combatant] == null:
-				printerr("ERROR: Combatant %s not in ActionScript %s" % [combatant, self])
-				break
-			sub_ival.node = self[combatant]
+	
+	for _combatant in [['user', 'target'], ['target', 'user']]:
+		var combatant = self[_combatant[0]]
+		var opponent = self[_combatant[1]]
+		if combatant == null:
+			printerr("ERROR: Combatant %s not in ActionScript %s" % [_combatant, self])
+			continue
+		
+		var ref_node = ival_node.find_child("ref_" + _combatant[0])
+		if ref_node is Node3D:
+			ref_node.reparent(BattleService.battle_node)
+			ref_node.position = BattleService.battle_node.actor_positions[combatant]
+		for sub_ival in get_tree().get_nodes_in_group("ival_battle_" + _combatant[0]):
+			sub_ival.node = combatant
+			if sub_ival.other != ref_node: sub_ival.other = opponent
+
 	for f in ['impact', 'cutstate']:
 		for sub_ival: FuncNode in get_tree().get_nodes_in_group("ival_battle_" + f):
 			sub_ival.node = self
 			sub_ival.function = f
+	
 	ival = ival_node.as_interval()
 	ival_node.queue_free()
 
 func validate_target() -> void:
 	if target.stats.hp <= 0:
-		end_action()
 		if active_ival is ActiveInterval and impact_count <= 0:
+			end_action()
 			active_ival.stop()

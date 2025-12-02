@@ -17,6 +17,8 @@ var player: Player
 var enemies: Array[Combatant] = []
 var manager: BattleManager
 
+var actor_positions: Dictionary[Actor3D, Vector3] = {}
+
 func _ready() -> void:
 	set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
 	if not body_entered.is_connected(on_body_entered):
@@ -38,7 +40,7 @@ func initialize_enemies() -> void:
 		var enemy: Combatant = spawnable_enemies.pick_random().instantiate()
 		enemies.append(enemy)
 		add_child(enemy)
-		enemy.global_position = enemy_positions[i]
+		enemy.position = enemy_positions[i]
 
 func on_body_entered(body: Node3D) -> void:
 	if body is Player:
@@ -56,6 +58,7 @@ func start_battle(plyr: Player) -> void:
 	player.request_state(&'Stopped')
 	
 	# Move all combatants into position
+	assign_actor_positions()
 	recenter_battle()
 	camera.make_current()
 	
@@ -74,12 +77,10 @@ func recenter_battle() -> void:
 func recenter_player() -> void:
 	# Move player to position
 	player.reparent(self)
-	player.global_position = calculate_player_position()
+	player.position = actor_positions.get(player)
 
 func recenter_enemies() -> void:
-	# Slap our enemies into position
-	var enemy_positions := calculate_enemy_positions()
-	for enemy in enemies: enemy.global_position = enemy_positions[enemies.find(enemy)]
+	for enemy in enemies: enemy.position = actor_positions.get(enemy)
 
 ## Returns the global positions of enemies at each index
 func calculate_enemy_positions(enemy_count := enemies.size()) -> Array[Vector3]:
@@ -89,9 +90,15 @@ func calculate_enemy_positions(enemy_count := enemies.size()) -> Array[Vector3]:
 	center_pos.x -= ENEMY_SPACING * (maxi(enemy_count - 2, 0))
 	var enemy_positions: Array[Vector3] = []
 	for i in enemy_count:
-		enemy_positions.append(to_global(center_pos))
+		enemy_positions.append(center_pos)
 		center_pos.x += ENEMY_SPACING
 	return enemy_positions
 
 func calculate_player_position() -> Vector3:
-	return to_global(Vector3(0, 0, -ENEMY_DISTANCE / 2.0))
+	return Vector3(0, 0, -ENEMY_DISTANCE / 2.0)
+
+func assign_actor_positions() -> void:
+	actor_positions.set(player, calculate_player_position())
+	var enemy_positions := calculate_enemy_positions()
+	for enemy in enemies:
+		actor_positions.set(enemy, enemy_positions[enemies.find(enemy)])
