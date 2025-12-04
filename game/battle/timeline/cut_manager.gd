@@ -100,6 +100,9 @@ func attempt_cut_input(user: Combatant) -> void:
 		return
 	
 	# TODO: Refactor this into teams
+	if !is_instance_valid(current_action_script.target):
+		printerr("CUT-IN: Attempted Cut-In on invalid target")
+		return
 	if current_action_script.target == cut_action.user && !cut_action.cut_type == CUT_STATE.Defense:
 		cut_action.target = current_action_script.user
 	else: cut_action.target = current_action_script.target
