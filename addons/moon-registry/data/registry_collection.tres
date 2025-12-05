@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RegistryCollection" load_steps=100 format=3 uid="uid://cx1do2l5hcbg8"]
+[gd_resource type="Resource" script_class="RegistryCollection" load_steps=98 format=3 uid="uid://cx1do2l5hcbg8"]
 
 [ext_resource type="Script" uid="uid://counuj1l33fav" path="res://addons/moon-registry/data/registry.gd" id="1_g76xr"]
 [ext_resource type="Script" uid="uid://cps0w3c1g6x35" path="res://addons/moon-registry/data/registry_collection.gd" id="2_hwpud"]
@@ -79,9 +79,7 @@
 [ext_resource type="Script" uid="uid://d2t47oeh14y4h" path="res://addons/moon-interval/nodes/set_property_node.gd" id="81_mbply"]
 [ext_resource type="Script" uid="uid://cotkwanlbw0vs" path="res://addons/moon-interval/nodes/track_node.gd" id="82_h57hs"]
 [ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="83_1te1p"]
-[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event/multi_event_editor.gd" id="83_osu37"]
 [ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event_editor.gd" id="83_tv564"]
-[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event/multi_event_graph_edit.gd" id="84_6tfbg"]
 [ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event_graph_edit.gd" id="84_v3hvw"]
 [ext_resource type="Script" uid="uid://bt64gatk5rir1" path="res://addons/moon-interval/plugin.gd" id="84_vhei0"]
 [ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://ui_assets/PLACEHOLDER/crosshair033.png" id="85_a5pc5"]
@@ -229,8 +227,8 @@ id_to_resource = Dictionary[int, Resource]({
 127: ExtResource("84_v3hvw"),
 128: ExtResource("83_tv564"),
 129: ExtResource("84_v3hvw"),
-130: ExtResource("83_osu37"),
-131: ExtResource("84_6tfbg")
+130: ExtResource("83_tv564"),
+131: ExtResource("84_v3hvw")
 })
 directory = "res://addons"
 scan_subdirectories = true
