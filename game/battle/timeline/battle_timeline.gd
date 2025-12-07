@@ -17,7 +17,7 @@ signal s_action_script_started(script: ActionScript)
 var manager: BattleManager:
 	set(x):
 		if x is BattleManager:
-			s_queue_finished.connect(x.begin_round)
+			s_queue_finished.connect(x.end_round)
 			x.s_timeline_ready.emit()
 		manager = x
 		
@@ -132,3 +132,20 @@ func run_action(action: QueuedAction) -> void:
 func reset_queue() -> void:
 	queue.clear()
 	queue.resize(manager.move_total)
+
+
+## Removes dead combatants from everything
+func scrub_battle() -> void:
+	for action in queue:
+		scrub_action(action)
+	## TODO: Scrub status effects
+
+func scrub_action(action: QueuedAction) -> void:
+	if not action.user in manager.combatants:
+		queue.erase(action)
+		return
+	for combatant in action.targets.duplicate():
+		if not combatant in manager.combatants:
+			action.targets.erase(combatant)
+	if action.targets.is_empty():
+		queue.erase(action)

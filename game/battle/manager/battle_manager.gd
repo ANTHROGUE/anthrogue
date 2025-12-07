@@ -71,7 +71,6 @@ func prepare_queue() -> void:
 	s_new_round.emit()
 
 func begin_round() -> void:
-	validate_combatants()
 	current_round += 1
 	for combatant: Combatant in combatants:
 		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
@@ -89,14 +88,21 @@ func validate_combatants() -> void:
 	for combatant: Combatant in combatants:
 		if is_instance_valid(combatant):
 			_combatants.append(combatant)
+			var _c := false
+			for connection in combatant.stats.s_hp_changed.get_connections():
+				_c = _c or check_pulses == connection['callable']
+			if !_c:
+				combatant.stats.s_hp_changed.connect(check_pulses)
 	combatants = _combatants
  
 ## TODO: Integrate with BattleTimeline
 func end_round() -> void:
+	validate_combatants()
 	if get_enemies().is_empty():
 		end_battle()
 		return
-	battle_ui.show()
+	else:
+		begin_round()
 
 func end_battle() -> void:
 	Player.instance.reparent(get_tree().current_scene)
@@ -115,27 +121,9 @@ func get_enemies() -> Array[Enemy]:
 			enemies.append(combatant)
 	return enemies
 
-## Removes dead combatants from everything
-func scrub_battle() -> void:
-	for action in action_queue:
-		scrub_action(action)
-	## TODO: Scrub status effects
-
-func scrub_action(action: QueuedAction) -> void:
-	if not action.user in combatants:
-		#action_queue.erase(action)
-		return
-	for combatant in action.targets.duplicate():
-		if not combatant in combatants:
-      pass
-			#action.targets.erase(combatant)
-	if action.targets.is_empty():
-    pass
-		#action_queue.erase(action)
-
 func remove_combatant(who: Combatant) -> void:
 	combatants.erase(who)
-	scrub_battle()
+	timeline.scrub_battle()
 	@warning_ignore("redundant_await")
 	await who.lose()
 	who.queue_free()

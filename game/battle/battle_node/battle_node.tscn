@@ -20,15 +20,10 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_s15mc"]
 script = ExtResource("3_swfr6")
-resources = []
-connections = []
-positions = {}
 
 [sub_resource type="Resource" id="Resource_05g16"]
 script = ExtResource("4_2kmjc")
 editor_data = SubResource("Resource_s15mc")
-cycles = false
-debug = false
 metadata/_custom_type_script = "uid://ciyodddkqsiev"
 
 [node name="BattleNode" type="Area3D"]
@@ -46,7 +41,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_mxw6g")
 }
 
-[node name="SequenceNode" parent="." instance_placeholder="res://game/battle/actions/test_actions/seq_test_strike.tscn"]
+[node name="SequenceNode" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
 
 [node name="EventPlayer" type="Node" parent="."]
 script = ExtResource("2_mxw6g")

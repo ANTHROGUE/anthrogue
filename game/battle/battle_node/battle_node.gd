@@ -26,7 +26,7 @@ func _ready() -> void:
 		set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
 		if not body_entered.is_connected(on_body_entered):
 			body_entered.connect(on_body_entered)
-		%Pointer.queue_free()
+		#%Pointer.queue_free()
 
 func initialize_enemies() -> void:
 	# Remove existing enemies
@@ -48,7 +48,7 @@ func on_body_entered(body: Node3D) -> void:
 		on_player_entered(body)
 
 func on_player_entered(plyr: Player) -> void:
-	if not plyr.state_controller.current_state_name == 'Stopped':
+	if not plyr.controller.current_state_name == 'Stopped':
 		call_deferred("start_battle", plyr)
 
 ## TODO (WIP)
