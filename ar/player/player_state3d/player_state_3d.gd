@@ -69,10 +69,12 @@ var animator: AnimationPlayer
 
 func assess_anim() -> void:
 	var anim := base_anim
+	if !player.is_on_floor():
+		anim = 'jump'
 	if player.is_on_floor() and not (Input.is_action_just_pressed('jump')):
 		if moving:
 			anim = 'run'
-		set_animation(anim)
+	set_animation(anim)
 			
 func set_animation(anim: String, speed := 1.0):
 	if not player.get_animation() == anim:
