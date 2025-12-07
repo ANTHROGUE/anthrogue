@@ -22,6 +22,9 @@ func _ready() -> void:
 			queue_free()
 	)
 
+func lose() -> void:
+	pass
+
 func initialize_stats() -> BattleStats:
 	var new_stats := BattleStats.new()
 	for stat in stats_preset.keys():

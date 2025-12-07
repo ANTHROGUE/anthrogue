@@ -19,6 +19,7 @@ var timeline: BattleTimeline:
 			add_child(x)
 		timeline = x
 
+var battle_node: BattleNode
 
 var current_round := 0
 
@@ -29,6 +30,8 @@ class QueuedAction:
 	var action: BattleAction
 
 var combatants: Array[Combatant] = []
+
+
 
 ## BANGRS - Moves calculated using AGI, may be varied
 ## v2i - (queued, max)
@@ -87,3 +90,52 @@ func validate_combatants() -> void:
 		if is_instance_valid(combatant):
 			_combatants.append(combatant)
 	combatants = _combatants
+ 
+## TODO: Integrate with BattleTimeline
+func end_round() -> void:
+	if get_enemies().is_empty():
+		end_battle()
+		return
+	battle_ui.show()
+
+func end_battle() -> void:
+	Player.instance.reparent(get_tree().current_scene)
+	Player.instance.request_state('Walk')
+	battle_node.queue_free()
+
+func check_pulses(targets: Array[Combatant]) -> void:
+	for target in targets:
+		if target.stats.hp <= 0:
+			await remove_combatant(target)
+
+func get_enemies() -> Array[Enemy]:
+	var enemies: Array[Enemy] = []
+	for combatant in combatants:
+		if combatant is Enemy:
+			enemies.append(combatant)
+	return enemies
+
+## Removes dead combatants from everything
+func scrub_battle() -> void:
+	for action in action_queue:
+		scrub_action(action)
+	## TODO: Scrub status effects
+
+func scrub_action(action: QueuedAction) -> void:
+	if not action.user in combatants:
+		#action_queue.erase(action)
+		return
+	for combatant in action.targets.duplicate():
+		if not combatant in combatants:
+      pass
+			#action.targets.erase(combatant)
+	if action.targets.is_empty():
+    pass
+		#action_queue.erase(action)
+
+func remove_combatant(who: Combatant) -> void:
+	combatants.erase(who)
+	scrub_battle()
+	@warning_ignore("redundant_await")
+	await who.lose()
+	who.queue_free()

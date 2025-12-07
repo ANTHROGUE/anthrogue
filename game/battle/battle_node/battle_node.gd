@@ -20,12 +20,13 @@ var manager: BattleManager
 var actor_positions: Dictionary[Actor3D, Vector3] = {}
 
 func _ready() -> void:
-	set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
-	if not body_entered.is_connected(on_body_entered):
-		body_entered.connect(on_body_entered)
 	if not spawnable_enemies.is_empty():
 		initialize_enemies()
-	#%Pointer.queue_free()
+	if not Engine.is_editor_hint():
+		set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
+		if not body_entered.is_connected(on_body_entered):
+			body_entered.connect(on_body_entered)
+		%Pointer.queue_free()
 
 func initialize_enemies() -> void:
 	# Remove existing enemies
@@ -47,7 +48,8 @@ func on_body_entered(body: Node3D) -> void:
 		on_player_entered(body)
 
 func on_player_entered(plyr: Player) -> void:
-	call_deferred("start_battle", plyr)
+	if not plyr.state_controller.current_state_name == 'Stopped':
+		call_deferred("start_battle", plyr)
 
 ## TODO (WIP)
 func start_battle(plyr: Player) -> void:
@@ -66,6 +68,7 @@ func start_battle(plyr: Player) -> void:
 	manager = BattleManager.new()
 	manager.combatants = [player]
 	manager.combatants.append_array(enemies)
+	manager.battle_node = self
 	add_child(manager)
 	
 	BattleService.s_battle_started.emit(self)
