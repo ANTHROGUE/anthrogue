@@ -13,9 +13,12 @@ class_name Inventory
 ## One-time use pickups
 @export var consumables: Array ## TODO
 
-## Current set of battle actions at the player's disposal
-@export var weapons: Array[PlayerAction] = [] ## TODO
+## BANGRS: 1 Weapon (Equip), 4 Talents (Learn)
+@export var weapon: Weapon
+@export var actions: Array[BattleAction] = [] ## TODO
+@export var action_cap = 6
 
 ## Point Pools
 ## Points allocated to using specific weapons
+### UNUSED IN BANGRS
 @export var point_pools: Dictionary[StringName, int] = {}

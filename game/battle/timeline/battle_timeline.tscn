@@ -1,0 +1,35 @@
+[gd_scene load_steps=10 format=3 uid="uid://hdlhael228mk"]
+
+[ext_resource type="Script" uid="uid://crgd5jyujx4l1" path="res://game/battle/timeline/battle_timeline.gd" id="1_vtsab"]
+[ext_resource type="Script" uid="uid://blsus0wox3w7p" path="res://addons/moon-interval/nodes/event_player.gd" id="2_w8slg"]
+[ext_resource type="Script" uid="uid://dvlhudd01sjr1" path="res://addons/moon-interval/events/control/signal_event.gd" id="3_7woph"]
+[ext_resource type="Script" uid="uid://dih7hadp53mog" path="res://addons/graphedit2/resources/graph_edit_resource.gd" id="3_x2745"]
+[ext_resource type="Script" uid="uid://ciyodddkqsiev" path="res://addons/moon-interval/events/multi_event.gd" id="4_7woph"]
+[ext_resource type="Script" uid="uid://liprnsit7wf3" path="res://game/battle/timeline/cut_manager.gd" id="6_3icbp"]
+
+[sub_resource type="Resource" id="Resource_yf7oe"]
+script = ExtResource("3_7woph")
+
+[sub_resource type="Resource" id="Resource_3icbp"]
+script = ExtResource("3_x2745")
+resources = [SubResource("Resource_yf7oe")]
+positions = {
+SubResource("Resource_yf7oe"): Vector2(589.79724, 222.72455)
+}
+
+[sub_resource type="Resource" id="Resource_polqk"]
+script = ExtResource("4_7woph")
+editor_data = SubResource("Resource_3icbp")
+metadata/_custom_type_script = "uid://ciyodddkqsiev"
+
+[node name="BattleTimeline" type="Node"]
+script = ExtResource("1_vtsab")
+metadata/_custom_type_script = "uid://crgd5jyujx4l1"
+
+[node name="EventPlayer" type="Node" parent="."]
+script = ExtResource("2_w8slg")
+multi_event = SubResource("Resource_polqk")
+metadata/_custom_type_script = "uid://blsus0wox3w7p"
+
+[node name="CutManager" type="Node" parent="."]
+script = ExtResource("6_3icbp")

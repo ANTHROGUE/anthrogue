@@ -51,7 +51,7 @@ var multi_event_stack: Array[MultiEvent] = []
 var event_owner: Node:
 	get(): return get_tree().edited_scene_root
 
-var undo_redo: EditorUndoRedoManager
+var undo_redo
 
 func _ready() -> void:
 	multi_event = multi_event

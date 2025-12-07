@@ -4,13 +4,9 @@ class_name EventPlayer
 ## A simple node for storing and playing back an Event.
 
 signal finished
-signal event_changed(event: MultiEvent)
 
 ## The event to play back.
-@export var multi_event: MultiEvent = null:
-	set(x):
-		multi_event = x
-		event_changed.emit(x)
+@export var multi_event: MultiEvent = null
 
 ## Determines if this event plays automatically when entering the scene.
 @export var autoplay := false

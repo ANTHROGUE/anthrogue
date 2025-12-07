@@ -1,10 +1,36 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqpmi3pqv8kj2"]
+[gd_scene load_steps=23 format=3 uid="uid://cqpmi3pqv8kj2"]
 
 [ext_resource type="Script" uid="uid://h2lgkhbp7yeq" path="res://ar/player/player.gd" id="1_sbar3"]
+[ext_resource type="Script" uid="uid://dv6lo85qpphjt" path="res://game/battle/actions/battle_action.gd" id="2_ai27o"]
 [ext_resource type="PackedScene" uid="uid://5qbsdj15ugvp" path="res://ar/player/camera/spring_camera.tscn" id="2_sijrc"]
+[ext_resource type="Resource" uid="uid://do8u84lipsd0x" path="res://ar/registry/battle/actions/test_strike/test_strike.tres" id="3_5xefd"]
+[ext_resource type="Resource" uid="uid://jveis1ahupsx" path="res://ar/registry/battle/actions/test/test_action.tres" id="3_33wsf"]
 [ext_resource type="Script" uid="uid://cs7q470v3yvq3" path="res://addons/fsm/fsm_3d.gd" id="3_epcbq"]
 [ext_resource type="Script" uid="uid://cd45xe8ryh404" path="res://ar/player/player_state3d/player_state_walk.gd" id="4_n8jis"]
-[ext_resource type="Script" uid="uid://bddcm42wkpvww" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
+[ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://ar/registry/battle/actions/test_strike/test_strike.gd" id="5_2ats8"]
+[ext_resource type="Script" path="res://ar/player/player_state3d/player_state_stopped.gd" id="5_7ubmn"]
+[ext_resource type="Script" uid="uid://dcomr1wbp4rlr" path="res://game/inventory/item/item.gd" id="5_33wsf"]
+[ext_resource type="Script" uid="uid://bmicmnkbs4t4k" path="res://game/inventory/inventory.gd" id="5_vgn1x"]
+[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://ui_assets/PLACEHOLDER/crosshair031.png" id="6_3airi"]
+[ext_resource type="Resource" uid="uid://bkyl817d4w6wx" path="res://ar/registry/battle/weapons/crowbar/crowbar.tres" id="7_am3w3"]
+[ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="7_lgvi6"]
+[ext_resource type="PackedScene" uid="uid://bguekq4ac1nsj" path="res://ar/player/PLACEHOLDER/characterMedium.blend" id="11_3airi"]
+
+[sub_resource type="Resource" id="Resource_pe4b4"]
+script = ExtResource("7_lgvi6")
+name = &"Super Test Strike"
+ap_cost = 3
+icon = ExtResource("6_3airi")
+summary = "Deal $0 damage"
+action_script = ExtResource("5_2ats8")
+values = [24]
+metadata/_custom_type_script = "uid://dv6lo85qpphjt"
+
+[sub_resource type="Resource" id="Resource_3hbgk"]
+script = ExtResource("5_vgn1x")
+weapon = ExtResource("7_am3w3")
+actions = Array[ExtResource("2_ai27o")]([ExtResource("3_5xefd"), ExtResource("3_33wsf"), ExtResource("3_5xefd"), ExtResource("3_5xefd"), ExtResource("3_5xefd"), SubResource("Resource_pe4b4")])
+metadata/_custom_type_script = "uid://bmicmnkbs4t4k"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbar3"]
 albedo_color = Color(0, 1, 1, 1)
@@ -19,14 +45,78 @@ albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sijrc"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("animator") groups=["Combatant_Ally"]]
 collision_layer = 3
 script = ExtResource("1_sbar3")
 combatant_tags = Array[int]([0])
+inventory = SubResource("Resource_3hbgk")
+animator = NodePath("Model/AnimationPlayer")
+
+[node name="Model" parent="." instance=ExtResource("11_3airi")]
+unique_name_in_owner = true
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Root" index="0"]
+bones/0/position = Vector3(0.20420879, 0.19320482, -0.14880997)
+bones/0/rotation = Quaternion(-0.60583276, 6.177425e-08, 0.7955921, -4.106114e-08)
+bones/1/rotation = Quaternion(-0.50751287, 0.50822717, -0.49190733, -0.49210063)
+bones/2/rotation = Quaternion(0.015735863, -0.0020790696, 0.99462473, -0.10232178)
+bones/3/position = Vector3(-0.0018213976, 0.24152175, 0.18004991)
+bones/3/rotation = Quaternion(0.9461289, -0.021870835, 0.07550259, -0.31410396)
+bones/5/position = Vector3(-0.61795783, -0.58670044, 0.025887026)
+bones/6/position = Vector3(-0.20752048, 0.1932048, 0.030460685)
+bones/6/rotation = Quaternion(-0.7461758, 4.637898e-08, 0.665749, -4.4836593e-08)
+bones/7/rotation = Quaternion(-0.50768626, 0.5079015, -0.49172843, -0.49243677)
+bones/8/rotation = Quaternion(0.01567582, 0.0011526054, 0.9946256, 0.10233666)
+bones/9/position = Vector3(0.0018214461, 0.24152172, 0.18004993)
+bones/9/rotation = Quaternion(0.9481119, 0.011444968, -0.04409314, -0.31465644)
+bones/11/position = Vector3(-0.61795783, -0.58670056, -0.029198237)
+bones/11/rotation = Quaternion(-0.7071066, 1.2513327e-07, 0.70710695, 5.024297e-15)
+bones/12/position = Vector3(-4.9915732e-05, 1.4820565, 0.10399981)
+bones/12/rotation = Quaternion(9.301512e-05, -3.619724e-08, 0.99999905, -0.001443072)
+bones/13/position = Vector3(0.0004645992, 0.32195097, -6.123738e-08)
+bones/13/rotation = Quaternion(5.2901185e-05, -0.027772395, 0.9996133, 0.0014450961)
+bones/14/rotation = Quaternion(-0.0043664617, -1.0228096e-08, -1.0999046e-08, 0.9999905)
+bones/15/rotation = Quaternion(0.06234841, -0.04485285, -0.002804811, 0.9970422)
+bones/16/rotation = Quaternion(0.094094224, -2.6478637e-09, 4.530484e-10, 0.9955633)
+bones/17/rotation = Quaternion(0.07661573, 2.8926548e-09, 3.3542866e-10, 0.9970607)
+bones/18/rotation = Quaternion(-0.10883053, 0.043729294, -0.01036314, 0.99304396)
+bones/19/rotation = Quaternion(0.5976562, 0.39550796, 0.5656469, -0.40795135)
+bones/20/rotation = Quaternion(-0.35961437, 0.67302966, -0.24033874, 0.59995496)
+bones/21/rotation = Quaternion(0.3512148, -0.07305932, -0.070769966, 0.9307536)
+bones/22/rotation = Quaternion(-0.026546774, 0.7247397, -0.021308199, 0.6881814)
+bones/24/rotation = Quaternion(0.75545675, 0.048127584, 0.0019912831, 0.6534256)
+bones/25/rotation = Quaternion(0.4109354, -0.027859328, 0.012505375, 0.91115284)
+bones/26/rotation = Quaternion(-0.2058405, 0.68872267, 0.37118384, 0.5878039)
+bones/27/rotation = Quaternion(0.6586537, -0.06894445, 0.13793623, 0.73647517)
+bones/28/rotation = Quaternion(0.6781865, -0.4857101, 0.46352896, 0.29881403)
+bones/29/rotation = Quaternion(0.047304876, 0.90625167, 0.40121806, -0.12447606)
+bones/30/rotation = Quaternion(-0.038942084, 0.0834644, 0.3573636, 0.92941296)
+bones/31/rotation = Quaternion(0.008204214, 0.00033305987, -0.033037264, 0.9994204)
+bones/33/rotation = Quaternion(-0.73048794, 0.043408673, 0.0074618123, 0.6815038)
+bones/34/rotation = Quaternion(-0.69370633, -0.022021832, -0.021153972, 0.7196104)
+bones/35/rotation = Quaternion(-0.22445707, 0.7967571, -0.36023104, -0.43015197)
+bones/36/rotation = Quaternion(-0.58770484, 0.03944805, 0.32780138, 0.73864275)
+bones/37/rotation = Quaternion(0.9965793, 0.06920033, -0.002732592, 0.045095917)
+bones/37/scale = Vector3(1.0000511, 1.0000012, 1.0000038)
+bones/38/rotation = Quaternion(0.34591, 0.03050081, 0.12914085, 0.92883724)
+bones/38/scale = Vector3(1.0000042, 0.9999983, 1.0000043)
+bones/39/rotation = Quaternion(-0.6605639, -0.15921263, -0.1574798, 0.7165938)
+bones/39/scale = Vector3(1.000015, 0.9999837, 1.0000005)
+bones/40/rotation = Quaternion(-0.019818004, 0.9522869, -0.29825518, 0.06165174)
+bones/41/rotation = Quaternion(0.97273606, -0.054311562, -0.15230583, 0.16624607)
+bones/42/rotation = Quaternion(0.3914481, 0.010536988, -0.16670462, 0.9049127)
+bones/43/rotation = Quaternion(-0.61762506, 0.21859334, 0.17198175, 0.73564833)
+bones/44/rotation = Quaternion(0.0282607, 0.9539412, -0.29757366, -0.025447706)
+
+[node name="Model_" parent="." instance_placeholder="res://ar/player/PLACEHOLDER/suitb/suitb.tscn"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96113145, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961131, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_sbar3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -36,11 +126,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_epcbq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961, 0)
 shape = SubResource("CapsuleShape3D_sijrc")
-debug_color = Color(0.9857194, 0, 0.33561736, 0.41960785)
+debug_color = Color(0.985719, 0, 0.335617, 0.419608)
 
 [node name="SpringCamera" parent="." instance=ExtResource("2_sijrc")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1188939, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11889, 0)
 
 [node name="PlayerState" type="Node3D" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
@@ -55,3 +145,5 @@ metadata/_custom_type_script = "uid://qgxhu3wis2l8"
 [node name="Stopped" type="Node3D" parent="PlayerState"]
 script = ExtResource("5_7ubmn")
 metadata/_custom_type_script = "uid://c0x8ymvu44xkw"
+
+[editable path="Model"]

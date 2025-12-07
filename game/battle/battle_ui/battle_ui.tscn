@@ -1,6 +1,315 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr7ndutcapucw"]
+[gd_scene load_steps=11 format=3 uid="uid://dr7ndutcapucw"]
 
 [ext_resource type="Script" uid="uid://bwpg4840d070v" path="res://game/battle/battle_ui/battle_ui.gd" id="1_xktba"]
+[ext_resource type="PackedScene" uid="uid://cn4evg0uslc3c" path="res://game/battle/move_timeline.tscn" id="2_5vhio"]
+[ext_resource type="Shader" uid="uid://bc3dmi0nh5kxd" path="res://shaders/canvas_blur_shader.gdshader" id="2_tubnw"]
+[ext_resource type="PackedScene" uid="uid://8ikc68l0i02y" path="res://game/battle/moveset_old.tscn" id="2_v3sf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgdvw"]
+shader = ExtResource("2_tubnw")
+shader_parameter/strength = 3.5430001682925
+shader_parameter/sample_power = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_kcxjk"]
+line_spacing = -4.0
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.188235)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="Animation" id="Animation_hgdvw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleUI_lower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 728)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleUI_upper:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BattleUI_lower/OLDMovesetPanelContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 15.9977)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MoveTimeline:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 944)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BattleUI_upper/EnemyPanelContainer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 24)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MovesetPanelContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1120, 504)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BattleUI_upper/EnemyPanelContainer:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BattleUI_lower/MascotPanelContainer:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BattleUI_lower/MascotPanelContainer:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(128, 47.9989)]
+}
+
+[sub_resource type="Animation" id="Animation_tubnw"]
+resource_name = "battleui_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleUI_lower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 2.5),
+"update": 0,
+"values": [Vector2(0, 1088), Vector2(0, 728)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleUI_upper:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, -240), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BattleUI_lower/OLDMovesetPanelContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(64, 120), Vector2(64, 16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("MoveTimeline:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
+"update": 0,
+"values": [Vector2(-1856, 920), Vector2(64, 952)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BattleUI_upper/EnemyPanelContainer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.49),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(64, -192), Vector2(64, 22.2504)]
+}
+
+[sub_resource type="Animation" id="Animation_5vhio"]
+resource_name = "battleui_to-movie"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleUI_lower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
+"update": 0,
+"values": [Vector2(0, 728), Vector2(0, 1088)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleUI_upper:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -240)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BattleUI_lower/OLDMovesetPanelContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
+"update": 0,
+"values": [Vector2(64, 16), Vector2(64, 120)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("MoveTimeline:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(64, 944), Vector2(64, 856)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BattleUI_upper/EnemyPanelContainer:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 0.25),
+"update": 0,
+"values": [Vector2(64, 22.2504), Vector2(296, 303.99744)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MovesetPanelContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.70000005),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1120, 504), Vector2(2152, 504)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BattleUI_upper/EnemyPanelContainer:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BattleUI_lower/MascotPanelContainer:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BattleUI_lower/MascotPanelContainer:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(128, 47.9989), Vector2(536, -295.9806)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kcxjk"]
+_data = {
+&"RESET": SubResource("Animation_hgdvw"),
+&"battleui_in": SubResource("Animation_tubnw"),
+&"battleui_to-movie": SubResource("Animation_5vhio")
+}
 
 [node name="BattleUI" type="Control"]
 layout_mode = 3
@@ -11,20 +320,242 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xktba")
 
-[node name="Button" type="Button" parent="."]
+[node name="BattleUI_lower" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -352.0
+offset_bottom = -0.0048828125
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Back" type="ColorRect" parent="BattleUI_lower"]
+material = SubResource("ShaderMaterial_hgdvw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 144.0
+offset_right = -0.00012207
+offset_bottom = 0.00463867
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6745098, 0.6745098, 0.6745098, 1)
+
+[node name="OLDMovesetPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -896.0
+offset_top = -335.9974
+offset_right = 888.0
+offset_bottom = 216.00256
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+alignment = 1
+reverse_fill = true
+
+[node name="MascotPanel2" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+visible = false
+layout_mode = 2
+
+[node name="MascotPanel3" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+visible = false
+layout_mode = 2
+
+[node name="MascotPanel4" parent="BattleUI_lower/OLDMovesetPanelContainer" instance=ExtResource("2_v3sf7")]
+visible = false
+layout_mode = 2
+
+[node name="AnimationPlayer_MPC" type="AnimationPlayer" parent="BattleUI_lower/OLDMovesetPanelContainer"]
+
+[node name="MascotPanelContainer" type="HFlowContainer" parent="BattleUI_lower"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -832.0
+offset_top = -303.99622
+offset_right = 128.00159
+offset_bottom = -135.99606
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 32
+alignment = 1
+
+[node name="MascotPanel1" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+layout_mode = 2
+
+[node name="MascotPanel2" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+layout_mode = 2
+
+[node name="MascotPanel3" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+layout_mode = 2
+
+[node name="MascotPanel4" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+layout_mode = 2
+
+[node name="MascotPanel5" parent="BattleUI_lower/MascotPanelContainer" instance_placeholder="res://game/battle/mascot_panel.tscn"]
+layout_mode = 2
+
+[node name="MovesLabel" type="Label" parent="BattleUI_lower"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -39.9949
+offset_right = -56.0
+offset_bottom = -5.99487
+grow_horizontal = 0
+grow_vertical = 0
+text = "Moves Filled: 3/3"
+label_settings = SubResource("LabelSettings_kcxjk")
+horizontal_alignment = 2
+
+[node name="GoButton" type="Button" parent="BattleUI_lower"]
+unique_name_in_owner = true
+z_index = 10
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 632.0
+offset_top = -135.995
+offset_right = 912.0
+offset_bottom = -32.9954
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "Start Rolling!"
+
+[node name="BattleUI_upper" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 240.0
+grow_horizontal = 2
+
+[node name="Back" type="ColorRect" parent="BattleUI_upper"]
+material = SubResource("ShaderMaterial_hgdvw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6745098, 0.6745098, 0.6745098, 1)
+
+[node name="EnemyPanelContainer" type="HBoxContainer" parent="BattleUI_upper"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 64.0
+offset_top = 24.0
+offset_right = -64.00366
+offset_bottom = 215.99997
+grow_horizontal = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="EnemyPanel" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+layout_mode = 2
+
+[node name="EnemyPanel2" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel3" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel4" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel5" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel6" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel7" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="EnemyPanel8" parent="BattleUI_upper/EnemyPanelContainer" instance_placeholder="res://game/battle/enemy_panel.tscn"]
+visible = false
+layout_mode = 2
+
+[node name="AnimationPlayer_EPC" type="AnimationPlayer" parent="BattleUI_upper/EnemyPanelContainer"]
+root_node = NodePath("../../../BattleUI_lower/OLDMovesetPanelContainer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_kcxjk")
+}
+
+[node name="MovesetPanelContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -576.0
+offset_right = -32.006104
+offset_bottom = -232.00623
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MovesetPanel" parent="MovesetPanelContainer" instance_placeholder="res://game/battle/moveset_panel.tscn"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -384.0
+offset_top = -171.99689
+offset_right = 384.0
+offset_bottom = 172.00311
 grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-text = "Use move and start turn lol"
 
-[connection signal="pressed" from="Button" to="." method="on_button_pressed"]
+[node name="TargetSelect" parent="." instance_placeholder="res://game/battle/target_select.tscn"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="MoveTimeline" parent="." instance=ExtResource("2_5vhio")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = -136.0
+offset_right = -344.0
+offset_bottom = -35.99524
+
+[connection signal="pressed" from="BattleUI_lower/GoButton" to="." method="on_go_pressed"]

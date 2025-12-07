@@ -2,77 +2,112 @@ extends Node
 class_name BattleManager
 
 
-const BATTLE_UI := preload('res://game/battle/battle_ui/battle_ui.tscn')
+const BATTLE_UI := preload("uid://dr7ndutcapucw")
+const BATTLE_TIMELINE := preload("uid://hdlhael228mk")
+
+var battle_ui: BattleUI:
+	set(x):
+		x.s_move_selected.connect(select_action)
+		if x not in get_children():
+			add_child(x)
+		battle_ui = x
+		
+var timeline: BattleTimeline:
+	set(x):
+		s_turn_confirmed.connect(x.on_turn_confirmed)
+		if x not in get_children():
+			add_child(x)
+		timeline = x
+
+var battle_node: BattleNode
+
+var current_round := 0
 
 class QueuedAction:
 	var user: Combatant
-	var targets: Array[Combatant] = []
+	var target: Combatant
+	var alt_targets: Array[Combatant] = []
 	var action: BattleAction
 
 var combatants: Array[Combatant] = []
-var battle_ui: Control
-var action_queue: Array[QueuedAction] = []
-var battle_node: BattleNode
 
+
+
+## BANGRS - Moves calculated using AGI, may be varied
+## v2i - (queued, max)
+var move_counts: Dictionary[Combatant, Vector2i] = {}
+var move_total := 0
+
+var player_moves_queued := 0
+
+signal s_turn_confirmed()
+signal s_new_round()
+signal s_timeline_ready()
 
 func _ready() -> void:
-	battle_ui = BATTLE_UI.instantiate()
-	battle_ui.s_move_queued.connect(queue_action)
-	battle_ui.s_turn_confirmed.connect(on_turn_confirmed)
-	battle_ui.battle_manager = self
-	add_child(battle_ui)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func on_turn_confirmed() -> void:
-	append_enemy_moves()
+	timeline = BATTLE_TIMELINE.instantiate()
+	battle_ui = BATTLE_UI.instantiate()
+	battle_ui.s_move_queued.connect(timeline.queue_action)
 	begin_round()
-	battle_ui.hide()
-
-func queue_action(action: BattleAction, user: Combatant = null, targets: Array[Combatant] = []) -> void:
-	var queued_action := QueuedAction.new()
-	queued_action.user = user
-	queued_action.targets = targets
-	queued_action.action = action
-	action_queue.append(queued_action)
 
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
-			queue_action(combatant.get_action())
+			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
+			timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, move_total - 1), true)
+			#timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 5, true)
+
+func prepare_queue() -> void:
+	move_counts.clear()
+	move_total = 0
+	for combatant in combatants:
+		var move_count = combatant.stats.calculate_moves()
+		move_counts.set(combatant, Vector2i(0, move_count))
+		move_total += move_count
+	timeline.reset_queue()
+	## BANGRS: enemy moves in timeline!
+	append_enemy_moves()
+	s_new_round.emit()
 
 func begin_round() -> void:
-	while not action_queue.is_empty():
-		await run_action(action_queue.pop_front())
-	end_round()
+	current_round += 1
+	for combatant: Combatant in combatants:
+		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
+		var weapon = combatant.get_weapon()
+		if weapon is Weapon:
+			weapon.regen_charges()
+	prepare_queue()
 
+func select_action(action: BattleAction, user: Combatant) -> void:
+	print("Selected %s from %s" % [action, user])
+	pass
+
+func validate_combatants() -> void:
+	var _combatants: Array[Combatant] = []
+	for combatant: Combatant in combatants:
+		if is_instance_valid(combatant):
+			_combatants.append(combatant)
+			var _c := false
+			for connection in combatant.stats.s_hp_changed.get_connections():
+				_c = _c or check_pulses == connection['callable']
+			if !_c:
+				combatant.stats.s_hp_changed.connect(check_pulses)
+	combatants = _combatants
+ 
+## TODO: Integrate with BattleTimeline
 func end_round() -> void:
+	validate_combatants()
 	if get_enemies().is_empty():
 		end_battle()
 		return
-	battle_ui.show()
+	else:
+		begin_round()
 
 func end_battle() -> void:
 	Player.instance.reparent(get_tree().current_scene)
 	Player.instance.request_state('Walk')
 	battle_node.queue_free()
-
-func run_action(action: QueuedAction) -> void:
-	var battle_action: BattleAction = action.action
-	var action_node := Node.new()
-	if battle_action.action_script:
-		action_node.set_script(battle_action.action_script)
-		add_child(action_node)
-		if action_node is ActionScript:
-			initialize_action(action_node, action)
-			await action_node.action()
-			await check_pulses(action.targets)
-	action_node.queue_free()
-
-func initialize_action(action: ActionScript, queued_action: QueuedAction) -> void:
-	action.user = queued_action.user
-	action.targets = queued_action.targets
-	action.manager = self
-	action.battle_node = battle_node
 
 func check_pulses(targets: Array[Combatant]) -> void:
 	for target in targets:
@@ -86,25 +121,9 @@ func get_enemies() -> Array[Enemy]:
 			enemies.append(combatant)
 	return enemies
 
-## Removes dead combatants from everything
-func scrub_battle() -> void:
-	for action in action_queue:
-		scrub_action(action)
-	## TODO: Scrub status effects
-
-func scrub_action(action: QueuedAction) -> void:
-	if not action.user in combatants:
-		action_queue.erase(action)
-		return
-	for combatant in action.targets.duplicate():
-		if not combatant in combatants:
-			action.targets.erase(combatant)
-	if action.targets.is_empty():
-		action_queue.erase(action)
-
 func remove_combatant(who: Combatant) -> void:
 	combatants.erase(who)
-	scrub_battle()
+	timeline.scrub_battle()
 	@warning_ignore("redundant_await")
 	await who.lose()
 	who.queue_free()

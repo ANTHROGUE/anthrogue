@@ -4,11 +4,18 @@ class_name PlayerState3D
 
 @onready var player: Player = owner
 @onready var camera: SpringCamera = %SpringCamera
-@onready var model: Node3D = %MeshInstance3D
+@onready var model: Node3D = %Model
 @onready var last_input_dir := global_basis.z
 
 var jumping := false
 var jump_force_remaining := 0.0
+
+var moving := false:
+	set(x):
+		moving = x
+		match player.controller.current_state_name:
+			&"Walk":
+				assess_anim()
 
 
 func handle_standard_movement(delta: float) -> void:
@@ -25,6 +32,7 @@ func handle_standard_movement(delta: float) -> void:
 	direction.y = 0.0
 	direction = direction.normalized()
 
+	moving = abs(direction) > Vector3(0, 0, 0)
 	if direction:
 		model.rotation.y = lerp_angle(model.rotation.y, atan2(direction.x, direction.z), .3)
 
@@ -55,3 +63,17 @@ func handle_jump(delta: float) -> void:
 		else:
 			jump_force_remaining = 0.0
 			jumping = false
+			
+var base_anim := 'neutral'
+var animator: AnimationPlayer
+
+func assess_anim() -> void:
+	var anim := base_anim
+	if player.is_on_floor() and not (Input.is_action_just_pressed('jump')):
+		if moving:
+			anim = 'run'
+		set_animation(anim)
+			
+func set_animation(anim: String, speed := 1.0):
+	if not player.get_animation() == anim:
+		player.set_animation(anim, speed)

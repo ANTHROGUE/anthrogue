@@ -1,0 +1,278 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbq0o58revbhn"]
+
+[ext_resource type="Script" uid="uid://caiqtdim4iteu" path="res://game/battle/moveset_panel.gd" id="1_ppigx"]
+[ext_resource type="Script" uid="uid://u4cfosmiwbtq" path="res://game/battle/action_detail_panel.gd" id="2_edbv6"]
+[ext_resource type="Script" uid="uid://ckipvh0ohu1g8" path="res://game/battle/weapon_button.gd" id="2_o27an"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h65jm"]
+line_spacing = -4.0
+font_size = 22
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.188235)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2yhv4"]
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ppigx"]
+line_spacing = -8.0
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MovesetPanel" type="ColorRect"]
+custom_minimum_size = Vector2(768, 344)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -344.0
+offset_right = 768.0
+grow_vertical = 0
+color = Color(0.234, 0.39, 0.234, 1)
+script = ExtResource("1_ppigx")
+
+[node name="DetailPanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -768.0
+offset_top = -552.0
+offset_bottom = -352.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.313726)
+script = ExtResource("2_edbv6")
+
+[node name="DetailLabel" type="Label" parent="DetailPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -184.0
+offset_right = 368.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Detail Label
+This is An Action!
+
+Use it to do a thing!"
+label_settings = SubResource("LabelSettings_h65jm")
+horizontal_alignment = 1
+
+[node name="ActionIcon" type="TextureRect" parent="DetailPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -368.0
+offset_top = 16.0
+offset_right = -72.0
+offset_bottom = 184.0
+grow_horizontal = 2
+
+[node name="StatsPanel" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -992.0
+offset_top = -328.0
+offset_right = -776.0
+offset_bottom = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="StatsLabel" type="Label" parent="StatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 4.5
+offset_right = -8.0
+offset_bottom = -4.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "STR: 2 TGN: 2 DEX: 2 LCK: 2 AGI: 2
+
+DMG: 100%
+Crit: 10% @ 2.0x
+
+Accuracy: 100%
+Dodge: 20%"
+label_settings = SubResource("LabelSettings_h65jm")
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Label_Name" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 144.0
+offset_bottom = 68.0
+text = "MascotName"
+label_settings = SubResource("LabelSettings_2yhv4")
+
+[node name="Label_HP" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -272.0
+offset_right = 125.0
+offset_bottom = -238.0
+grow_vertical = 0
+text = "HP: 15/15"
+label_settings = SubResource("LabelSettings_2yhv4")
+
+[node name="Label_AP" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -240.0
+offset_right = 96.0
+offset_bottom = -206.0
+grow_vertical = 0
+text = "AP: 7/7"
+label_settings = SubResource("LabelSettings_2yhv4")
+
+[node name="WeaponButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -120.0
+offset_right = 144.0
+offset_bottom = -16.0
+grow_vertical = 0
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_o27an")
+
+[node name="Label" type="Label" parent="WeaponButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = 2.0
+grow_horizontal = 2
+text = "Crowbar"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="CostLabel" type="Label" parent="WeaponButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "cost"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="CutLabelOffense" type="Label" parent="WeaponButton"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -72.0
+offset_right = 48.0
+offset_bottom = -23.0
+text = "OFF
+0/3"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+
+[node name="CutLabelDefense" type="Label" parent="WeaponButton"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -72.0
+offset_right = 112.0
+offset_bottom = -23.0
+text = "DEF
+0/3"
+label_settings = SubResource("LabelSettings_ppigx")
+horizontal_alignment = 1
+
+[node name="WeaponUIContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -120.0
+offset_right = 128.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="TalentUIContainer" type="HFlowContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -328.0
+offset_right = 760.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 40
+reverse_fill = true
+
+[node name="TalentButton1" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2
+
+[node name="TalentButton2" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2
+
+[node name="TalentButton3" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2
+
+[node name="TalentButton4" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2
+
+[node name="TalentButton5" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2
+
+[node name="TalentButton6" parent="TalentUIContainer" instance_placeholder="res://game/battle/talent_button.tscn"]
+layout_mode = 2

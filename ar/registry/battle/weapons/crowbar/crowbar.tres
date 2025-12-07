@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://bkyl817d4w6wx"]
+
+[ext_resource type="Script" uid="uid://bugxg1uehu7lo" path="res://game/inventory/weapon/weapon.gd" id="1_4mu4i"]
+[ext_resource type="Resource" uid="uid://b8w21j2tj60kd" path="res://ar/registry/battle/weapons/crowbar/crowbar_bash.tres" id="1_ue58d"]
+[ext_resource type="Script" uid="uid://dv6lo85qpphjt" path="res://game/battle/actions/battle_action.gd" id="2_5n75j"]
+[ext_resource type="Resource" uid="uid://dk2nv7a1iwukr" path="res://ar/registry/battle/weapons/crowbar/crowbar_block.tres" id="2_mhonc"]
+
+[resource]
+script = ExtResource("1_4mu4i")
+action = ExtResource("1_ue58d")
+jumps = Dictionary[String, ExtResource("2_5n75j")]({
+"Defense": ExtResource("2_mhonc"),
+"Offense": ExtResource("1_ue58d")
+})
+name = &"Crowbar"
+metadata/_custom_type_script = "uid://bugxg1uehu7lo"
