@@ -42,3 +42,16 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 stretch_mode = 6
+
+[node name="CancelButton" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 72.0
+offset_top = -16.0
+offset_right = 104.0
+offset_bottom = 16.0
+disabled = true
+
+[connection signal="pressed" from="CancelButton" to="." method="_on_cancel_button_pressed"]

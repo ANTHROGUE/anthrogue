@@ -1,6 +1,8 @@
 extends Control
 class_name MovePanel
 
+signal s_move_cancelled
+
 var user: Combatant:
 	set(x):
 		if user != x && user is Combatant:
@@ -16,9 +18,14 @@ var queued_action: BattleTimeline.QueuedAction:
 			%ActionIcon.texture = x.action.icon
 			if x.user is Combatant:
 				user = x.user
+			if x.cancellable:
+				%CancelButton.show()
+				%CancelButton.disabled = false
 		else:
 			%ActionIcon.texture = null
 			user = null
+			%CancelButton.hide()
+			%CancelButton.disabled = true
 		queued_action = x
 
 func check_user() -> void:
@@ -26,3 +33,7 @@ func check_user() -> void:
 		modulate = Color(0.3, 0.3, 0.3, 1.0)
 		return
 	modulate = Color(1.0, 1.0, 1.0, 1.0)
+
+
+func _on_cancel_button_pressed() -> void:
+	s_move_cancelled.emit()

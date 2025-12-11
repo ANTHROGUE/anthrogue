@@ -49,13 +49,14 @@ func _ready() -> void:
 	timeline = BATTLE_TIMELINE.instantiate()
 	battle_ui = BATTLE_UI.instantiate()
 	battle_ui.s_move_queued.connect(timeline.queue_action)
+	timeline.s_queue_changed.connect(battle_ui.refresh_stats)
 	begin_round()
 
 func append_enemy_moves() -> void:
 	for combatant in combatants:
 		if combatant is Enemy:
 			#queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 1, true)
-			timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, move_total - 1), true)
+			timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], randi_range(1, move_total - 1), true, false)
 			#timeline.queue_action(combatant.get_action(), combatant, Player.instance, [Player.instance], 5, true)
 
 func prepare_queue() -> void:

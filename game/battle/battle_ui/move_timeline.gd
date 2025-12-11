@@ -25,11 +25,11 @@ func setup_panels() -> void:
 		return
 	move_panels.resize(manager.move_total)
 	for i in manager.move_total:
-		var panel = MOVE_PANEL.instantiate()
+		var panel: MovePanel = MOVE_PANEL.instantiate()
+		panel.s_move_cancelled.connect(timeline.cancel_move.bind(i))
 		%MovePanelContainer.add_child(panel)
 		move_panels[i] = panel
 	#refresh_panels()
-	
 	
 func clear_panels() -> void:
 	for panel in %MovePanelContainer.get_children():

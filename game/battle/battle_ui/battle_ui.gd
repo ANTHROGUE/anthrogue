@@ -22,7 +22,7 @@ var targeting_panels: Array[CombatantPanel] = []
 var moveset_panel: MovesetPanel
 @onready var move_timeline: MoveTimeline = %MoveTimeline
 
-signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant], timing: int, loose: bool)
+signal s_move_queued(move: BattleAction, user: Combatant, targets: Array[Combatant], timing: int, loose: bool, cancellable: bool)
 signal s_move_selected(move: BattleAction, user: Combatant)
 signal s_move_hovered(move: BattleAction)
 
@@ -132,10 +132,9 @@ func set_target(target: Combatant) -> void:
 		print("Received no target, cancelling")
 	var x: Array[Combatant] = []
 	if target is Combatant:
-		s_move_queued.emit(targeting_action, targeting_user, target, x, targeting_timing, false)
+		s_move_queued.emit(targeting_action, targeting_user, target, x, targeting_timing, false, true)
 	if moveset_panel is MovesetPanel:
 		moveset_panel.refresh_panel()
-	refresh_stats()
 	targeting_panels.clear()
 	update_target_buttons()
 

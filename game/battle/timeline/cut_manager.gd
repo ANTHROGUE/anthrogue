@@ -15,7 +15,7 @@ class CutAction:
 	var action: BattleAction
 	var cut_type: CUT_STATE
 	func as_queued_action() -> BattleTimeline.QueuedAction:
-		var _out = BattleTimeline.QueuedAction.new()
+		var _out = BattleTimeline.QueuedAction.new(user, target, [], action, false)
 		for key in ['user', 'target', 'action']:
 			_out[key] = self[key]
 		return _out

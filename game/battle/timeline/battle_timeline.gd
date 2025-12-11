@@ -6,6 +6,14 @@ class QueuedAction:
 	var target: Combatant
 	var alt_targets: Array[Combatant] = []
 	var action: BattleAction
+	var cancellable: bool
+	
+	func _init(_user: Combatant, _target: Combatant, _alt_targets: Array[Combatant], _action: BattleAction, _cancellable: bool) -> void:
+		user = _user
+		target = _target
+		alt_targets = _alt_targets
+		action = _action
+		cancellable = _cancellable
 
 var queue: Array[QueuedAction] = []
 var current_action: QueuedAction = null
@@ -26,7 +34,7 @@ var manager: BattleManager:
 func _ready() -> void:
 	manager = get_parent()
 	
-func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = [], timing: int = -1, loose: bool = false) -> void:
+func queue_action(action: BattleAction, user: Combatant = null, target: Combatant = null, alt_targets: Array[Combatant] = [], timing: int = -1, loose: bool = false, cancellable = true) -> void:
 	var space: int = -1
 	# Strict pre-calculated action queue size
 	if timing > -1 && timing < queue.size():
@@ -64,11 +72,7 @@ func queue_action(action: BattleAction, user: Combatant = null, target: Combatan
 			break
 			
 	if space > -1 and space < queue.size():
-		var queued_action := QueuedAction.new()
-		queued_action.user = user
-		queued_action.target = target
-		queued_action.alt_targets = alt_targets
-		queued_action.action = action
+		var queued_action := QueuedAction.new(user, target, alt_targets, action, cancellable)
 		queue[space] = queued_action
 	else:
 		printerr("Timeline does not have space for Action %s" % action)
@@ -128,6 +132,16 @@ func run_action(action: QueuedAction) -> void:
 			action_node.action()
 			await action_node.s_action_end
 	action_node.queue_free()
+	
+func cancel_move(idx: int) -> void:
+	var old_action: BattleAction = queue[idx].action
+	var old_user: Combatant = queue[idx].user
+	
+	if old_action is BattleAction:
+		old_user.affect_stat(old_action.ap_cost, "ap")
+		manager.move_counts[old_user].x -= 1
+		queue[idx] = null
+		s_queue_changed.emit()
 
 func reset_queue() -> void:
 	queue.clear()
