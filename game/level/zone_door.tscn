@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cailn7sf4xpgo"]
+
+[ext_resource type="Script" uid="uid://buhgslj6nii7v" path="res://game/level/zone_door.gd" id="1_yrr3m"]
+
+[node name="ZoneDoor" type="Node3D"]
+script = ExtResource("1_yrr3m")
+metadata/_custom_type_script = "uid://buhgslj6nii7v"
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_detector_body_entered"]
