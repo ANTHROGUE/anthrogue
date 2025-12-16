@@ -2,22 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjqgj7re7wty8"
-path.s3tc="res://.godot/imported/gag_panel.png-9da01bbddd7ab7e59df2f2e19642cf41.s3tc.ctex"
+uid="uid://ck41b3bcppwiy"
+path="res://.godot/imported/elevator_new_8.png-6bb12b666df9cdde72803b0d4c3977fd.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui_assets/PLACEHOLDER/gag_panel.png"
-dest_files=["res://.godot/imported/gag_panel.png-9da01bbddd7ab7e59df2f2e19642cf41.s3tc.ctex"]
+source_file="res://PLACEHOLDER/sellbot_elevator/elevator_new_8.png"
+dest_files=["res://.godot/imported/elevator_new_8.png-6bb12b666df9cdde72803b0d4c3977fd.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=false
+compress/mode=3
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0

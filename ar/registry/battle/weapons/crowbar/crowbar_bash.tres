@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://b8w21j2tj60kd"]
 
 [ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://ar/registry/battle/actions/test_strike/test_strike.gd" id="1_jp4fq"]
-[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://ui_assets/PLACEHOLDER/crosshair033.png" id="2_utvce"]
+[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://PLACEHOLDER/crosshair033.png" id="2_utvce"]
 [ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="3_4qh3h"]
 
 [resource]

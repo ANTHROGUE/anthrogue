@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="1_r5bx7"]
 [ext_resource type="Script" uid="uid://b2s74xm33jdla" path="res://ar/registry/battle/actions/test_strike/test_strike.gd" id="1_slbuy"]
-[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://ui_assets/PLACEHOLDER/crosshair031.png" id="2_6n2sw"]
+[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://PLACEHOLDER/crosshair031.png" id="2_6n2sw"]
 
 [resource]
 script = ExtResource("1_r5bx7")

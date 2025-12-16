@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://ciyodddkqsiev"
 [node name="BattleNode" type="Area3D"]
 collision_mask = 3
 script = ExtResource("1_1h0ks")
+interact_tags = Array[int]([0])
 
 [node name="BattleCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -40,18 +41,6 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_mxw6g")
 }
-
-[node name="SequenceNode" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = null
 
 [node name="EventPlayer" type="Node" parent="."]
 script = ExtResource("2_mxw6g")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cevh5qjd1v4d8"]
+
+[ext_resource type="PackedScene" uid="uid://4vgsokdvgcx2" path="res://PLACEHOLDER/sellbot_elevator/elevator_new.fbx" id="1_sp8m0"]
+
+[node name="elevator_new" instance=ExtResource("1_sp8m0")]
+
+[node name="light_panel_frame" parent="suit_elevator_1" index="8"]
+visible = false
+
+[node name="collisions" parent="suit_elevator_1" index="9"]
+visible = false
+
+[node name="flashing_collisions" parent="suit_elevator_1" index="10"]
+visible = false
+
+[node name="door_collisions" parent="suit_elevator_1" index="11"]
+visible = false

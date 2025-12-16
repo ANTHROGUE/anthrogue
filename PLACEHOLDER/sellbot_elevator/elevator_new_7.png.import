@@ -2,28 +2,28 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3ftdevyqt07v"
-path="res://.godot/imported/crosshair033.png-46be1e707d7d0a466c62a26f37603e86.ctex"
+uid="uid://c2gwo0nhsham7"
+path="res://.godot/imported/elevator_new_7.png-110bf542811c63d91b127ce9d5812684.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui_assets/PLACEHOLDER/crosshair033.png"
-dest_files=["res://.godot/imported/crosshair033.png-46be1e707d7d0a466c62a26f37603e86.ctex"]
+source_file="res://PLACEHOLDER/sellbot_elevator/elevator_new_7.png"
+dest_files=["res://.godot/imported/elevator_new_7.png-110bf542811c63d91b127ce9d5812684.ctex"]
 
 [params]
 
-compress/mode=0
-compress/high_quality=false
+compress/mode=3
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

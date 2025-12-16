@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfw8g4sirpc08"]
 
-[ext_resource type="Texture2D" uid="uid://bjqgj7re7wty8" path="res://ui_assets/PLACEHOLDER/gag_panel.png" id="1_b0qgg"]
+[ext_resource type="Texture2D" uid="uid://bjqgj7re7wty8" path="res://PLACEHOLDER/gag_panel.png" id="1_b0qgg"]
 [ext_resource type="Script" uid="uid://xyavdyte8glk" path="res://game/battle/move_panel.gd" id="2_moh8b"]
 
 [node name="MovePanel" type="TextureRect"]

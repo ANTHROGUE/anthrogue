@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cailn7sf4xpgo"]
+
+[ext_resource type="Script" uid="uid://buhgslj6nii7v" path="res://game/level/zone_exit.gd" id="1_yrr3m"]
+[ext_resource type="PackedScene" uid="uid://cevh5qjd1v4d8" path="res://PLACEHOLDER/elevator_new.tscn" id="2_j4e3q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j4e3q"]
+
+[node name="ZoneDoor" type="Area3D"]
+script = ExtResource("1_yrr3m")
+interact_tags = Array[int]([0])
+metadata/_custom_type_script = "uid://buhgslj6nii7v"
+
+[node name="elevator_new" parent="." instance=ExtResource("2_j4e3q")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shape = SubResource("BoxShape3D_j4e3q")

@@ -79,17 +79,17 @@
 [ext_resource type="Script" uid="uid://d2t47oeh14y4h" path="res://addons/moon-interval/nodes/set_property_node.gd" id="81_mbply"]
 [ext_resource type="Script" uid="uid://cotkwanlbw0vs" path="res://addons/moon-interval/nodes/track_node.gd" id="82_h57hs"]
 [ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="83_1te1p"]
-[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event/multi_event_editor.gd" id="83_osu37"]
+[ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event_editor.gd" id="83_osu37"]
 [ext_resource type="Script" uid="uid://2337ws3vaecv" path="res://addons/moon-interval/editor/multi_event_editor.gd" id="83_tv564"]
-[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event/multi_event_graph_edit.gd" id="84_6tfbg"]
+[ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event_graph_edit.gd" id="84_6tfbg"]
 [ext_resource type="Script" uid="uid://ca8nlkbok27c4" path="res://addons/moon-interval/editor/multi_event_graph_edit.gd" id="84_v3hvw"]
 [ext_resource type="Script" uid="uid://bt64gatk5rir1" path="res://addons/moon-interval/plugin.gd" id="84_vhei0"]
-[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://ui_assets/PLACEHOLDER/crosshair033.png" id="85_a5pc5"]
+[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://PLACEHOLDER/crosshair033.png" id="85_a5pc5"]
 [ext_resource type="Resource" uid="uid://jveis1ahupsx" path="res://ar/registry/battle/actions/test/test_action.tres" id="86_ifn0l"]
 [ext_resource type="PackedScene" uid="uid://c80tj678kqkkk" path="res://ar/registry/battle/actions/test_strike/seq_test_strike.tscn" id="86_v3hvw"]
 [ext_resource type="Resource" uid="uid://do8u84lipsd0x" path="res://ar/registry/battle/actions/test_strike/test_strike.tres" id="87_fm1di"]
 [ext_resource type="Resource" uid="uid://c48jk3q7kq2ak" path="res://ar/registry/battle/actions/test_strike/evil_test_strike.tres" id="88_h0roa"]
-[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://ui_assets/PLACEHOLDER/crosshair031.png" id="89_evgmf"]
+[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://PLACEHOLDER/crosshair031.png" id="89_evgmf"]
 [ext_resource type="Resource" uid="uid://bkyl817d4w6wx" path="res://ar/registry/battle/weapons/crowbar/crowbar.tres" id="90_jpfj8"]
 [ext_resource type="Resource" uid="uid://b8w21j2tj60kd" path="res://ar/registry/battle/weapons/crowbar/crowbar_bash.tres" id="91_njrnh"]
 [ext_resource type="Resource" uid="uid://dk2nv7a1iwukr" path="res://ar/registry/battle/weapons/crowbar/crowbar_block.tres" id="92_osu37"]
@@ -235,8 +235,10 @@ id_to_resource = Dictionary[int, Resource]({
 133: ExtResource("84_v3hvw"),
 134: ExtResource("83_tv564"),
 135: ExtResource("84_v3hvw"),
-136: ExtResource("83_osu37"),
-137: ExtResource("84_6tfbg")
+136: ExtResource("83_tv564"),
+137: ExtResource("84_v3hvw"),
+138: ExtResource("83_osu37"),
+139: ExtResource("84_6tfbg")
 })
 directory = "res://addons"
 scan_subdirectories = true

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfulvjn770vuy"]
+[gd_scene load_steps=12 format=3 uid="uid://cfulvjn770vuy"]
 
 [ext_resource type="Texture2D" uid="uid://dv3ipad4eyg0m" path="res://icon.svg" id="1_anvxm"]
 [ext_resource type="Script" uid="uid://b8xnxch00p7wo" path="res://game/level/zone.gd" id="1_n1hb5"]
 [ext_resource type="PackedScene" uid="uid://cqpmi3pqv8kj2" path="res://ar/player/player.tscn" id="2_77eix"]
 [ext_resource type="PackedScene" uid="uid://dissrv86lly3" path="res://game/battle/battle_node/battle_node.tscn" id="3_77eix"]
 [ext_resource type="PackedScene" uid="uid://cfgxtotgi5fgp" path="res://ar/registry/battle/enemies/test/enemy_test.tscn" id="4_vfskg"]
+[ext_resource type="PackedScene" uid="uid://cailn7sf4xpgo" path="res://game/level/zone_exit.tscn" id="6_lue5w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfskg"]
 albedo_texture = ExtResource("1_anvxm")
@@ -34,8 +35,10 @@ fog_enabled = true
 fog_light_energy = 0.51
 fog_sun_scatter = 0.19
 
-[node name="BattleTest" type="Node3D"]
+[node name="BattleTest" type="Node3D" node_paths=PackedStringArray("elements")]
 script = ExtResource("1_n1hb5")
+elements = [NodePath("BattleNode")]
+metadata/_custom_type_script = "uid://b8xnxch00p7wo"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.43579)
@@ -54,7 +57,9 @@ stats_preset = Dictionary[String, Variant]({
 })
 
 [node name="BattleNode" parent="." instance=ExtResource("3_77eix")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.5881996, 0.629895, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.5881996, 0.629895, -3)
+monitoring = false
+monitorable = false
 enemy_count_range = Vector2i(3, 3)
 spawnable_enemies = Array[PackedScene]([ExtResource("4_vfskg")])
 
@@ -76,3 +81,15 @@ shadow_opacity = 0.6
 shadow_blur = 1.787
 directional_shadow_mode = 1
 directional_shadow_fade_start = 0.175
+
+[node name="ZoneDoor" parent="." instance=ExtResource("6_lue5w")]
+transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 15.216688, 0.5, -1.785228)
+
+[node name="ZoneDoor4" parent="." instance=ExtResource("6_lue5w")]
+transform = Transform3D(3.9340247e-07, 0, 3, 0, 3, 0, -3, 0, 3.9340247e-07, -16.783312, 0.5, -1.785228)
+
+[node name="ZoneDoor2" parent="." instance=ExtResource("6_lue5w")]
+transform = Transform3D(-3, 0, 2.6226832e-07, 0, 3, 0, -2.6226832e-07, 0, -3, 6.216688, 0.5, 6.214772)
+
+[node name="ZoneDoor3" parent="." instance=ExtResource("6_lue5w")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6.216688, 0.5, -9.785228)

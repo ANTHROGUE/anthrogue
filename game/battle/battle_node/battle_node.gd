@@ -1,7 +1,6 @@
 @tool
-extends Area3D
+extends ZoneElement
 class_name BattleNode
-
 
 const ENEMY_DISTANCE := 5.0
 const ENEMY_SPACING := 1.5
@@ -22,11 +21,7 @@ var actor_positions: Dictionary[Actor3D, Vector3] = {}
 func _ready() -> void:
 	if not spawnable_enemies.is_empty():
 		initialize_enemies()
-	if not Engine.is_editor_hint():
-		set_collision_mask_value(Globals.COLLISION_LAYER_INTERACT, true)
-		if not body_entered.is_connected(on_body_entered):
-			body_entered.connect(on_body_entered)
-		#%Pointer.queue_free()
+	super()
 
 func initialize_enemies() -> void:
 	# Remove existing enemies
@@ -43,13 +38,9 @@ func initialize_enemies() -> void:
 		add_child(enemy)
 		enemy.position = enemy_positions[i]
 
-func on_body_entered(body: Node3D) -> void:
-	if body is Player:
-		on_player_entered(body)
-
-func on_player_entered(plyr: Player) -> void:
-	if not plyr.controller.current_state_name == 'Stopped':
-		call_deferred("start_battle", plyr)
+func interact() -> void:
+	if not Player.instance.controller.current_state_name == 'Stopped':
+		call_deferred("start_battle", Player.instance)
 
 ## TODO (WIP)
 func start_battle(plyr: Player) -> void:
