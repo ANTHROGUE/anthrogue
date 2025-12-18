@@ -51,6 +51,9 @@ func _ready() -> void:
 	battle_ui = BATTLE_UI.instantiate()
 	battle_ui.s_move_queued.connect(timeline.queue_action)
 	timeline.s_queue_changed.connect(battle_ui.refresh_stats)
+	
+	prepare_queue()
+	
 	begin_round()
 
 func append_enemy_moves() -> void:
@@ -68,9 +71,7 @@ func prepare_queue() -> void:
 		move_counts.set(combatant, Vector2i(0, move_count))
 		move_total += move_count
 	timeline.reset_queue()
-	## BANGRS: enemy moves in timeline!
-	append_enemy_moves()
-	s_new_round.emit()
+	
 
 func begin_round() -> void:
 	current_round += 1
@@ -80,6 +81,9 @@ func begin_round() -> void:
 		if weapon is Weapon:
 			weapon.regen_charges()
 	prepare_queue()
+	## BANGRS: enemy moves in timeline!
+	append_enemy_moves()
+	s_new_round.emit()
 
 func select_action(action: BattleAction, user: Combatant) -> void:
 	print("Selected %s from %s" % [action, user])

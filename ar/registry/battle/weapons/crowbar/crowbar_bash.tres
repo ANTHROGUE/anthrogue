@@ -10,5 +10,5 @@ name = &"Crowbar Bash"
 icon = ExtResource("2_utvce")
 summary = "Deal $0 damage"
 action_script = ExtResource("1_jp4fq")
-values = [5]
+values = [4]
 metadata/_custom_type_script = "uid://dv6lo85qpphjt"

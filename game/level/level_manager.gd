@@ -43,6 +43,7 @@ func go_to_zone(_coord: Vector2i, relative := false) -> void:
 		Player.instance.request_state(&"Walk")
 		return
 	
+	print("LevelManager: %s -> %s" % [current_coord, coord])
 	current_coord = coord
 	# TODO Load scene in coord
 	SceneLoader.change_scene_to_packed(ZONE)

@@ -8,5 +8,5 @@ signal s_zone_exit_entered(exit: ZoneExit)
 
 func interact() -> void:
 	Player.instance.request_state(&'Stopped')
-	print("ZoneExit: Going! %s %s" % [to_coord, coord_relative])
+	print("ZoneExit: Going! %s %s" % [to_coord, "relative" if coord_relative else ""])
 	s_zone_exit_entered.emit(self)
