@@ -239,8 +239,10 @@ id_to_resource = Dictionary[int, Resource]({
 137: ExtResource("84_v3hvw"),
 138: ExtResource("83_tv564"),
 139: ExtResource("84_v3hvw"),
-140: ExtResource("83_osu37"),
-141: ExtResource("84_6tfbg")
+140: ExtResource("83_tv564"),
+141: ExtResource("84_v3hvw"),
+142: ExtResource("83_osu37"),
+143: ExtResource("84_6tfbg")
 })
 directory = "res://addons"
 scan_subdirectories = true

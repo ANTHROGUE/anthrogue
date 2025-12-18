@@ -22,4 +22,4 @@ func begin_game() -> void:
 	SceneLoader.add_persistent_node(player)
 	#player.state = player.PlayerState.STOPPED
 	
-	SceneLoader.load_into_scene("uid://cfulvjn770vuy", GameLoader.Phase.GAMEPLAY)
+	RunService.enter_run()

@@ -107,7 +107,7 @@ func end_round() -> void:
 		begin_round()
 
 func end_battle() -> void:
-	Player.instance.reparent(get_tree().current_scene)
+	#Player.instance.reparent(get_tree().current_scene)
 	Player.instance.request_state('Walk')
 	battle_node.queue_free()
 	SceneLoader.add_persistent_node(Player.instance)

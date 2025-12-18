@@ -21,7 +21,7 @@ GameLoader="*res://ar/globals/game_loader.gd"
 MovieUtil="*res://game/globals/movie_util.gd"
 Globals="*res://game/globals/globals.gd"
 BattleService="*res://ar/globals/battle_service.gd"
-ZoneService="*res://ar/globals/zone_service.gd"
+LevelService="*res://ar/globals/level_service.gd"
 RunService="*res://ar/globals/run_service.gd"
 SceneLoader="*res://ar/globals/scene_loader.gd"
 

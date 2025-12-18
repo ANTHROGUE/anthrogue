@@ -30,7 +30,7 @@ enum CUT_STATE {
 
 var cut_state := CUT_STATE.None:
 	set(x):
-		print("Entering Cut State %s" % CUT_STATE.find_key(x))
+		#print("Entering Cut State %s" % CUT_STATE.find_key(x))
 		s_cut_state_changed.emit(x)
 		cut_state = x
 		
