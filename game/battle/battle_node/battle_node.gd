@@ -39,8 +39,7 @@ func initialize_enemies() -> void:
 		enemy.position = enemy_positions[i]
 
 func interact() -> void:
-	if not Player.instance.controller.current_state_name == 'Stopped':
-		call_deferred("start_battle", Player.instance)
+	call_deferred("start_battle", Player.instance)
 
 ## TODO (WIP)
 func start_battle(plyr: Player) -> void:

@@ -30,6 +30,7 @@ metadata/_custom_type_script = "uid://ciyodddkqsiev"
 collision_mask = 3
 script = ExtResource("1_1h0ks")
 interact_tags = Array[int]([0])
+active = null
 
 [node name="BattleCamera" type="Camera3D" parent="."]
 unique_name_in_owner = true

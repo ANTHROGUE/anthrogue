@@ -1,6 +1,16 @@
 extends Node
 class_name LevelManager
 
+func _init() -> void:
+	GameLoader.queue_into(GameLoader.Phase.GAMEPLAY, self, {
+		'ZONE': "uid://cfulvjn770vuy",
+		'ROOM_TRANSITION': "uid://63u4vcjeqr3k"
+	})
+	
+	GameLoader.load_all()
+
+var ZONE: PackedScene
+
 enum ZoneType {
 	ENTRANCE,
 	OBSTACLE,
@@ -30,8 +40,9 @@ func go_to_zone(_coord: Vector2i, relative := false) -> void:
 	
 	if !coord < zone_map_range or !coord >= Vector2i(0, 0):
 		printerr("LevelManager: Attempted to go to non-existend map coordinate %s" % _coord)
+		Player.instance.request_state(&"Walk")
 		return
 	
 	current_coord = coord
 	# TODO Load scene in coord
-	SceneLoader.load_into_scene("uid://cfulvjn770vuy", GameLoader.Phase.GAMEPLAY)
+	SceneLoader.change_scene_to_packed(ZONE)

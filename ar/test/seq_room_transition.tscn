@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://63u4vcjeqr3k"]
+
+[ext_resource type="Script" uid="uid://hdjgpdt57p5a" path="res://addons/moon-interval/nodes/sequence_node.gd" id="1_7dw8w"]
+[ext_resource type="Script" uid="uid://w53l1qtcgxyu" path="res://addons/moon-interval/nodes/lerp_property_node.gd" id="3_s85ir"]
+
+[node name="SeqRoomTransition" type="Node"]
+script = ExtResource("1_7dw8w")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="LerpPropertyNode" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("3_s85ir")
+node = NodePath("../Control")
+property = &":modulate"
+start_value = Color(1, 1, 1, 0.7529412)
+value = Color(0, 0, 0, 0)
+duration = 1.0
+flags = 1
+
+[node name="Control" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.7529412)
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
