@@ -141,6 +141,7 @@ func set_target(target: Combatant) -> void:
 func refresh_stats() -> void:
 	%MovesLabel.text = "Moves Filled: %d / %d" % [manager.move_counts[Player.instance].x, manager.move_counts[Player.instance].y]
 	for panel in mascot_panels + enemy_panels + [moveset_panel]:
+		if !is_instance_valid(panel): continue
 		if panel is CombatantPanel: panel.refresh_panel()
 
 func update_panels() -> void:

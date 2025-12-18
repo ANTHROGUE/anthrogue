@@ -11,16 +11,19 @@ config_version=5
 [application]
 
 config/name="anthrogue"
-run/main_scene="uid://cfulvjn770vuy"
+run/main_scene="uid://qcqo2p0gxasa"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+GameLoader="*res://ar/globals/game_loader.gd"
+MovieUtil="*res://game/globals/movie_util.gd"
 Globals="*res://game/globals/globals.gd"
 BattleService="*res://ar/globals/battle_service.gd"
-MovieUtil="*res://game/globals/movie_util.gd"
 ZoneService="*res://ar/globals/zone_service.gd"
+RunService="*res://ar/globals/run_service.gd"
+SceneLoader="*res://ar/globals/scene_loader.gd"
 
 [display]
 

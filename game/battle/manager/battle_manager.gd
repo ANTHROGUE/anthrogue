@@ -43,6 +43,7 @@ var player_moves_queued := 0
 signal s_turn_confirmed()
 signal s_new_round()
 signal s_timeline_ready()
+signal s_battle_ended()
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -109,6 +110,8 @@ func end_battle() -> void:
 	Player.instance.reparent(get_tree().current_scene)
 	Player.instance.request_state('Walk')
 	battle_node.queue_free()
+	SceneLoader.add_persistent_node(Player.instance)
+	s_battle_ended.emit()
 
 func check_pulses(targets: Array[Combatant]) -> void:
 	for target in targets:

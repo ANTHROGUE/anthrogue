@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://mty4rn7d7fn3"]
+
+[ext_resource type="Script" uid="uid://bjiti2gmwln1h" path="res://ar/test/loading_screen/loading_screen.gd" id="1_6lcto"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85l3m"]
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 8
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vhk3"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydl26"]
+font_size = 36
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.41960785)
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6lcto")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03529412, 0.03529412, 0.03529412, 0.26666668)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 69.0
+offset_top = -68.0
+offset_right = -69.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_85l3m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8vhk3")
+max_value = 1.0
+value = 0.25
+show_percentage = false
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 1
+offset_top = -49.0
+offset_right = 149.0
+offset_bottom = -3.0
+text = "Loading..."
+label_settings = SubResource("LabelSettings_ydl26")

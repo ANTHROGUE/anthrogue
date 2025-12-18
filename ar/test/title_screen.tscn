@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://qcqo2p0gxasa"]
+
+[ext_resource type="Script" uid="uid://bofcnax5uihns" path="res://ar/test/title_screen.gd" id="1_7hox1"]
+[ext_resource type="PackedScene" uid="uid://cevh5qjd1v4d8" path="res://PLACEHOLDER/elevator_new.tscn" id="2_vfi3y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jhd1k"]
+font_size = 144
+
+[sub_resource type="Environment" id="Environment_vfi3y"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gfuhi"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7hox1")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -248.0
+offset_right = 224.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "New Run"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -447.5
+offset_top = 184.0
+offset_right = 447.5
+offset_bottom = 381.0
+grow_horizontal = 2
+text = "ANTHROGUE"
+label_settings = SubResource("LabelSettings_jhd1k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="elevator_new" parent="Node3D" instance=ExtResource("2_vfi3y")]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9678055, 2.175021)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_vfi3y")
+camera_attributes = SubResource("CameraAttributesPractical_gfuhi")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
