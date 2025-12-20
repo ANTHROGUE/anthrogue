@@ -41,6 +41,19 @@ signal s_max_hp_changed
 signal s_ap_changed
 signal s_max_ap_changed
 
+## Block: Temporary resource, is depleted before HP from damage
+@export var block := 0:
+	set(x):
+		var _block = block
+		block = x
+		if x != _block:
+			s_block_changed.emit()
+## Block decay rate: Every move, current block is reduced by a percentage of the peak block reached that round (rounding down)
+@export var block_peak := 0
+@export var block_decay_rate := 0.10
+
+signal s_block_changed
+
 ## Strength: Scales flat damage
 @export var strength := 0
 ## Toughness: Scales Max HP
@@ -111,6 +124,19 @@ enum DamageTag {
 	BONUS
 }
 
+func take_damage(_amount: int, dt: Array[DamageTag] = []) -> int:
+	var amount = _amount
+	
+	if DamageTag.TRUE_DAMAGE not in dt:
+		if block > 0:
+			var _block = block
+			block = max(0, _block - amount)
+			amount = max(0, amount - _block)
+		
+	if abs(amount) > 0:
+		hp -= amount
+	
+	return amount
 
 func calculate_moves() -> int:
 	current_moves = moves

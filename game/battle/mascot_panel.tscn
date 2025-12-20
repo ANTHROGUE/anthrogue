@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://djrshqlncgwga"]
+[gd_scene load_steps=7 format=3 uid="uid://djrshqlncgwga"]
 
 [ext_resource type="Script" uid="uid://c7hc8fgwo3caq" path="res://game/battle/mascot_panel.gd" id="1_4wao1"]
 [ext_resource type="PackedScene" uid="uid://dv3m85tmjgyxa" path="res://game/battle/target_button.tscn" id="2_jmpl3"]
 [ext_resource type="Script" uid="uid://c278bmtvg5ijj" path="res://game/battle/weapon_jump_button.gd" id="3_4wao1"]
+[ext_resource type="Texture2D" uid="uid://c3ftdevyqt07v" path="res://PLACEHOLDER/crosshair033.png" id="3_ub7vk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2yhv4"]
 outline_size = 4
@@ -18,6 +19,21 @@ outline_color = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(160, 144)
 color = Color(0.234, 0.39, 0.234, 1)
 script = ExtResource("1_4wao1")
+
+[node name="Label_Block" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -48.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_2yhv4")
 
 [node name="Label_HP" type="Label" parent="."]
 unique_name_in_owner = true
@@ -67,7 +83,9 @@ horizontal_alignment = 1
 
 [node name="TargetButton" parent="." instance=ExtResource("2_jmpl3")]
 visible = false
+z_index = 1
 layout_mode = 1
+icon = ExtResource("3_ub7vk")
 
 [node name="WeaponJumpButton" type="Button" parent="."]
 unique_name_in_owner = true

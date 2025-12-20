@@ -29,7 +29,9 @@ func action() -> void:
 	if !is_instance_valid(target): return
 	
 	print("Action: %s" % name)
-	ival_node = load(ival_path).instantiate()
+	var _in = load(ival_path)
+	if is_instance_valid(_in):
+		ival_node = _in.instantiate()
 	if ival_node is IntervalNode:
 		assign_ival()
 		active_ival = ival.start(self, true)

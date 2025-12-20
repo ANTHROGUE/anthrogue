@@ -1,15 +1,17 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://dk2nv7a1iwukr"]
 
-[ext_resource type="Script" uid="uid://dnopg7f3nwtyg" path="res://ar/registry/battle/actions/test/test_action.gd" id="1_78t6s"]
-[ext_resource type="Texture2D" uid="uid://dbnqcgunrxoq8" path="res://PLACEHOLDER/crosshair031.png" id="2_epkb7"]
+[ext_resource type="Script" uid="uid://c0y58m54xxcr4" path="res://ar/registry/battle/weapons/crowbar/crowbar_block.gd" id="1_lni8j"]
 [ext_resource type="Script" uid="uid://dbafo7lu58ogw" path="res://game/battle/actions/action_attack.gd" id="3_upqk1"]
+
+[sub_resource type="Resource" id="Resource_lni8j"]
+metadata/__load_path__ = "res://ui_assets/PLACEHOLDER/crosshair031.png"
 
 [resource]
 script = ExtResource("3_upqk1")
 name = &"Pry Cover"
-icon = ExtResource("2_epkb7")
+icon = SubResource("Resource_lni8j")
 summary = "Gain [0] Block"
-action_script = ExtResource("1_78t6s")
+action_script = ExtResource("1_lni8j")
 values = [8]
 targeting = 5
 metadata/_custom_type_script = "uid://dv6lo85qpphjt"

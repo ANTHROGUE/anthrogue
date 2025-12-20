@@ -22,3 +22,7 @@ class_name Inventory
 ## Points allocated to using specific weapons
 ### UNUSED IN BANGRS
 @export var point_pools: Dictionary[StringName, int] = {}
+
+## Currencies
+@export var money_anim := 0
+@export var money_scrap := 0
