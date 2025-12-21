@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjqgj7re7wty8"
-path.s3tc="res://.godot/imported/gag_panel.png-8423681c8542b25bb4138a33fae934d9.s3tc.ctex"
+path.etc2="res://.godot/imported/gag_panel.png-8423681c8542b25bb4138a33fae934d9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://PLACEHOLDER/gag_panel.png"
-dest_files=["res://.godot/imported/gag_panel.png-8423681c8542b25bb4138a33fae934d9.s3tc.ctex"]
+dest_files=["res://.godot/imported/gag_panel.png-8423681c8542b25bb4138a33fae934d9.etc2.ctex"]
 
 [params]
 

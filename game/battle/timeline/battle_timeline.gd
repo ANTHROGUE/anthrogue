@@ -14,11 +14,15 @@ class QueuedAction:
 		alt_targets = _alt_targets
 		action = _action
 		cancellable = _cancellable
+	
+	func get_combatants() -> Array[Combatant]:
+		return [user, target] + alt_targets
 
 var queue: Array[QueuedAction] = []
 var current_action: QueuedAction = null
 
 signal s_queue_changed()
+signal s_move_started(action: QueuedAction)
 signal s_queue_finished()
 signal s_action_script_started(script: ActionScript)
 
@@ -105,6 +109,7 @@ func on_turn_confirmed() -> void:
 func execute_round() -> void:
 	for action in queue:
 		if action is QueuedAction:
+			s_move_started.emit(action)
 			current_action = action
 			await run_action(action)
 			current_action = null

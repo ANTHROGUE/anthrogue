@@ -52,6 +52,9 @@ signal s_max_ap_changed
 @export var block_peak := 0
 @export var block_decay_rate := 0.10
 
+func tick_block_decay() -> void:
+	block -= ceili(block_peak * block_decay_rate)
+
 signal s_block_changed
 
 ## Strength: Scales flat damage
@@ -147,3 +150,6 @@ func calculate_moves() -> int:
 			print("%s gains %d move(s) from roll" % [get_parent().name, agi_move_roll])
 		current_moves += agi_moves + agi_move_roll
 	return current_moves
+
+func _ready() -> void:
+	s_block_changed.connect(func(): block_peak = max(block, block_peak))

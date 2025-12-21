@@ -46,3 +46,11 @@ func affect_stat(amount: int, stat: String = 'hp') -> void:
 func get_weapon() -> Weapon:
 	if inventory is Inventory: return inventory.weapon
 	return null
+
+func tick_round_start() -> void:
+	if stats is BattleStats:	
+		stats.ap = clamp(stats.ap + stats.ap_regen, 0, stats.max_ap)
+		stats.block_peak = stats.block
+		
+	if get_weapon():
+		get_weapon().regen_charges()

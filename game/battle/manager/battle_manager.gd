@@ -15,6 +15,7 @@ var battle_ui: BattleUI:
 var timeline: BattleTimeline:
 	set(x):
 		s_turn_confirmed.connect(x.on_turn_confirmed)
+		x.s_move_started.connect(on_move_started)
 		if x not in get_children():
 			add_child(x)
 		timeline = x
@@ -75,11 +76,7 @@ func prepare_queue() -> void:
 
 func begin_round() -> void:
 	current_round += 1
-	for combatant: Combatant in combatants:
-		combatant.stats.ap = clamp(combatant.stats.ap + combatant.stats.ap_regen, 0, combatant.stats.max_ap)
-		var weapon = combatant.get_weapon()
-		if weapon is Weapon:
-			weapon.regen_charges()
+	for combatant: Combatant in combatants: combatant.tick_round_start()
 	prepare_queue()
 	## BANGRS: enemy moves in timeline!
 	append_enemy_moves()
@@ -135,3 +132,12 @@ func remove_combatant(who: Combatant) -> void:
 	@warning_ignore("redundant_await")
 	await who.lose()
 	who.queue_free()
+
+func on_move_started(action: BattleTimeline.QueuedAction) -> void:
+	for combatant in combatants:
+		if combatant.stats is not BattleStats:
+			continue
+		## Decay block
+		if combatant not in action.get_combatants():
+			combatant.stats.tick_block_decay()
+			
