@@ -89,3 +89,6 @@ func validate_target() -> void:
 		if active_ival is ActiveInterval and impact_count <= 0:
 			end_action()
 			active_ival.stop()
+
+func inflict_attack(amount := 0, tags: Array[BattleStats.DamageTag] = [target.stats.DamageTag.ATTACK]) -> void:
+	user.inflict(InflictDatagram.new(InflictDatagram.InflictTags.DAMAGE, target, [amount, tags]))

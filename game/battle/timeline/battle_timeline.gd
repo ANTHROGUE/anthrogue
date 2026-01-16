@@ -15,7 +15,7 @@ class QueuedAction:
 		action = _action
 		cancellable = _cancellable
 	
-	func get_combatants() -> Array[Combatant]:
+	func get_combatants() -> Array:
 		return [user, target] + alt_targets
 
 var queue: Array[QueuedAction] = []

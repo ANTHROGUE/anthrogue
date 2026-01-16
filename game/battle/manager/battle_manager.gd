@@ -135,6 +135,8 @@ func remove_combatant(who: Combatant) -> void:
 
 func on_move_started(action: BattleTimeline.QueuedAction) -> void:
 	for combatant in combatants:
+		if !is_instance_valid(combatant):
+			continue
 		if combatant.stats is not BattleStats:
 			continue
 		## Decay block

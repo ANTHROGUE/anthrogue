@@ -130,6 +130,9 @@ enum DamageTag {
 func take_damage(_amount: int, dt: Array[DamageTag] = []) -> int:
 	var amount = _amount
 	
+	if DamageTag.ATTACK in dt:
+		amount = process_inc_atk_effectors(amount)
+	
 	if DamageTag.TRUE_DAMAGE not in dt:
 		if block > 0:
 			var _block = block
@@ -139,6 +142,12 @@ func take_damage(_amount: int, dt: Array[DamageTag] = []) -> int:
 	if abs(amount) > 0:
 		hp -= amount
 	
+	return amount
+
+func process_inc_atk_effectors(_amount: int) -> int:
+	var amount := _amount
+	amount = floori(amount * defense_mult)
+	amount -= defense_flat
 	return amount
 
 func calculate_moves() -> int:

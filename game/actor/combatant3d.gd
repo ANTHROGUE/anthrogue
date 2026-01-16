@@ -54,3 +54,8 @@ func tick_round_start() -> void:
 		
 	if get_weapon():
 		get_weapon().regen_charges()
+
+func inflict(data: InflictDatagram) -> void:
+	match data.tag:
+		data.InflictTags.DAMAGE:
+			data.target.stats.take_damage(data.values[0], data.values[1])
