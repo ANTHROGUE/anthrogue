@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpu5e70h8m72l"]
+
+[ext_resource type="Script" uid="uid://be8ua6ji4bugr" path="res://addons/moon-interval/nodes/parallel_node.gd" id="1_rbp03"]
+[ext_resource type="Script" uid="uid://hdjgpdt57p5a" path="res://addons/moon-interval/nodes/sequence_node.gd" id="2_ubou6"]
+[ext_resource type="Script" uid="uid://dyy8dwk13mfwo" path="res://addons/moon-interval/nodes/func_node.gd" id="3_tjpxo"]
+[ext_resource type="Script" uid="uid://w53l1qtcgxyu" path="res://addons/moon-interval/nodes/lerp_property_node.gd" id="4_41cqd"]
+[ext_resource type="Script" uid="uid://cf8y2gbe10g4w" path="res://addons/moon-interval/nodes/wait_node.gd" id="5_8w0lq"]
+[ext_resource type="PackedScene" uid="uid://cfgxtotgi5fgp" path="res://ar/registry/battle/enemies/test/enemy_test.tscn" id="6_dri01"]
+
+[node name="seq_test_block" type="Node"]
+script = ExtResource("1_rbp03")
+metadata/_custom_type_script = "uid://be8ua6ji4bugr"
+
+[node name="ActionSequence" type="Node" parent="."]
+script = ExtResource("2_ubou6")
+
+[node name="intro" type="Node" parent="ActionSequence"]
+script = ExtResource("2_ubou6")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="01_user_LerpPos" type="Node" parent="ActionSequence/intro" node_paths=PackedStringArray("node") groups=["ival_battle_user"]]
+script = ExtResource("4_41cqd")
+node = NodePath("../../../user")
+property = &":position"
+start_value = Vector3(0, 0, 0)
+value = Vector3(0, 1, 0)
+duration = 0.4
+ease = 1
+trans = 3
+flags = 2
+
+[node name="WaitNode" type="Node" parent="ActionSequence/intro"]
+script = ExtResource("5_8w0lq")
+time = 0.2
+
+[node name="swing" type="Node" parent="ActionSequence"]
+script = ExtResource("2_ubou6")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="state_defense" type="Node" parent="ActionSequence/swing" groups=["ival_battle_cutstate"]]
+script = ExtResource("3_tjpxo")
+arguments = ["Defense"]
+
+[node name="WaitNode2" type="Node" parent="ActionSequence/swing"]
+script = ExtResource("5_8w0lq")
+time = 0.2
+
+[node name="02_user_LerpPos" type="Node" parent="ActionSequence/swing" node_paths=PackedStringArray("node", "other") groups=["ival_battle_user"]]
+script = ExtResource("4_41cqd")
+node = NodePath("../../../user")
+property = &":position"
+other = NodePath("../../../target")
+start_value = Vector3(0, 0, -2.5)
+value = Vector3(0, 0.5, 0)
+duration = 0.3
+ease = 0
+trans = 5
+flags = 4
+
+[node name="impact" type="Node" parent="ActionSequence" groups=["ival_battle_impact"]]
+script = ExtResource("3_tjpxo")
+
+[node name="outro" type="Node" parent="ActionSequence"]
+script = ExtResource("1_rbp03")
+metadata/_custom_type_script = "uid://be8ua6ji4bugr"
+
+[node name="user" type="Node" parent="ActionSequence/outro"]
+script = ExtResource("2_ubou6")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="WaitNode" type="Node" parent="ActionSequence/outro/user"]
+script = ExtResource("5_8w0lq")
+time = 0.2
+
+[node name="user_LerpPos" type="Node" parent="ActionSequence/outro/user" node_paths=PackedStringArray("node", "other") groups=["ival_battle_user"]]
+script = ExtResource("4_41cqd")
+node = NodePath("../../../../user")
+property = &":position"
+other = NodePath("../../../../ref_user")
+start_value = Vector3(0, 0.00046245332, 2.5)
+value = Vector3(0, 0, 0)
+duration = 0.5
+ease = 1
+trans = 5
+flags = 4
+
+[node name="target" type="Node" parent="ActionSequence/outro"]
+script = ExtResource("2_ubou6")
+metadata/_custom_type_script = "uid://hdjgpdt57p5a"
+
+[node name="03_target_LerpPos" type="Node" parent="ActionSequence/outro/target" node_paths=PackedStringArray("node") groups=["ival_battle_target"]]
+script = ExtResource("4_41cqd")
+node = NodePath("../../../../target")
+property = &":position:y"
+start_value = 0.0
+value = 1.0
+duration = 0.15
+ease = 1
+trans = 5
+flags = 1
+
+[node name="04_target_LerpPos" type="Node" parent="ActionSequence/outro/target" node_paths=PackedStringArray("node", "other") groups=["ival_battle_target"]]
+script = ExtResource("4_41cqd")
+node = NodePath("../../../../target")
+property = &":position"
+other = NodePath("../../../../ref_target")
+start_value = Vector3(0, 0.00046245332, 2.5)
+value = Vector3(0, 0, 0)
+duration = 0.15
+trans = 5
+flags = 4
+
+[node name="FuncNode" type="Node" parent="ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("3_tjpxo")
+node = NodePath("../../ref_user")
+function = &"queue_free"
+
+[node name="FuncNode2" type="Node" parent="ActionSequence" node_paths=PackedStringArray("node")]
+script = ExtResource("3_tjpxo")
+node = NodePath("../../ref_target")
+function = &"queue_free"
+
+[node name="ref_user" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+
+[node name="ref_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+
+[node name="user" parent="." instance_placeholder="res://ar/player/player.tscn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0006993, 1)
+
+[node name="target" parent="." instance=ExtResource("6_dri01")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2.5)
