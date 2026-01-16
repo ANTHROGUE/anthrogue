@@ -110,8 +110,14 @@ func set_targeting_panels(move: BattleAction, user: Combatant) -> void:
 			for panel: CombatantPanel in mascot_panels:
 				if panel.user != user:
 					targeting_panels.append(panel)
-	if targeting_panels.size() > 0:
+		BattleAction.TARGETING.Self:
+			for panel: CombatantPanel in mascot_panels:
+				if panel.user == user:
+					targeting_panels.append(panel)
+	if targeting_panels.size() > 1:
 		update_target_buttons()
+	elif targeting_panels.size() == 1:
+		set_target(targeting_panels[0].user)
 	
 func update_target_buttons() -> void:
 	var button: Button
