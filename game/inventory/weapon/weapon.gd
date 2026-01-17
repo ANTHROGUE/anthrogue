@@ -16,8 +16,8 @@ class_name Weapon
 
 signal s_weapon_charges_updated()
 
-func apply_item() -> void:
-	super()
+func apply_item(combatant: Combatant, object: Node3D = null) -> void:
+	super(combatant, object)
 
 func spend_charge(key: String) -> bool:
 	if key not in charges.keys():

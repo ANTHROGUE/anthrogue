@@ -1,24 +1,2 @@
-extends Node
+extends CombatantModifier
 class_name ItemScript
-
-
-## Default action when first collected or loaded from save
-func setup() -> void:
-	pass
-
-## Action to take on collect
-func on_collect() -> void:
-	setup()
-
-## Action to take when the item is loaded from save
-func on_load() -> void:
-	setup()
-
-## Action to take on removal
-func on_removed() -> void:
-	pass
-
-func get_seralized_data() -> Dictionary:
-	var dict: Dictionary[String, Variant] = {}
-	
-	return dict

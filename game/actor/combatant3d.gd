@@ -14,6 +14,8 @@ class_name Combatant
 @export var inventory: Inventory
 var panel: CombatantPanel
 
+var cbmods: ModifierManager
+
 
 func _ready() -> void:
 	stats = initialize_stats()
@@ -21,6 +23,11 @@ func _ready() -> void:
 		if stats.hp <= 0:
 			queue_free()
 	)
+	
+	if cbmods is not ModifierManager:
+		cbmods = ModifierManager.new()
+		cbmods.name = "ModifierManager"
+		add_child(cbmods)
 
 func lose() -> void:
 	pass
